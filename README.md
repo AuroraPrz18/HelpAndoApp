@@ -101,35 +101,35 @@ V2. Encourage people to do things that can help to build a better world. It is p
 **Flow Navigation** (Screen to Screen)
 
 * Login Screen
-   => Registration
-   => Home feed
+   * Registration
+   * Home feed
 * Registration Screen
-   => Home feed
+   * Home feed
 * Main Activity
-   => HomeFeed
-   => Todo
-   => Organizations
-   => Profile 
+   * HomeFeed
+   * Todo
+   * Organizations
+   * Profile 
 * HomeFeed Screen
 * Todo Screen
-   => AddTask
-   => SuggestedTasks (Just admin account)
+   * AddTask
+   * SuggestedTasks (Just admin account)
 * Organizations Screen
-   => ContactIt (Optional)
+   * ContactIt (Optional)
 * Profile Screen
-   => Categories
-   => Follow
+   * Categories
+   * Follow
 * Categories Activity
-   => Profile Screen
+   * Profile Screen
 * AddTask Screen
-   => Todo
+   * Todo
 * SuggestedTasks Sceen
-   => Todo
-   => EvaluateTask
+   * Todo
+   * EvaluateTask
 * EvaluateTask Screen
-   => SuggestedTasks
+   * SuggestedTasks
 * Follow Activity
-   => Profile
+   * Profile
 
 ## Wireframes
 [Add picture of your hand sketched wireframes in this section]
