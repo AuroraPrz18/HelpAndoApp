@@ -130,7 +130,6 @@ Encourage people to do things that can help to build a better world. It is possi
    * SuggestedTasks
 
 ## Wireframes
-Hand sketched wireframe only with main views
 <img src="https://github.com/AuroraPrz18/HelpAndoApp/blob/master/Wireframe.jpg" width=600>
 
 ### [BONUS] Digital Wireframes & Mockups
