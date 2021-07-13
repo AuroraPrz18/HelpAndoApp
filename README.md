@@ -45,6 +45,10 @@ Encourage people to do things that can help to build a better world. It is possi
 * [ ] -> User can post information about places that need help, including the place's Location.
 * [ ] User can watch posts of other users.
 * [ ] Sponsors can find information about how to contact volunteers to know more about its altruistic projects.
+* [ ] The app integrates with at least one SDK or API
+* [ ] The app uses at least one gesture (e.g. double tap to like, e.g. pinch to scale)
+* [ ] The app uses at least one animation (e.g. fade in/out, e.g. animating a view growing and shrinking)
+* [ ] The app incorporates at least one external library to add visual polish
 
 
 **Optional Nice-to-have Stories**
