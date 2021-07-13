@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">HelpAndoApp</string>
+    <!-- LogIn Activity -->
+    <string name="ivLogo_description">Logo app</string>
+    <string name="etUser_hint">Username</string>
+    <string name="etPassword_hint">Password</string>
+    <string name="tvSignUp_description">Sign up here</string>
+    <string name="tvSignUp_text">Sign Up</string>
+    <string name="btnSignIn_description">Button to sign in</string>
+    <string name="btnSignIn_text">Sign In</string>
 </resources>
