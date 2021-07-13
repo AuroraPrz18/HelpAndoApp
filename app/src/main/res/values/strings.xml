@@ -8,4 +8,14 @@
     <string name="tvSignUp_text">Sign Up</string>
     <string name="btnSignIn_description">Button to sign in</string>
     <string name="btnSignIn_text">Sign In</string>
+    <!-- Sign Up Activity -->
+    <string name="ivIcon_description">Icon of a user</string>
+    <string name="etName_hint">Name</string>
+    <string name="etUserType_hint">Choose a type of user</string>
+    <string name="btnSignUp_text">Sign Up</string>
+    <string name="btnSignUp_description">Sign Up</string>
+    <string-array name="user_type">
+        <item>Volunteer</item>
+        <item>Sponsor</item>
+    </string-array>
 </resources>

@@ -12,5 +12,18 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="textInputStyle">@style/AppTheme.TextInputLayout</item>
+    </style>
+
+    <!-- Customize TextInputLayout style. -->
+    <style name="AppTheme.TextInputLayout" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/tv_login</item>
+        <item name="boxBackgroundColor">@android:color/transparent</item>
+        <item name="android:textColorHint">@color/tv_login</item>
+        <item name="hintTextColor">@color/tv_login</item>
+        <item name="endIconTint">@color/white</item>
+        <item name="startIconTint">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
     </style>
 </resources>
