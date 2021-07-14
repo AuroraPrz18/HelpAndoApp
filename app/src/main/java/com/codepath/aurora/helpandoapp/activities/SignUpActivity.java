@@ -107,7 +107,6 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     // TODO: CHANGE IT INSIDE THE VIEW MODEL
-
     /**
      * Asynchronous method to sign up a given user
      * @param newUser
