@@ -9,7 +9,7 @@
         android:contentDescription="@string/itemHomeFeed"
         app:showAsAction="always" />
     <item
-        android:id="@+id/toDoActivity"
+        android:id="@+id/toDoFragment"
         android:icon="@drawable/ic_tasks_24"
         android:title="@string/itemToDo"
         android:contentDescription="@string/itemToDo"

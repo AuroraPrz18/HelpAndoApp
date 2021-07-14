@@ -20,9 +20,9 @@
         android:name="com.codepath.aurora.helpandoapp.fragments.UserProfileFragment"
         android:label="user_profile_fragment"
         tools:layout="@layout/user_profile_fragment" />
-    <activity
-        android:id="@+id/toDoActivity"
-        android:name="com.codepath.aurora.helpandoapp.activities.ToDoActivity"
-        android:label="activity_to_do"
-        tools:layout="@layout/activity_to_do" />
+    <fragment
+        android:id="@+id/toDoFragment"
+        android:name="com.codepath.aurora.helpandoapp.fragments.ToDoFragment"
+        android:label="to_do_fragment"
+        tools:layout="@layout/to_do_fragment" />
 </navigation>

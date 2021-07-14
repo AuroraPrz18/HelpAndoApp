@@ -23,4 +23,9 @@
     <string name="itemToDo">To do list</string>
     <string name="itemNonProfit">Non-profit</string>
     <string name="itemProfile">User profile</string>
+    <string name="etNameTask_hint">Task name</string>
+    <string name="etTaskDescription_hint">Description</string>
+    <string name="etCategory_hint">Choose a category</string>
+    <string name="etPoints_hint">Points</string>
+    <string name="btnSend_text">Add Task</string>
 </resources>
