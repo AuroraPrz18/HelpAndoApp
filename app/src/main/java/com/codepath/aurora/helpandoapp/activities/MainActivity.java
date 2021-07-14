@@ -2,6 +2,9 @@ package com.codepath.aurora.helpandoapp.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,13 +29,35 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = navHostFragment.getNavController();
         // set up the bottom navigation view
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
+        //
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        // To inflate the new items in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_top_menu, menu);
+        MenuItem logOutItem = menu.findItem(R.id.imLogout);
+        // Set the listener to the log out item
+        logOutItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                logOut();
+                return true;
+            }
+        });
+        return true;
+    }
+
+    /**
+     * Logs out the current user and finishes the activity
+     */
     public void logOut(){
         ParseUser.logOut();
         ParseUser currentUser = ParseUser.getCurrentUser();
         if(currentUser == null){
             Intent intent = new Intent(this, LoginActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Removes other activities from stack
             startActivity(intent);
         }else{
             Toast.makeText(this, "Try again!", Toast.LENGTH_SHORT).show();
