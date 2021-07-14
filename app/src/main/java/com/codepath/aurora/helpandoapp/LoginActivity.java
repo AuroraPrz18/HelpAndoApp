@@ -29,13 +29,27 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         // Getting an instance of the viewModel
         _viewModel = new ViewModelProvider(this).get(LogInViewModel.class);
-
+        // If there is an active session - allow user persistence
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if(currentUser != null){
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
+        }
     }
 
+    /**
+     * Method called when the user click the LogIn button
+     * @param view
+     */
     public void onClickSignInButton(View view) {
         loginUser(_binding.etUsername.getText().toString(), _binding.etPassword.getText().toString());
     }
 
+    /**
+     * Method that tries to log in the user with given credentials.
+     * @param username
+     * @param password
+     */
     private void loginUser(String username, String password) {
         // TODO: CHANGE IT TO THE MODEL VIEW
         ParseUser.logInInBackground(username, password, new LogInCallback() {
@@ -51,6 +65,10 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Method called when the user click the SignUp button
+     * @param view
+     */
     public void onClickSignUp(View view) {
         Intent intent = new Intent(this, SignUpActivity.class);
         startActivity(intent);
