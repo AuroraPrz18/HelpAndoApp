@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/homeFeedFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/itemHomeFeed"
+        android:contentDescription="@string/itemHomeFeed"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/toDoActivity"
+        android:icon="@drawable/ic_tasks_24"
+        android:title="@string/itemToDo"
+        android:contentDescription="@string/itemToDo"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/organizationsFragment"
+        android:icon="@drawable/ic_business"
+        android:title="@string/itemNonProfit"
+        android:contentDescription="@string/itemNonProfit"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/userProfileFragment"
+        android:icon="@drawable/ic_user_24"
+        android:title="@string/itemProfile"
+        android:contentDescription="@string/itemProfile"
+        app:showAsAction="always" />
+</menu>

@@ -18,4 +18,9 @@
         <item>Volunteer</item>
         <item>Sponsor</item>
     </string-array>
+    <!-- Menus -->
+    <string name="itemHomeFeed">Home Feed</string>
+    <string name="itemToDo">To do list</string>
+    <string name="itemNonProfit">Non-profit</string>
+    <string name="itemProfile">User profile</string>
 </resources>

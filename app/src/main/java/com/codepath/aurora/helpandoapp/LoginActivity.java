@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.codepath.aurora.helpandoapp.activities.MainActivity;
 import com.codepath.aurora.helpandoapp.activities.SignUpActivity;
 import com.codepath.aurora.helpandoapp.databinding.ActivityLoginBinding;
 
@@ -24,8 +25,8 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onClickSignInButton(View view) {
         // TODO: Logic of the program. Check if is a valid user, etc.
-        // Intent intent = new Intent(this, MainActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void onClickSignUp(View view) {

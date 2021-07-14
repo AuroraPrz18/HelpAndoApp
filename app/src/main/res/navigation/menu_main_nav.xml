@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/menu_main_nav"
+    app:startDestination="@id/homeFeedFragment">
+
+    <fragment
+        android:id="@+id/homeFeedFragment"
+        android:name="com.codepath.aurora.helpandoapp.fragments.HomeFeedFragment"
+        android:label="home_feed_fragment"
+        tools:layout="@layout/home_feed_fragment" />
+    <fragment
+        android:id="@+id/organizationsFragment"
+        android:name="com.codepath.aurora.helpandoapp.fragments.OrganizationsFragment"
+        android:label="organizations_fragment"
+        tools:layout="@layout/organizations_fragment" />
+    <fragment
+        android:id="@+id/userProfileFragment"
+        android:name="com.codepath.aurora.helpandoapp.fragments.UserProfileFragment"
+        android:label="user_profile_fragment"
+        tools:layout="@layout/user_profile_fragment" />
+    <activity
+        android:id="@+id/toDoActivity"
+        android:name="com.codepath.aurora.helpandoapp.activities.ToDoActivity"
+        android:label="activity_to_do"
+        tools:layout="@layout/activity_to_do" />
+</navigation>
