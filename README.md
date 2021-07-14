@@ -1,4 +1,4 @@
-Original App Design Project 
+Original App Design Project
 ===
 
 # HelpAndo App
@@ -11,7 +11,7 @@ Original App Design Project
 
 ## Overview
 ### Description
-Encourage people to do things that can help to build a better world. It is possible giving you tasks to do every week, month, or year. Moreover, you can find information about causes that you can help and find people to connect with to build an environment of comfort and empathy. 
+Encourage people to do things that can help to build a better world. It is possible giving you tasks to do every week, month, or year. Moreover, you can find information about causes that you can help and find people to connect with to build an environment of comfort and empathy.
 
 
 ### App Evaluation
@@ -32,7 +32,7 @@ Encourage people to do things that can help to build a better world. It is possi
 * [ ] User can create a new account.
     * [ ] User should chose a type of user (volunteer or sponsor).
 * [ ] User can login.
-* [ ] User can logout. 
+* [ ] User can logout.
 * [ ] The app should allow user persistence.
 * [ ] User can suggest tasks to the admin. V1 all of them will be automatically acepted.
 * [ ] User should find tasks to do, ordered by week, month or year depending on their difficulty or time required.
@@ -64,7 +64,7 @@ Encourage people to do things that can help to build a better world. It is possi
 * [ ] User can chose a photo from galery and post it.
 * [ ] User can define if its publications are in a private timeline or public timeline.
 * [ ] -> User should be able to find information about places that need help. This information should be obtained by a backend server that is fill by the users.
-* [ ] Suggested tasks are received by the admin.  
+* [ ] Suggested tasks are received by the admin.
 * [ ] Admin can add tasks in the same mobile app.
 * [ ] Admin can edit tasks in the same mobile app.
 * [ ] Admin can accept and reject tasks in the same mobile app.
@@ -72,7 +72,7 @@ Encourage people to do things that can help to build a better world. It is possi
 * [ ] The App allows social networking. (Messaging)
 * [ ] User can like publications.
 * [ ] User can find publications by category.
-* [ ] User can have preferred categories of tasks and subscribe to them. 
+* [ ] User can have preferred categories of tasks and subscribe to them.
 * [ ] -> Conect the App to receive post of different sources, for example FB API,Twitter API, etc.
 * [ ] Each month recognition to the volunteer and sponsor of the month.
 
@@ -85,7 +85,7 @@ Encourage people to do things that can help to build a better world. It is possi
    * User can create a new account
 * Main Activity (Activity)
         * User can logout.
-    * HomeFeed Fragment 
+    * HomeFeed Fragment
         * User can post text information about the tasks that it had completed.
         * User can take a picture and post it inside the app.
         * User can post information about people that need help, this post will have a button to display information to contact the user to help her or him.
@@ -107,7 +107,7 @@ Encourage people to do things that can help to build a better world. It is possi
     * Notifications Fragment (optional)
         * User should receive notifications about new ranking or improvement.
     * Profile Fragment
-        * User can have and see its dashboard and points, based on its performance. 
+        * User can have and see its dashboard and points, based on its performance.
 
 ### 3. Navigation
 
@@ -135,7 +135,7 @@ Encourage people to do things that can help to build a better world. It is possi
    * Todo
    * Organizations
    * Notifications
-   * Profile 
+   * Profile
 * HomeFeed Screen
 * Todo Screen
    * Todo
@@ -154,19 +154,20 @@ Encourage people to do things that can help to build a better world. It is possi
 ## Wireframes
 <img src="https://github.com/AuroraPrz18/HelpAndoApp/blob/master/Wireframe.jpg" width=600>
 
-## Schema 
-   
+## Schema
+
 ### Models
 Model: User
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
    | objectId      | String   | unique id for the user (default field) |
    | userName      | String   | unique username for the user |
+   | name          | String   | user's name |
    | profilePicture| File     | picture that will be display as the profile picture |
    | password      | String   | string to login |
    | type          | String   | define if the user is a volunteer or a sponsor |
    | isAdmin       | Boolean  | define if the user has admin privileges |
-   
+
 Model: Task
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
@@ -176,7 +177,7 @@ Model: Task
    | points        | Number   | points that the user will get when he/she complete this task |
    | category      | String   | define the category of the task |
    | isApproved    | Boolean  | define if this task has been approved by an admin |
-   
+
 Model: TaskCompleted
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
@@ -184,7 +185,7 @@ Model: TaskCompleted
    | user          | Pointer to User | user that completed this post |
    | task          | Pointer to Task | task completed by the user |
    | completedDate | DateTime | when this user completed this task (default field) |
-  
+
 Model: Post
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
@@ -203,11 +204,11 @@ Model: Contact
    | name          | String   | name of the contact person to help |
    | telephone     | String   | telephone number where you can send message to help |
    | text          | String   | extra info about how to contact |
-   
-   
+
+
 ### Networking
 * Login Screen (Activity)
-    * (Read/GET) - To log in into a user account 
+    * (Read/GET) - To log in into a user account
    ```
     ParseUser.logInInBackground("<userName>", "<password>", (user, e) -> {
         if (user != null) {
@@ -217,7 +218,7 @@ Model: Contact
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     });
-    ```                           
+    ```
 * Registration Screen (Activity)
     * (Create/POST) - To signing up a new user
     ```
@@ -239,7 +240,7 @@ Model: Contact
     });
     ```
 * Main Activity (Activity)
-    * HomeFeed Fragment 
+    * HomeFeed Fragment
         * (Create/POST) - To create a new Post
           ```
           ParseObject entity = new ParseObject("Post");
@@ -320,7 +321,7 @@ Model: Contact
               } else {
                 // something went wrong
                 Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-              }  
+              }
           });
         ```
     * Todo Activity
