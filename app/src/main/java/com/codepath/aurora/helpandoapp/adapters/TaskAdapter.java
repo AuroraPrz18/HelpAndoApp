@@ -55,6 +55,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         return _tasks.size();
     }
 
+    public void clear() {
+        _tasks.clear();
+    }
+
     /**
      * Class that provides a reference to the type of view used
      */

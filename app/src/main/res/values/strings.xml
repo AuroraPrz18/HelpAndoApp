@@ -44,13 +44,18 @@
     <!-- ToDo Activity -->
     <string name="category">Category: %s</string>
     <string name="points">Points: %s</string>
+    <string name="order_by">Order by:</string>
+    <string-array name="order_by">
+        <item>Week</item>
+        <item>Month</item>
+        <item>Year</item>
+    </string-array>
     <!-- Toasts -->
     <string name="fields_required">All fields are required</string>
     <string name="wrong">Something went wrong</string>
     <string name="success_task">Your task has been submitted!</string>
     <string name="try_again">Try again!</string>
     <string name="success_sign_up">You can log in now!</string>
+    <!-- User Profile -->
     <string name="points_title">Points</string>
-
-
 </resources>

@@ -9,12 +9,39 @@
 
     <!-- include a layout for suggested Task-->
 
+    <TextView
+        style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@id/tfChooser"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="12dp"
+        android:text="@string/order_by" />
+
+    <com.google.android.material.textfield.TextInputLayout
+       android:id="@+id/tfChooser"
+        style="@style/AppTheme.Dark.TextInputLayout.FilledBox"
+        android:layout_width="130dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        >
+        <AutoCompleteTextView
+            android:id="@+id/acChooser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none"
+            tools:text="Week"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTasks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@id/tfChooser" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSuggestTask"

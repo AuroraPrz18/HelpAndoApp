@@ -35,7 +35,7 @@ Encourage people to do things that can help to build a better world. It is possi
 * [X] User can logout.
 * [X] The app should allow user persistence.
 * [X] User can suggest tasks to the admin. V1 all of them will be automatically accepted.
-* [ ] User should find tasks to do, ordered by week, month or year depending on their difficulty or time required.
+* [X] User should find tasks to do, ordered by week, month or year depending on their difficulty or time required.
 * [ ] -> User should be able to find information about non-profit organizations. This information should be obtained by a global API.
 * [ ] -> User profile should display the dashboard of self-improvement based on its performance.
 * [X] User profile should display the total points of the user, based on its performance.
