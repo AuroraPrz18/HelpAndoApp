@@ -48,6 +48,8 @@
     <string name="fields_required">All fields are required</string>
     <string name="wrong">Something went wrong</string>
     <string name="success_task">Your task has been submitted!</string>
+    <string name="try_again">Try again!</string>
+    <string name="success_sign_up">You can log in now!</string>
 
 
 </resources>

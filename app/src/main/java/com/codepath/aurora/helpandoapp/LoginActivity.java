@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Method called when the user click the SignUp button
+     * Method called when the user click the SignUp button. It starts SignUp Activity
      * @param view
      */
     public void onClickSignUp(View view) {

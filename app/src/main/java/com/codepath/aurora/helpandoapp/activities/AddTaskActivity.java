@@ -102,7 +102,7 @@ public class AddTaskActivity extends AppCompatActivity {
         // Saves the new object.
         newTask.saveInBackground(e -> {
             if(e != null){ // Something went wrong
-                Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.wrong)+e, Toast.LENGTH_SHORT).show();
+                Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
                 return;
             }
             Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.success_task), Toast.LENGTH_SHORT).show();

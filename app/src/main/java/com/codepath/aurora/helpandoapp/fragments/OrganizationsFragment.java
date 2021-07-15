@@ -15,7 +15,7 @@ import com.codepath.aurora.helpandoapp.viewModels.OrganizationsViewModel;
 
 public class OrganizationsFragment extends Fragment {
 
-    private OrganizationsViewModel mViewModel;
+    private OrganizationsViewModel _viewModel;
 
     public static OrganizationsFragment newInstance() {
         return new OrganizationsFragment();
@@ -30,7 +30,7 @@ public class OrganizationsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(OrganizationsViewModel.class);
+        _viewModel = new ViewModelProvider(this).get(OrganizationsViewModel.class);
         // TODO: Use the ViewModel
     }
 

@@ -24,12 +24,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        // Define a navigation controller
+        // Define a navigation controller, which is the object that manages app navigation within a NavHost
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
         NavController navController = navHostFragment.getNavController();
         // set up the bottom navigation view
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
-        //
     }
 
     @Override
@@ -60,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Removes other activities from stack
             startActivity(intent);
         }else{
-            Toast.makeText(this, "Try again!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.try_again), Toast.LENGTH_SHORT).show();
         }
     }
 

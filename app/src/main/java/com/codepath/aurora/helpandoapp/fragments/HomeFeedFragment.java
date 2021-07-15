@@ -15,8 +15,7 @@ import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
 
 public class HomeFeedFragment extends Fragment {
 
-    private HomeFeedViewModel mViewModel;
-
+    private HomeFeedViewModel _viewModel;
     public static HomeFeedFragment newInstance() {
         return new HomeFeedFragment();
     }
@@ -30,7 +29,7 @@ public class HomeFeedFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HomeFeedViewModel.class);
+        _viewModel = new ViewModelProvider(this).get(HomeFeedViewModel.class);
         // TODO: Use the ViewModel
     }
 

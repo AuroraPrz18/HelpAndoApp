@@ -17,12 +17,12 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
-    List<Task> tasks;
-    Context context;
+    private List<Task> _tasks;
+    private Context _context;
 
     public TaskAdapter(List<Task> tasks, Context context) {
-        this.tasks = tasks;
-        this.context = context;
+        this._tasks = tasks;
+        this._context = context;
     }
 
     /**
@@ -33,7 +33,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         // Create and inflate a new view for an item
-        View view = LayoutInflater.from(context).inflate(R.layout.item_task, parent, false);
+        View view = LayoutInflater.from(_context).inflate(R.layout.item_task, parent, false);
         return new ViewHolder(view);
     }
 
@@ -42,7 +42,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
      */
     @Override
     public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
-        Task task = tasks.get(position);
+        Task task = _tasks.get(position);
         holder.bind(task);
     }
 
@@ -52,7 +52,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
      */
     @Override
     public int getItemCount() {
-        return tasks.size();
+        return _tasks.size();
     }
 
     /**
@@ -65,11 +65,15 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             _binding = ItemTaskBinding.bind(itemView);
         }
 
+        /**
+         * Method to custom the data inside each item view
+         * @param task
+         */
         public void bind(Task task) {
             _binding.tvTitle.setText(task.getName());
             _binding.tvDescription.setText(task.getDescription());
-            _binding.tvCategory.setText(context.getResources().getString(R.string.category, task.getCategory()));
-            _binding.tvPoints.setText(context.getResources().getString(R.string.points, task.getPoints()+""));
+            _binding.tvCategory.setText(_context.getResources().getString(R.string.category, task.getCategory()));
+            _binding.tvPoints.setText(_context.getResources().getString(R.string.points, task.getPoints()+""));
         }
     }
 }
