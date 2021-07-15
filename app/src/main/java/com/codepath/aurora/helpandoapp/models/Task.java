@@ -2,13 +2,23 @@ package com.codepath.aurora.helpandoapp.models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 @ParseClassName("Task")
 public class Task extends ParseObject {
-    public static final String KEY_NAME = "userName";
-    public static final String KEY_DESCRIPTION = "userName";
-    public static final String KEY_CATEGORY = "userName";
-    public static final String KEY_POINTS = "userName";
+    public static final String KEY_USER = "user";
+    public static final String KEY_NAME = "name";
+    public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_CATEGORY = "category";
+    public static final String KEY_POINTS = "points";
+
+    public ParseUser getUser() {
+        return getParseUser(KEY_USER);
+    }
+
+    public void setUser(ParseUser user) {
+        put(KEY_USER, user);
+    }
 
     public String getName() {
         return getString(KEY_NAME);

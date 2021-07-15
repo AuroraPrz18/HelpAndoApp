@@ -28,4 +28,17 @@
     <string name="etCategory_hint">Choose a category</string>
     <string name="etPoints_hint">Points</string>
     <string name="btnSend_text">Add Task</string>
+    <!-- AddTask Activity -->
+    <string-array name="categories">
+        <item>Arts, Culture and Humanities</item>
+        <item>Education</item>
+        <item>Environment and Animals</item>
+        <item>Health</item>
+        <item>Human Services</item>
+        <item>International, Foreign Affairs</item>
+        <item>Public, Social Benefit</item>
+        <item>Religion Related</item>
+        <item>Mutual/Membership Benefit</item>
+        <item>Unknown, Unclassified</item>
+    </string-array>
 </resources>
