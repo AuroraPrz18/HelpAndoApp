@@ -50,6 +50,7 @@
     <string name="success_task">Your task has been submitted!</string>
     <string name="try_again">Try again!</string>
     <string name="success_sign_up">You can log in now!</string>
+    <string name="points_title">Points</string>
 
 
 </resources>
