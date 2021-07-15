@@ -1,6 +1,7 @@
 package com.codepath.aurora.helpandoapp.activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -82,6 +83,7 @@ public class AddTaskActivity extends AppCompatActivity {
         newTask.setDescription(_binding.etDescription.getText().toString());
         newTask.setCategory(getCategory());
         newTask.setPoints(Long.parseLong(_binding.etPoint.getText().toString()));
+        newTask.setIsApproved(true); // V1 all of them will be automatically accepted.
         return newTask;
     }
 
@@ -103,6 +105,7 @@ public class AddTaskActivity extends AppCompatActivity {
         newTask.saveInBackground(e -> {
             if(e != null){ // Something went wrong
                 Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
+                Log.e("ERROR", e+"");
                 return;
             }
             Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.success_task), Toast.LENGTH_SHORT).show();

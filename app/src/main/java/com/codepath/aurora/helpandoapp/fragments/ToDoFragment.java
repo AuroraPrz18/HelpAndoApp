@@ -66,6 +66,7 @@ public class ToDoFragment extends Fragment {
      */
     private void populateTasksList() {
         ParseQuery<Task> query = ParseQuery.getQuery("Task");
+        query.whereEqualTo(Task.KEY_APPROVED, true); // Only tasks accepted
         query.findInBackground(new FindCallback<Task>() {
             @Override
             public void done(List<Task> receivedTasks, ParseException e) {

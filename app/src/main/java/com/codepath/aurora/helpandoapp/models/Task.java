@@ -11,6 +11,7 @@ public class Task extends ParseObject {
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_CATEGORY = "category";
     public static final String KEY_POINTS = "points";
+    public static final String KEY_APPROVED = "isApproved";
 
     public ParseUser getUser() {
         return getParseUser(KEY_USER);
@@ -50,6 +51,14 @@ public class Task extends ParseObject {
 
     public void setPoints(long points) {
         put(KEY_POINTS, points);
+    }
+
+    public boolean getIsApproved() {
+        return getBoolean(KEY_APPROVED);
+    }
+
+    public void setIsApproved(boolean isApproved) {
+        put(KEY_APPROVED, isApproved);
     }
 
 }
