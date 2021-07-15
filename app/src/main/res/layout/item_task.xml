@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Only reusable items this week" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/tvTitle"
+        android:layout_marginTop="8dp"
+        android:text="This week carry your own reusable bags, water bottle and tupper. Think about how much plastic are you reducing." />
+
+    <TextView
+        android:id="@+id/tvCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvDescription"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/green_1"
+        android:text="Category: Environment and Animals" />
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvCategory"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/green_1"
+        android:text="Points: 1000" />
+
+</RelativeLayout>

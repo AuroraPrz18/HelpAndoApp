@@ -41,4 +41,13 @@
         <item>Mutual/Membership Benefit</item>
         <item>Unknown, Unclassified</item>
     </string-array>
+    <!-- ToDo Activity -->
+    <string name="category">Category: %s</string>
+    <string name="points">Points: %s</string>
+    <!-- Toasts -->
+    <string name="fields_required">All fields are required</string>
+    <string name="wrong">Something went wrong</string>
+    <string name="success_task">Your task has been submitted!</string>
+
+
 </resources>

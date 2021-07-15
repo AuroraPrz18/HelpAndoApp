@@ -2,24 +2,37 @@ package com.codepath.aurora.helpandoapp.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.codepath.aurora.helpandoapp.activities.AddTaskActivity;
+import com.codepath.aurora.helpandoapp.adapters.TaskAdapter;
 import com.codepath.aurora.helpandoapp.databinding.ToDoFragmentBinding;
+import com.codepath.aurora.helpandoapp.models.Task;
 import com.codepath.aurora.helpandoapp.viewModels.ToDoViewModel;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ToDoFragment extends Fragment {
     private ToDoFragmentBinding _binding;
     private ToDoViewModel mViewModel;
+    private TaskAdapter adapter;
+    private List<Task> tasks;
 
     public static ToDoFragment newInstance() {
         return new ToDoFragment();
@@ -29,6 +42,7 @@ public class ToDoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         _binding = ToDoFragmentBinding.inflate(inflater, container, false);
+        setUpRecyclerView();
         return _binding.getRoot();
     }
 
@@ -43,6 +57,33 @@ public class ToDoFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        // Populate Tasks list
+        populateTasksList();
+    }
+
+    private void populateTasksList() {
+        ParseQuery<Task> query = ParseQuery.getQuery("Task");
+        query.findInBackground(new FindCallback<Task>() {
+            @Override
+            public void done(List<Task> receivedTasks, ParseException e) {
+                if(e != null){
+                    Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Log.d("DEBUG", receivedTasks.toString());
+                // Save received tasks
+                tasks.addAll(receivedTasks);
+                // Notify the adapter of data change
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void setUpRecyclerView() {
+        _binding.rvTasks.setLayoutManager(new LinearLayoutManager(_binding.getRoot().getContext()));
+        tasks = new ArrayList<>();
+        adapter = new TaskAdapter( tasks, _binding.getRoot().getContext());
+        _binding.rvTasks.setAdapter(adapter);
     }
 
     @Override
