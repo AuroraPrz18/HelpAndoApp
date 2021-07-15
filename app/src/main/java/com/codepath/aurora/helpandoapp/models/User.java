@@ -9,6 +9,7 @@ public class User extends ParseObject {
     public static final String KEY_NAME = "name";
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_TYPE= "type";
+    public static final String KEY_POINTS= "points";
 
     // Required empty constructor
     public User() {
