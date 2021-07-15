@@ -14,28 +14,35 @@ public class User extends ParseObject {
     public User() {
     }
 
-    public String getUsername(){
+    public String getUsername() {
         return getString(KEY_USERNAME);
     }
-    public void setUsername(String username){
+
+    public void setUsername(String username) {
         put(KEY_USERNAME, username);
     }
-    public String getName(){
+
+    public String getName() {
         return getString(KEY_NAME);
     }
-    public void setName(String name){
+
+    public void setName(String name) {
         put(KEY_NAME, name);
     }
-    public String getPassword(){
+
+    public String getPassword() {
         return getString(KEY_PASSWORD);
     }
-    public void setPassword(String password){
+
+    public void setPassword(String password) {
         put(KEY_PASSWORD, password);
     }
-    public String getType(){
+
+    public String getType() {
         return getString(KEY_TYPE);
     }
-    public void setType(String type){
+
+    public void setType(String type) {
         put(KEY_TYPE, type);
     }
 
