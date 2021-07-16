@@ -61,5 +61,7 @@
     <string name="points_title">Points</string>
     <string name="etPost_hint">How do you help today?</string>
     <string name="btnPost">Post now</string>
+    <string name="text_required">The post requires text.</string>
+    <string name="success_post">Posted successful!</string>
 
 </resources>
