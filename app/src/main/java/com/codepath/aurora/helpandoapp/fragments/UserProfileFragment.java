@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.codepath.aurora.helpandoapp.databinding.UserProfileFragmentBinding;
@@ -35,24 +36,32 @@ public class UserProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        //_viewModel.setUser(ParseUser.getCurrentUser());
-        setUpProfile();
     }
 
     private void setUpProfile() {
         // todo: check if it is updated when needed
-        ParseUser user = ParseUser.getCurrentUser();
-        _binding.tvName.setText(user.getString(User.KEY_NAME));
-        _binding.tvUsername.setText(user.getString(User.KEY_USERNAME));
-        _binding.tvType.setText(user.getString(User.KEY_TYPE));
-        _binding.tvPoints.setText(user.getNumber(User.KEY_POINTS)+"");
+        _binding.tvName.setText(_viewModel.getUser().getString(User.KEY_NAME));
+        _binding.tvUsername.setText(_viewModel.getUser().getString(User.KEY_USERNAME));
+        _binding.tvType.setText(_viewModel.getUser().getString(User.KEY_TYPE));
+        _binding.tvPoints.setText(_viewModel.getUser().getNumber(User.KEY_POINTS)+"");
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         _viewModel = new ViewModelProvider(this).get(UserProfileViewModel.class);
-        // TODO: Use the ViewModel
+        _viewModel.setUser(ParseUser.getCurrentUser());
+        setUpProfile();
+        //setUpAllTheObservers();
+    }
+
+    private void setUpAllTheObservers() {
+        _viewModel.getPoints().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                _binding.tvPoints.setText(String.valueOf(integer));
+            }
+        });
     }
 
 }

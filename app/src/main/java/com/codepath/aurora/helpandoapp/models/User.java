@@ -2,6 +2,7 @@ package com.codepath.aurora.helpandoapp.models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.parse.ParseUser;
 
 @ParseClassName("User")
 public class User extends ParseObject {
@@ -13,6 +14,27 @@ public class User extends ParseObject {
 
     // Required empty constructor
     public User() {
+    }
+
+    public static void newTaskCompleted(Task task) {
+        //-------- Add row in TaskCompleted table --------------/
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser == null) return;
+        // Create an entry in the TaskCompleted table
+        ParseObject newTaskCompleted = new ParseObject("TaskCompleted");
+        // Set a relation in this table pointing the task and the user
+        newTaskCompleted.put("task", task);
+        newTaskCompleted.put("user", currentUser);
+        // Save this in the backend server
+        newTaskCompleted.saveInBackground();
+
+        //-------- Add row in TaskCompleted table --------------/
+        Integer points = (Integer)currentUser.getNumber(User.KEY_POINTS);
+        points += (Integer) ((int)task.getPoints()) ;
+        currentUser.put(User.KEY_POINTS, points);
+        // Saves the object.
+        currentUser.saveInBackground();
+
     }
 
     public String getUsername() {
@@ -46,5 +68,4 @@ public class User extends ParseObject {
     public void setType(String type) {
         put(KEY_TYPE, type);
     }
-
 }

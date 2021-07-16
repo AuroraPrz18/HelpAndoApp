@@ -11,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ItemTaskBinding;
 import com.codepath.aurora.helpandoapp.models.Task;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
+import com.codepath.aurora.helpandoapp.models.User;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -95,13 +94,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             _binding.btnDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Create an entry in the TaskCompleted table
-                    ParseObject newTaskCompleted = new ParseObject("TaskCompleted");
-                    // Set a relation in this table pointing the task and the user
-                    newTaskCompleted.put("task", task);
-                    newTaskCompleted.put("user", ParseUser.getCurrentUser());
-                    // Save this in the backend server
-                    newTaskCompleted.saveInBackground();
+                    User.newTaskCompleted(task);
                 }
             });
         }
