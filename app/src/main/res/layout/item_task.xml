@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:layout_marginBottom="8dp"
@@ -20,7 +21,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@+id/ibCheck"
             android:text="Only reusable items this week" />
+
+        <ImageButton
+            android:id="@+id/ibCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            app:srcCompat="@drawable/ic_check"
+            android:background="@android:color/transparent"/>
 
         <TextView
             android:id="@+id/tvDescription"
@@ -66,9 +77,10 @@
                 android:text="@string/btnComplete"
                 android:textColor="@color/green_3"
                 style="?attr/borderlessButtonStyle"
-                android:visibility="gone"
                 />
         </LinearLayout>
+
+
 
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -12,6 +12,11 @@ import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ItemTaskBinding;
 import com.codepath.aurora.helpandoapp.models.Task;
 import com.codepath.aurora.helpandoapp.models.User;
+import com.parse.CountCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -91,10 +96,28 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             _binding.tvCategory.setText(_context.getResources().getString(R.string.category, task.getCategory()));
             _binding.tvPoints.setText(_context.getResources().getString(R.string.points, task.getPoints()+""));
             _binding.btnDone.setVisibility(View.GONE);
+            _binding.ibCheck.setVisibility(View.INVISIBLE);
+            isCompleted(task);
             _binding.btnDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     User.newTaskCompleted(task);
+                    _binding.btnDone.setVisibility(View.GONE);
+                    _binding.ibCheck.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+        public void isCompleted(Task task) {
+            // Set up the query to obtain only id tasks completed by the user
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("TaskCompleted");
+            query.whereEqualTo("user", ParseUser.getCurrentUser());
+            query.whereEqualTo("task", task);
+            query.countInBackground(new CountCallback() {
+                @Override
+                public void done(int count, ParseException e) {
+                    if(count>0){
+                        _binding.ibCheck.setVisibility(View.VISIBLE);
+                    }
                 }
             });
         }
