@@ -45,6 +45,7 @@
     <string name="category">Category: %s</string>
     <string name="points">Points: %s</string>
     <string name="order_by">Order by:</string>
+    <string name="btnComplete">I am done it!</string>
     <string-array name="order_by">
         <item>Week</item>
         <item>Month</item>
@@ -58,4 +59,5 @@
     <string name="success_sign_up">You can log in now!</string>
     <!-- User Profile -->
     <string name="points_title">Points</string>
+
 </resources>

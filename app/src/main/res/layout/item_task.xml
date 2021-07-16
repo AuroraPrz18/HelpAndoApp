@@ -51,6 +51,24 @@
             android:layout_marginTop="4dp"
             android:textColor="@color/green_1"
             android:text="Points: 1000" />
+        <!-- Buttons -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPoints"
+            android:layout_margin="8dp">
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="@string/btnComplete"
+                android:text="@string/btnComplete"
+                android:textColor="@color/green_3"
+                style="?attr/borderlessButtonStyle"
+                android:visibility="gone"
+                />
+        </LinearLayout>
 
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

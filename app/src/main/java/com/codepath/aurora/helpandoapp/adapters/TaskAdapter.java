@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,6 +68,17 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             _binding = ItemTaskBinding.bind(itemView);
+            // set a click listener to show the button to mark this task as a completed
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(_binding.btnDone.getVisibility()==View.GONE){ // If the button was not visible
+                        _binding.btnDone.setVisibility(View.VISIBLE); //Show it
+                    }else{
+                        _binding.btnDone.setVisibility(View.GONE); // else, hide it
+                    }
+                }
+            });
         }
 
         /**
@@ -78,6 +90,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             _binding.tvDescription.setText(task.getDescription());
             _binding.tvCategory.setText(_context.getResources().getString(R.string.category, task.getCategory()));
             _binding.tvPoints.setText(_context.getResources().getString(R.string.points, task.getPoints()+""));
+            _binding.btnDone.setVisibility(View.GONE);
+            _binding.btnDone.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(_context, task.getName(), Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }
