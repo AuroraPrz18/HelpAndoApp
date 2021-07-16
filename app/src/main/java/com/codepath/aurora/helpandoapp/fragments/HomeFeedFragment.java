@@ -34,4 +34,8 @@ public class HomeFeedFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    public void onClickPostNow(View view){
+
+    }
+
 }

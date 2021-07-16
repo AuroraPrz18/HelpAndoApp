@@ -79,8 +79,5 @@
                 style="?attr/borderlessButtonStyle"
                 />
         </LinearLayout>
-
-
-
-    </RelativeLayout>
+            </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>
