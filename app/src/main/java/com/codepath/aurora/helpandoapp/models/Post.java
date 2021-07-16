@@ -7,6 +7,7 @@ import com.parse.ParseObject;
 public class Post extends ParseObject {
     public final static String KEY_AUTHOR = "author";
     public final static String KEY_TEXT_POST = "text";
+    public final static String KEY_TASK = "task";
     public final static String KEY_IMAGE = "image";
     public final static String KEY_LOCATION = "location";
     public final static String KEY_CONTACT_INFO = "contactInfo";
@@ -25,6 +26,14 @@ public class Post extends ParseObject {
 
     public void setText(String text) {
         put(KEY_TEXT_POST, text);
+    }
+
+    public ParseObject getTask() {
+        return getParseObject(KEY_TASK);
+    }
+
+    public void setTask(ParseObject task) {
+        put(KEY_TASK, task);
     }
 
 }

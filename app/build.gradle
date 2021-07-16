@@ -48,4 +48,7 @@ dependencies {
     implementation "androidx.navigation:navigation-ui:$nav_version"
     // Parse library
     implementation "com.github.parse-community.Parse-SDK-Android:parse:1.26.0"
+    // Parceler dependencies
+    implementation 'org.parceler:parceler-api:1.1.12'
+    annotationProcessor 'org.parceler:parceler:1.1.12'
 }

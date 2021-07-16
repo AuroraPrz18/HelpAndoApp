@@ -19,7 +19,6 @@ import com.parse.ParseUser;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu){
         // To inflate the new items in the action bar
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main_top_menu, menu);
@@ -52,14 +51,14 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Logs out the current user and finishes the activity
      */
-    public void logOut() {
+    public void logOut(){
         ParseUser.logOut();
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if (currentUser == null) {
+        if(currentUser == null){
             Intent intent = new Intent(this, LoginActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // Removes other activities from stack
             startActivity(intent);
-        } else {
+        }else{
             Toast.makeText(this, getResources().getString(R.string.try_again), Toast.LENGTH_SHORT).show();
         }
     }

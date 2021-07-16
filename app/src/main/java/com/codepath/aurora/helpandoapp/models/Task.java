@@ -4,6 +4,9 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
+import org.parceler.Parcel;
+
+@Parcel(analyze = Task.class) // Define explicitly what types Parceler should analyze, to avoid issues because this class extends ParseObject
 @ParseClassName("Task")
 public class Task extends ParseObject {
     public static final String KEY_USER = "user";
@@ -12,6 +15,9 @@ public class Task extends ParseObject {
     public static final String KEY_CATEGORY = "category";
     public static final String KEY_POINTS = "points";
     public static final String KEY_APPROVED = "isApproved";
+
+    public Task() {
+    }
 
     public ParseUser getUser() {
         return getParseUser(KEY_USER);
