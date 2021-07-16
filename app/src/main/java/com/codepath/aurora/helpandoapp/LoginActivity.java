@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
         _viewModel = new ViewModelProvider(this).get(LogInViewModel.class);
         // If there is an active session - allow user persistence
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         }
@@ -39,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Method called when the user click the LogIn button
+     *
      * @param view
      */
     public void onClickSignInButton(View view) {
@@ -47,26 +48,28 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * Method that tries to log in the user with given credentials.
+     *
      * @param username
      * @param password
      */
     private void loginUser(String username, String password) {
         // TODO: CHANGE IT TO THE MODEL VIEW
         ParseUser.logInInBackground(username, password, new LogInCallback() {
-                    @Override
-                    public void done(ParseUser user, ParseException e) {
-                        if(e != null){
-                            Toast.makeText(LoginActivity.this, "Forgotten credentials? Try again", Toast.LENGTH_SHORT).show();
-                            return;
-                        }
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(intent);
-                    }
-                });
+            @Override
+            public void done(ParseUser user, ParseException e) {
+                if (e != null) {
+                    Toast.makeText(LoginActivity.this, "Forgotten credentials? Try again", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     /**
      * Method called when the user click the SignUp button. It starts SignUp Activity
+     *
      * @param view
      */
     public void onClickSignUp(View view) {

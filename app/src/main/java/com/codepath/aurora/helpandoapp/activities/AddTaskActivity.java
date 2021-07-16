@@ -57,7 +57,7 @@ public class AddTaskActivity extends AppCompatActivity {
      */
     private void populateDropdownMenuCategories() {
         // Get all categories from the resources (strings.xml)
-        String [] categories = getResources().getStringArray(R.array.categories);
+        String[] categories = getResources().getStringArray(R.array.categories);
         // Create an adapter which will help to bind the strings with the menu
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, categories);
         // Set the menu's adapter
@@ -65,9 +65,9 @@ public class AddTaskActivity extends AppCompatActivity {
     }
 
     public void onClickAddTask(View view) {
-        if(isValid()){ // If all the data provided is complete
+        if (isValid()) { // If all the data provided is complete
             addTaskInBackground(createTask());
-        }else{
+        } else {
             Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.fields_required), Toast.LENGTH_SHORT).show();
         }
     }
@@ -89,6 +89,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
     /**
      * Checks if the information provided is complete
+     *
      * @return True if it is complete
      */
     private boolean isValid() {
@@ -98,14 +99,15 @@ public class AddTaskActivity extends AppCompatActivity {
 
     /**
      * Adds a task given to the backend server
+     *
      * @param newTask
      */
     private void addTaskInBackground(Task newTask) {
         // Saves the new object.
         newTask.saveInBackground(e -> {
-            if(e != null){ // Something went wrong
+            if (e != null) { // Something went wrong
                 Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
-                Log.e("ERROR", e+"");
+                Log.e("ERROR", e + "");
                 return;
             }
             Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.success_task), Toast.LENGTH_SHORT).show();
@@ -115,10 +117,11 @@ public class AddTaskActivity extends AppCompatActivity {
 
     /**
      * Returns the category selected in a String format
+     *
      * @return
      */
     private String getCategory() {
-        String [] categories = getResources().getStringArray(R.array.categories);
+        String[] categories = getResources().getStringArray(R.array.categories);
         return categories[_viewModel.getCategory()];
     }
 }

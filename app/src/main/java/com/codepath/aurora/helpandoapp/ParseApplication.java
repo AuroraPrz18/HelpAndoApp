@@ -8,7 +8,7 @@ import com.parse.Parse;
 import com.parse.ParseObject;
 
 /**
- *  Class to setup Parse Initialize Parse using the server configuration
+ * Class to setup Parse Initialize Parse using the server configuration
  */
 public class ParseApplication extends Application {
     @Override

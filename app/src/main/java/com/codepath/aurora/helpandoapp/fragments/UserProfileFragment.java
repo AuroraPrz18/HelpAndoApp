@@ -38,12 +38,14 @@ public class UserProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    /**
+     * Set initial text for all the views in the layout.
+     */
     private void setUpProfile() {
-        // todo: check if it is updated when needed
         _binding.tvName.setText(_viewModel.getUser().getString(User.KEY_NAME));
         _binding.tvUsername.setText(_viewModel.getUser().getString(User.KEY_USERNAME));
         _binding.tvType.setText(_viewModel.getUser().getString(User.KEY_TYPE));
-        _binding.tvPoints.setText(_viewModel.getUser().getNumber(User.KEY_POINTS)+"");
+        _binding.tvPoints.setText(_viewModel.getUser().getNumber(User.KEY_POINTS) + "");
     }
 
     @Override

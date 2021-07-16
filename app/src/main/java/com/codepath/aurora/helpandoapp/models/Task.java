@@ -46,7 +46,7 @@ public class Task extends ParseObject {
     }
 
     public long getPoints() {
-        return ((Number) getNumber(KEY_POINTS) ).longValue();
+        return ((Number) getNumber(KEY_POINTS)).longValue();
     }
 
     public void setPoints(long points) {

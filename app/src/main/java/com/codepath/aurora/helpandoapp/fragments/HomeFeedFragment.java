@@ -16,6 +16,7 @@ import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
 public class HomeFeedFragment extends Fragment {
 
     private HomeFeedViewModel _viewModel;
+
     public static HomeFeedFragment newInstance() {
         return new HomeFeedFragment();
     }

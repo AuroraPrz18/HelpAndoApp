@@ -54,6 +54,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     /**
      * Method to get the size of the data
+     *
      * @return
      */
     @Override
@@ -70,6 +71,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
      */
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemTaskBinding _binding;
+
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             _binding = ItemTaskBinding.bind(itemView);
@@ -77,9 +79,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(_binding.btnDone.getVisibility()==View.GONE){ // If the button was not visible
+                    if (_binding.btnDone.getVisibility() == View.GONE) { // If the button was not visible
                         _binding.btnDone.setVisibility(View.VISIBLE); //Show it
-                    }else{
+                    } else {
                         _binding.btnDone.setVisibility(View.GONE); // else, hide it
                     }
                 }
@@ -88,34 +90,42 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
         /**
          * Method to custom the data inside each item view
+         *
          * @param task
          */
         public void bind(Task task) {
             _binding.tvTitle.setText(task.getName());
             _binding.tvDescription.setText(task.getDescription());
             _binding.tvCategory.setText(_context.getResources().getString(R.string.category, task.getCategory()));
-            _binding.tvPoints.setText(_context.getResources().getString(R.string.points, task.getPoints()+""));
+            _binding.tvPoints.setText(_context.getResources().getString(R.string.points, task.getPoints() + ""));
             _binding.btnDone.setVisibility(View.GONE);
             _binding.ibCheck.setVisibility(View.INVISIBLE);
             isCompleted(task);
+            // When the button btnDone is clicked it means that the user has completed this tasks
             _binding.btnDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    User.newTaskCompleted(task);
-                    _binding.btnDone.setVisibility(View.GONE);
-                    _binding.ibCheck.setVisibility(View.VISIBLE);
+                    User.newTaskCompleted(task); // Add this relation user-task into the TaskCompleted table
+                    _binding.btnDone.setVisibility(View.GONE); // Hide de button
+                    _binding.ibCheck.setVisibility(View.VISIBLE); // Show that it has been completed
                 }
             });
         }
+
+        /**
+         * Check if a given tasks has already been completed by the user.
+         *
+         * @param task
+         */
         public void isCompleted(Task task) {
-            // Set up the query to obtain only id tasks completed by the user
+            // Set up the query to obtain how many times the user has completed this task
             ParseQuery<ParseObject> query = ParseQuery.getQuery("TaskCompleted");
-            query.whereEqualTo("user", ParseUser.getCurrentUser());
-            query.whereEqualTo("task", task);
+            query.whereEqualTo("user", ParseUser.getCurrentUser()); // Specify the user
+            query.whereEqualTo("task", task); // Specify the task
             query.countInBackground(new CountCallback() {
                 @Override
                 public void done(int count, ParseException e) {
-                    if(count>0){
+                    if (count > 0) { // If the user completed the task at least once, set the check icon to be visible
                         _binding.ibCheck.setVisibility(View.VISIBLE);
                     }
                 }

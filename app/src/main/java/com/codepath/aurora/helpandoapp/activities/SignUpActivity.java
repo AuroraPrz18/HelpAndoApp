@@ -59,19 +59,20 @@ public class SignUpActivity extends AppCompatActivity {
      * Method to retrieve the different user types and populate the Dropdown Menu whit them.
      */
     private void populateDropdownMenu() {
-        String [] userTypes = getResources().getStringArray(R.array.user_type);
+        String[] userTypes = getResources().getStringArray(R.array.user_type);
         ArrayAdapter adapter = new ArrayAdapter(this, R.layout.dropdown_user_type_item, userTypes);
         _binding.acUserType.setAdapter(adapter);
     }
 
     /**
      * Method called when the user click the SignUp button
+     *
      * @param view
      */
     public void onClickSignUpButton(View view) {
-        if(isValid()){ // If all the data provided is complete
+        if (isValid()) { // If all the data provided is complete
             signUpAUserInBackground(createNewUser());
-        }else{
+        } else {
             Toast.makeText(SignUpActivity.this, getResources().getString(R.string.fields_required), Toast.LENGTH_SHORT).show();
         }
     }
@@ -80,7 +81,7 @@ public class SignUpActivity extends AppCompatActivity {
     /**
      * Method that create a new ParseUser with the information provided
      */
-    private ParseUser createNewUser(){
+    private ParseUser createNewUser() {
         ParseUser newUser = new ParseUser();
         newUser.setUsername(_binding.etUsername.getText().toString());
         newUser.put(User.KEY_NAME, _binding.etName.getText().toString());
@@ -91,36 +92,40 @@ public class SignUpActivity extends AppCompatActivity {
 
     /**
      * Boolean method to check if the information provided by the user is completed. Returns TRUE if it is completed, FALSE if not.
+     *
      * @return
      */
     private boolean isValid() {
-        if(_binding.etUsername.getText().toString().isEmpty()) return false;
-        if(_binding.etName.getText().toString().isEmpty()) return false;
-        if(_binding.etPassword.getText().toString().isEmpty()) return false;
-        if(_viewModel.getTypeUser() == -1) return false;
+        if (_binding.etUsername.getText().toString().isEmpty()) return false;
+        if (_binding.etName.getText().toString().isEmpty()) return false;
+        if (_binding.etPassword.getText().toString().isEmpty()) return false;
+        if (_viewModel.getTypeUser() == -1) return false;
         return true;
     }
 
     /**
      * Method that returns the last user type selected.
+     *
      * @return
      */
-    private String getUserType(){
-        String [] userTypes = getResources().getStringArray(R.array.user_type);
+    private String getUserType() {
+        String[] userTypes = getResources().getStringArray(R.array.user_type);
         return userTypes[_viewModel.getTypeUser()];
     }
 
     // TODO: CHANGE IT INSIDE THE VIEW MODEL
+
     /**
      * Asynchronous method to sign up a given user
+     *
      * @param newUser
      * @return
      */
-    public boolean signUpAUserInBackground(ParseUser newUser){
-        newUser.signUpInBackground(new SignUpCallback(){
+    public boolean signUpAUserInBackground(ParseUser newUser) {
+        newUser.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {
-                if(e != null){ // Something returns a exception
+                if (e != null) { // Something returns a exception
                     Toast.makeText(SignUpActivity.this, getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
                     return;
                 }

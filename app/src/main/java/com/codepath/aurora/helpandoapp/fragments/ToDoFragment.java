@@ -2,7 +2,6 @@ package com.codepath.aurora.helpandoapp.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +74,7 @@ public class ToDoFragment extends Fragment {
         query.findInBackground(new FindCallback<Task>() {
             @Override
             public void done(List<Task> receivedTasks, ParseException e) {
-                if(e != null){
+                if (e != null) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -94,18 +93,18 @@ public class ToDoFragment extends Fragment {
      */
     private void setUpDropdownMenu() {
         // Set the different options to filter
-        String [] options = getResources().getStringArray(R.array.order_by);
+        String[] options = getResources().getStringArray(R.array.order_by);
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.support_simple_spinner_dropdown_item, options);
         _binding.acChooser.setAdapter(adapter);
         // Set onClickListener where depending on the option selected the tasks will change
         _binding.acChooser.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(_binding.acChooser.getText().toString().equals(options[0])){ // Week
+                if (_binding.acChooser.getText().toString().equals(options[0])) { // Week
                     populateTasksList(0, 499); // Tasks which its points are between 0-499
-                }else if(_binding.acChooser.getText().toString().equals(options[1])){ // Month
+                } else if (_binding.acChooser.getText().toString().equals(options[1])) { // Month
                     populateTasksList(500, 999); // Tasks which its points are between 500-999
-                }else{
+                } else {
                     populateTasksList(1000, 10000); // Tasks which its points are between 1000-10000
                 }
             }
@@ -121,7 +120,7 @@ public class ToDoFragment extends Fragment {
     private void setUpRecyclerView() {
         _binding.rvTasks.setLayoutManager(new LinearLayoutManager(_binding.getRoot().getContext()));
         _tasks = new ArrayList<>();
-        _adapter = new TaskAdapter( _tasks, _binding.getRoot().getContext());
+        _adapter = new TaskAdapter(_tasks, _binding.getRoot().getContext());
         _binding.rvTasks.setAdapter(_adapter);
     }
 
