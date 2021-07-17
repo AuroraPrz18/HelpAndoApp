@@ -117,7 +117,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                     User.newTaskCompleted(task); // Add this relation user-task into the TaskCompleted table
                     _binding.btnDone.setVisibility(View.GONE); // Hide de button
                     _binding.ibCheck.setVisibility(View.VISIBLE); // Show that it has been completed
-                    _binding.ibComment.setVisibility(View.VISIBLE); // User can now comment about this task
+                    _binding.ibComment.setVisibility(View.GONE); // User can now comment about this task
+                    _completed = true;
                 }
             });
             // When the button btnComment is clicked, it means that the user will be able to post something about that specific task

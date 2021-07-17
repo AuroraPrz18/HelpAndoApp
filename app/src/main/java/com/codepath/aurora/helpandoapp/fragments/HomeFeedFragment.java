@@ -10,18 +10,27 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.codepath.aurora.helpandoapp.R;
+import com.codepath.aurora.helpandoapp.adapters.PostAdapter;
 import com.codepath.aurora.helpandoapp.databinding.HomeFeedFragmentBinding;
 import com.codepath.aurora.helpandoapp.models.Post;
 import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeFeedFragment extends Fragment {
     private HomeFeedFragmentBinding _binding;
     private HomeFeedViewModel _viewModel;
+    private PostAdapter _adapter;
+    private List<Post> _posts;
 
     public static HomeFeedFragment newInstance() {
         return new HomeFeedFragment();
@@ -44,6 +53,8 @@ public class HomeFeedFragment extends Fragment {
                 onClickPostNow();
             }
         });
+        setUpRecyclerView();
+        populatePostsList();
     }
 
     public void onClickPostNow(){
@@ -87,4 +98,38 @@ public class HomeFeedFragment extends Fragment {
         });
     }
 
+
+    /**
+     * Initializes the RecyclerView with a LayoutManager and with an Adapter
+     */
+    private void setUpRecyclerView() {
+        _binding.rvPosts.setLayoutManager(new LinearLayoutManager(_binding.getRoot().getContext()));
+        _posts = new ArrayList<>();
+        _adapter = new PostAdapter(_binding.getRoot().getContext(), _posts);
+        _binding.rvPosts.setAdapter(_adapter);
+    }
+
+    /**
+     * Populates Posts list retrieving them from de backend server
+     */
+    private void populatePostsList() {
+         ParseQuery<Post> query = ParseQuery.getQuery("Post");
+         query.orderByDescending("createdAt");
+         query.include(Post.KEY_TASK);
+         query.include(Post.KEY_AUTHOR);
+         query.findInBackground(new FindCallback<Post>() {
+             @Override
+             public void done(List<Post> receivedPosts, ParseException e) {
+                 if (e != null) {
+                     Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
+                     return;
+                 }
+                 // Save received tasks in tasks list
+                 _posts.clear();
+                 _posts.addAll(receivedPosts);
+                 // Notify the adapter of data change
+                 _adapter.notifyDataSetChanged();
+             }
+         });
+    }
 }
