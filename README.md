@@ -39,11 +39,11 @@ Encourage people to do things that can help to build a better world. It is possi
 * [ ] -> User should be able to find information about non-profit organizations. This information should be obtained by a global API.
 * [ ] -> User profile should display the dashboard of self-improvement based on its performance.
 * [X] User profile should display the total points of the user, based on its performance.
-* [ ] User can post text information about the tasks that it had completed.
+* [X] User can post text information about the tasks that it had completed.
 * [ ] User can take a picture and post it inside the app.
 * [ ] User can post information about people that need help, this post will have a button to display information to contact the user to help her or him.
 * [ ] -> User can post information about places that need help, including the place's Location.
-* [ ] User can watch posts of other users.
+* [X] User can watch posts of other users.
 * [ ] Sponsors can find information about how to contact volunteers to know more about its altruistic projects.
 * [ ] The app integrates with at least one SDK or API
 * [ ] The app uses at least one gesture (e.g. double tap to like, e.g. pinch to scale)
