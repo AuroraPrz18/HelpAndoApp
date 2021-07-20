@@ -36,7 +36,7 @@ Encourage people to do things that can help to build a better world. It is possi
 * [X] The app should allow user persistence.
 * [X] User can suggest tasks to the admin. V1 all of them will be automatically accepted.
 * [X] User should find tasks to do, ordered by week, month or year depending on their difficulty or time required.
-* [ ] -> User should be able to find information about non-profit organizations. This information should be obtained by a global API.
+* [/] -> User should be able to find information about non-profit organizations. This information should be obtained by a global API.
 * [ ] -> User profile should display the dashboard of self-improvement based on its performance.
 * [X] User profile should display the total points of the user, based on its performance.
 * [X] User can post text information about the tasks that it had completed.
@@ -45,10 +45,12 @@ Encourage people to do things that can help to build a better world. It is possi
 * [ ] -> User can post information about places that need help, including the place's Location.
 * [X] User can watch posts of other users.
 * [ ] Sponsors can find information about how to contact volunteers to know more about its altruistic projects.
-* [ ] The app integrates with at least one SDK or API
+* [X] The app integrates with at least one SDK or API
 * [ ] The app uses at least one gesture (e.g. double tap to like, e.g. pinch to scale)
 * [ ] The app uses at least one animation (e.g. fade in/out, e.g. animating a view growing and shrinking)
 * [ ] The app incorporates at least one external library to add visual polish
+
+API used to obtain nonprofit organizations data: https://www.globalgiving.org/api/
 
 
 **Optional Nice-to-have Stories**

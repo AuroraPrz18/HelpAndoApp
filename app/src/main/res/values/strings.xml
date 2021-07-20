@@ -66,5 +66,7 @@
     <string name="postAboutTask">What do you have to say about the task \"%s\"?</string>
     <string name="random">Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.</string>
     <string name="answerTask">In response to \'%s\' task:</string>
+    <string name="address">Address:</string>
+    <string name="credits">Data provided by: https://www.globalgiving.org/</string>
 
 </resources>

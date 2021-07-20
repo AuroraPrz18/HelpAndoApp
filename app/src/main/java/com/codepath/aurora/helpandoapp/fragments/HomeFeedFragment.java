@@ -124,7 +124,7 @@ public class HomeFeedFragment extends Fragment {
                      Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
                      return;
                  }
-                 // Save received tasks in tasks list
+                 // Save received posts
                  _posts.clear();
                  _posts.addAll(receivedPosts);
                  // Notify the adapter of data change

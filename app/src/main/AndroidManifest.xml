@@ -15,7 +15,6 @@
         android:theme="@style/Theme.HelpAndoApp">
         <activity android:name=".activities.NewPostActivity"></activity>
         <activity android:name=".activities.AddTaskActivity" />
-        <activity android:name=".activities.ToDoActivity" />
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.SignUpActivity" />
         <activity android:name=".LoginActivity">
