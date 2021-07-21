@@ -74,7 +74,6 @@ public class OrganizationsFragment extends Fragment {
         RequestHeaders headers = new RequestHeaders();
         headers.put("Accept", "application/json");
         String url = _viewModel.getURLOrganizations(getResources().getString(R.string.api_organizations));
-        Log.d("DEBUG ARRAY", url);
         client.get(url, headers, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {

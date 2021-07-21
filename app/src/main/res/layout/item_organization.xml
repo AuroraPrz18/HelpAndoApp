@@ -22,8 +22,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            android:src="@drawable/ic_business"
-            app:tint="@color/green_1" />
+            tools:srcCompat="@drawable/ic_business"/>
         <TextView
             android:id="@+id/tvName"
             style="@style/TextAppearance.AppCompat.Subhead"

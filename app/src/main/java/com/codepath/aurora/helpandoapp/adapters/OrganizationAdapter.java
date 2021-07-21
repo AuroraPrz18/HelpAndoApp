@@ -1,9 +1,7 @@
 package com.codepath.aurora.helpandoapp.adapters;
 
 import android.content.Context;
-import android.os.Build;
 import android.text.Html;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.codepath.aurora.helpandoapp.GlideApp;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ItemOrganizationBinding;
 import com.codepath.aurora.helpandoapp.models.Organization;
@@ -102,23 +100,12 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
             _binding.tvLocation.setText(org.getCity() + ", " + org.getState() + ", " + org.getCountry());
             _binding.tvUrl.setText(org.getUrl());
             String urlLogo = org.getLogoUrl();
-            if(!urlLogo.isEmpty()){
-                //if(urlLogo.substring(0, 5)== "http:"){
-                //    urlLogo = "https:" + urlLogo.substring(5);
-                //}
-                Log.d("DEBUG", urlLogo.substring(0, 5) + ""+ urlLogo);
-
-                Glide.with(_context)
-                        .load(urlLogo)
-                        //.override(30, 30) // Resizing the image
-                        //.error(_context.getDrawable(R.drawable.ic_business))
-                        .into(_binding.ivLogo);
-            }else{
-                _binding.ivLogo.setImageDrawable(_context.getDrawable(R.drawable.ic_business));
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    _binding.ivLogo.setBackgroundColor(_context.getColor(R.color.green_1));
-                }
-            }
+            GlideApp.with(_context)
+                    .load(urlLogo)
+                    .override(100, 100) // Resizing the image
+                    .fitCenter()
+                    .error(_context.getDrawable(R.drawable.ic_business))
+                    .into(_binding.ivLogo);
         }
     }
 }
