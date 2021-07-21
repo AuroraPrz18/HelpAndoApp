@@ -1,6 +1,7 @@
 package com.codepath.aurora.helpandoapp.fragments;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.adapters.PostAdapter;
 import com.codepath.aurora.helpandoapp.databinding.HomeFeedFragmentBinding;
+import com.codepath.aurora.helpandoapp.models.Contact;
 import com.codepath.aurora.helpandoapp.models.Post;
 import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
 import com.parse.FindCallback;
@@ -23,10 +25,12 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFeedFragment extends Fragment {
+public class HomeFeedFragment extends Fragment implements ContactDialog.ContactDialogListener{
     private HomeFeedFragmentBinding _binding;
     private HomeFeedViewModel _viewModel;
     private PostAdapter _adapter;
@@ -53,8 +57,24 @@ public class HomeFeedFragment extends Fragment {
                 onClickPostNow();
             }
         });
+        _binding.ibContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openContactDialog();
+            }
+        });
         setUpRecyclerView();
         populatePostsList();
+    }
+
+    private void openContactDialog() {
+        ContactDialog dialog = new ContactDialog();
+        // Adding the Contact info if it exist
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("Contact", Parcels.wrap(_viewModel.getContact()));
+        dialog.setArguments(bundle);
+        dialog.setTargetFragment(HomeFeedFragment.this, 1);
+        dialog.show(getParentFragmentManager(), "Dialog tag");
     }
 
     public void onClickPostNow(){
@@ -94,6 +114,8 @@ public class HomeFeedFragment extends Fragment {
                     return;
                 }
                 Toast.makeText(getActivity(), getResources().getString(R.string.success_post), Toast.LENGTH_SHORT).show();
+                // Clean the Contact Info
+                _viewModel.cleanContact();
             }
         });
     }
@@ -131,5 +153,17 @@ public class HomeFeedFragment extends Fragment {
                  _adapter.notifyDataSetChanged();
              }
          });
+    }
+
+    @Override
+    public void saveInformation(Contact contact) {
+        _binding.cvContactCard.setVisibility(View.VISIBLE);
+        _binding.tvNameContact.setText(Html.fromHtml("<b>" + getResources().getString(R.string.etNameContact_hint) + "</b> "
+                + contact.getName()));
+        _binding.tvPhoneContact.setText(Html.fromHtml("<b>" + getResources().getString(R.string.etTelContact_hint) + "</b> "
+                + contact.getTelephone()));
+        _binding.tvExtraInfoContact.setText(Html.fromHtml("<b>" + getResources().getString(R.string.etExtraInfoContact_hint) + "</b> "
+                + contact.getExtraInfo()));
+        _viewModel.setContact(contact);
     }
 }

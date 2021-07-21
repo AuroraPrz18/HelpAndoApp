@@ -68,5 +68,12 @@
     <string name="answerTask">In response to \'%s\' task:</string>
     <string name="address">Address:</string>
     <string name="credits">Data provided by: https://www.globalgiving.org/</string>
+    <string name="etNameContact_hint">Name of the person that need help:</string>
+    <string name="etTelContact_hint">Contact Telephone:</string>
+    <string name="etExtraInfoContact_hint">Add any extra contact information to help this person:</string>
+    <string name="dialog_contact_title">Add contact information</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_use_contact_info">Apply</string>
+    <string name="card_contact_title">Contact Information to help the cause</string>
 
 </resources>

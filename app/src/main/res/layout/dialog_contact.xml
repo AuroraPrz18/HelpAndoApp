@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tfName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        style="@style/AppTheme.Dark.TextInputLayout"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/etNameContact_hint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tfTelephone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tfName"
+        android:layout_marginTop="@dimen/marginTop"
+        android:layout_alignParentLeft="true"
+        style="@style/AppTheme.Dark.TextInputLayout"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etTelephone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:hint="@string/etTelContact_hint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tfExtraInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tfTelephone"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="@dimen/marginTop"
+        style="@style/AppTheme.Dark.TextInputLayout"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etExtraInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/etExtraInfoContact_hint" />
+    </com.google.android.material.textfield.TextInputLayout>
+</RelativeLayout>

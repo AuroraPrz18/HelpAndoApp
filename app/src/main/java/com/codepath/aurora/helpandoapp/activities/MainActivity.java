@@ -17,7 +17,7 @@ import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ActivityMainBinding;
 import com.parse.ParseUser;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
