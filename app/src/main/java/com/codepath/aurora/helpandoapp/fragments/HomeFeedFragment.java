@@ -53,6 +53,15 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         _viewModel = new ViewModelProvider(this).get(HomeFeedViewModel.class);
+        setOnClickListeners();
+        setUpRecyclerView();
+        populatePostsList();
+    }
+
+    /**
+     * Sets all the onClickListeners for this Activity
+     */
+    private void setOnClickListeners() {
         _binding.btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,8 +74,20 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
                 openContactDialog(); // Shows DialogFragment
             }
         });
-        setUpRecyclerView();
-        populatePostsList();
+        _binding.ibDeleteContactCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeContactCard(); // Shows DialogFragment
+            }
+        });
+    }
+
+    /**
+     * Closes the ContactCard view and delete information related with this
+     */
+    private void closeContactCard() {
+        _viewModel.cleanContact();
+        _binding.cvContactCard.setVisibility(View.GONE);
     }
 
     /**
@@ -102,6 +123,9 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
      */
     private Post createNewPost() {
         Post newPost = new Post();
+        if(_viewModel.getContact()!=null){ // If this Post include a Contact, add this
+            newPost.setContact(_viewModel.getContact());
+        }
         newPost.setAuthor(ParseUser.getCurrentUser());
         String postText = _binding.etPost.getText().toString();
         newPost.setText(postText);
@@ -125,7 +149,7 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
                 }
                 Toast.makeText(getActivity(), getResources().getString(R.string.success_post), Toast.LENGTH_SHORT).show();
                 // Clean the Contact Info
-                _viewModel.cleanContact();
+                closeContactCard();
             }
         });
     }
@@ -149,6 +173,7 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         query.orderByDescending("createdAt");
         query.include(Post.KEY_TASK);
         query.include(Post.KEY_AUTHOR);
+        query.include(Post.KEY_CONTACT_INFO);
         query.findInBackground(new FindCallback<Post>() {
             @Override
             public void done(List<Post> receivedPosts, ParseException e) {

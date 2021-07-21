@@ -1,20 +1,25 @@
 package com.codepath.aurora.helpandoapp.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ItemPostBinding;
+import com.codepath.aurora.helpandoapp.fragments.ContactDialogInPost;
+import com.codepath.aurora.helpandoapp.models.Contact;
 import com.codepath.aurora.helpandoapp.models.Post;
 import com.codepath.aurora.helpandoapp.models.Task;
 import com.codepath.aurora.helpandoapp.models.User;
 
 import org.jetbrains.annotations.NotNull;
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -22,9 +27,9 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     Context _context;
     List<Post> _posts;
 
-    public PostAdapter(Context _context, List<Post> _posts) {
-        this._context = _context;
-        this._posts = _posts;
+    public PostAdapter(Context context, List<Post> posts) {
+        this._context = context;
+        this._posts = posts;
     }
 
     /**
@@ -79,9 +84,30 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             } else {
                 _binding.tvTask.setVisibility(View.GONE);
             }
+            if (post.getContact() != null) {
+                _binding.ibShowContact.setVisibility(View.VISIBLE);
+                _binding.ibShowContact.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openContactDialog((Contact) post.getContact());
+                    }
+                });
+            } else {
+                _binding.ibShowContact.setVisibility(View.GONE);
+            }
             _binding.tvText.setText(post.getText());
         }
+
+        /**
+         * Shows the ContactDialogInPost with the contact information attached to this post
+         */
+        private void openContactDialog(Contact contact) {
+            ContactDialogInPost dialog = new ContactDialogInPost();
+            // Adding the Contact info as an Argument
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("Contact", Parcels.wrap(contact));
+            dialog.setArguments(bundle);
+            dialog.show(((FragmentActivity)_context).getSupportFragmentManager(), "Contact Show");
+        }
     }
-
-
 }

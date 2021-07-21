@@ -58,15 +58,26 @@
                 android:layout_marginTop="@dimen/marginTop"
                 android:layout_below="@id/tfPost"
                 android:backgroundTint="@color/gray_1">
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="@dimen/padding"
                     android:orientation="vertical">
+                    <ImageButton
+                        android:id="@+id/ibDeleteContactCard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentRight="true"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_close" />
 
                     <TextView
+                        android:id="@+id/tvTitle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toLeftOf="@id/ibDeleteContactCard"
                         android:text="@string/card_contact_title"
                         android:textAlignment="center"
                         android:textColor="@color/white"
@@ -75,6 +86,8 @@
                         android:id="@+id/tvNameContact"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/tvTitle"
                         android:layout_marginTop="@dimen/marginTop"
                         tools:text="Name: Aurora Perez"
                         android:textColor="@color/white"
@@ -83,6 +96,8 @@
                         android:id="@+id/tvPhoneContact"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/tvNameContact"
                         android:layout_marginTop="@dimen/marginTop"
                         tools:text="Telephone: 11111111"
                         android:textColor="@color/white"
@@ -91,11 +106,13 @@
                         android:id="@+id/tvExtraInfoContact"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_below="@id/tvPhoneContact"
                         android:layout_marginTop="@dimen/marginTop"
                         tools:text="aerwarwsefweafwafawef"
                         android:textColor="@color/white"
                         />
-                </LinearLayout>
+                </RelativeLayout>
 
             </androidx.cardview.widget.CardView>
 

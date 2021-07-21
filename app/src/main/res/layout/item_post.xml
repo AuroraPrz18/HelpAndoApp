@@ -62,5 +62,18 @@
                 android:layout_below="@+id/tvTask"
                 android:layout_weight="1"
                 tools:text="@string/random" />
+
+        <ImageButton
+            android:id="@+id/ibShowContact"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/tvText"
+            android:layout_marginTop="@dimen/marginTop"
+            app:srcCompat="@drawable/ic_contact"
+            android:background="@android:color/transparent"
+            app:tint="@color/green_1"
+            android:contentDescription="@string/show_contact_hint"/>
+
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

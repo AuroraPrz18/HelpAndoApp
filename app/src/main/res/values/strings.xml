@@ -75,5 +75,7 @@
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_use_contact_info">Apply</string>
     <string name="card_contact_title">Contact Information to help the cause</string>
+    <string name="show_contact_hint">Show the contact to help</string>
+    <string name="ok">Okay</string>
 
 </resources>

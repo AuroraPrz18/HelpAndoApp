@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="@dimen/padding">
+        <TextView
+            android:id="@+id/tvNameContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="@dimen/marginTop"
+            tools:text="Name: Aurora Perez"
+            />
+        <TextView
+            android:id="@+id/tvPhoneContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tvNameContact"
+            android:layout_marginTop="@dimen/marginTop"
+            tools:text="Telephone: 11111111"
+            android:clickable="true"
+            android:linksClickable="true"
+            android:autoLink="phone"
+            />
+        <TextView
+            android:id="@+id/tvExtraInfoContact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/tvPhoneContact"
+            android:layout_marginTop="@dimen/marginTop"
+            tools:text="aerwarwsefweafwafawef audsf@gmail.com"
+            android:clickable="true"
+            android:linksClickable="true"
+            android:autoLink="email"
+            />
+</RelativeLayout>
