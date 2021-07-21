@@ -78,14 +78,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
          */
         public void bind(Post post) {
             _binding.tvUser.setText(post.getAuthor().getString(User.KEY_NAME));
-            if (post.getTask() != null) {
+            if (post.getTask() != null) { // if it is a Post about some Task, show Task's information
                 _binding.tvTask.setVisibility(View.VISIBLE);
                 _binding.tvTask.setText(_context.getResources().getString(R.string.answerTask, ((Task) post.getTask()).getName()));
             } else {
                 _binding.tvTask.setVisibility(View.GONE);
             }
-            if (post.getContact() != null) {
+            if (post.getContact() != null) { // if it is a Post about some a ContactCard, show Contact information icon
                 _binding.ibShowContact.setVisibility(View.VISIBLE);
+                // If the icon is clicked, show all the information about how to help
                 _binding.ibShowContact.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

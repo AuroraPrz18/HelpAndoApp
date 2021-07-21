@@ -2,6 +2,7 @@ package com.codepath.aurora.helpandoapp.fragments;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -123,7 +124,7 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
      */
     private Post createNewPost() {
         Post newPost = new Post();
-        if(_viewModel.getContact()!=null){ // If this Post include a Contact, add this
+        if(_viewModel.getContact().getName()!=null){ // If this Post include a Contact, add this
             newPost.setContact(_viewModel.getContact());
         }
         newPost.setAuthor(ParseUser.getCurrentUser());
@@ -145,6 +146,7 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
                 _binding.btnPost.setEnabled(true);
                 if (e != null) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
+                    Log.e("ERROR", e.toString());
                     return;
                 }
                 Toast.makeText(getActivity(), getResources().getString(R.string.success_post), Toast.LENGTH_SHORT).show();

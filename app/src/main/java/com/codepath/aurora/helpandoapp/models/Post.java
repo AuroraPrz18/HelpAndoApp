@@ -40,8 +40,8 @@ public class Post extends ParseObject {
         return getParseObject(KEY_CONTACT_INFO);
     }
 
-    public void setContact(ParseObject task) {
-        put(KEY_CONTACT_INFO, task);
+    public void setContact(ParseObject contact) {
+        put(KEY_CONTACT_INFO, contact);
     }
 
 }

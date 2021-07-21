@@ -12,9 +12,6 @@ public class Contact extends ParseObject {
     public Contact() {
     }
 
-    public Contact(String name, String telephone, String extraInfo) {
-    }
-
     public String getName() {
         return getString(KEY_NAME);
     }
