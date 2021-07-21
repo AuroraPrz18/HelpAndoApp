@@ -31,15 +31,16 @@ public class Organization {
      * @throws JSONException
      */
     public static List<Organization> fromJsonArray(JSONArray jsonArray) throws JSONException {
-        List <Organization> organizations = new ArrayList<>();
-        for( int i = 0; i<jsonArray.length(); i++){
+        List<Organization> organizations = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
             organizations.add(fromJson(jsonArray.getJSONObject(i)));
         }
         return organizations;
     }
 
     /**
-     * Builds a tweet with the information provieded in a JSON Object
+     * Builds an Organization with the information provided inside a JSON Object
+     *
      * @param jsonObject
      * @return
      * @throws JSONException

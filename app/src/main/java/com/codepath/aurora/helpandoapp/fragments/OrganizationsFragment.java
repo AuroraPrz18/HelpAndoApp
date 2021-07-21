@@ -1,7 +1,6 @@
 package com.codepath.aurora.helpandoapp.fragments;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,14 +64,15 @@ public class OrganizationsFragment extends Fragment {
     }
 
     /**
-     * Executes the request asynchronously and fire the onSuccess when the response returns
-     * a success code and onFailure if the response does not. Using AsyncHttpClient library.
+     * Executes a request asynchronously asking our API for non-profit organizations and fire the
+     * onSuccess when the response returns a success code and onFailure if the response does not.
+     * Using AsyncHttpClient library.
      */
-    private void populateOrganizations(){
+    private void populateOrganizations() {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         RequestHeaders headers = new RequestHeaders();
-        headers.put("Accept", "application/json");
+        headers.put("Accept", "application/json"); // To get the response in JSON format - XML is the default value
         String url = _viewModel.getURLOrganizations(getResources().getString(R.string.api_organizations));
         client.get(url, headers, params, new JsonHttpResponseHandler() {
             @Override

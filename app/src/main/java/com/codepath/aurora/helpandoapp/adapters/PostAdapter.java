@@ -60,6 +60,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemPostBinding _binding;
+
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             _binding = ItemPostBinding.bind(itemView);
@@ -72,10 +73,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
          */
         public void bind(Post post) {
             _binding.tvUser.setText(post.getAuthor().getString(User.KEY_NAME));
-            if(post.getTask()!=null){
+            if (post.getTask() != null) {
                 _binding.tvTask.setVisibility(View.VISIBLE);
-                _binding.tvTask.setText(_context.getResources().getString(R.string.answerTask, ((Task)post.getTask()).getName()));
-            }else {
+                _binding.tvTask.setText(_context.getResources().getString(R.string.answerTask, ((Task) post.getTask()).getName()));
+            } else {
                 _binding.tvTask.setVisibility(View.GONE);
             }
             _binding.tvText.setText(post.getText());

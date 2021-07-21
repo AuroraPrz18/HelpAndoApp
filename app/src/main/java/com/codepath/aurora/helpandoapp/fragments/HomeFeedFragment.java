@@ -30,7 +30,9 @@ import org.parceler.Parcels;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeFeedFragment extends Fragment implements ContactDialog.ContactDialogListener{
+// This class implements ContactDialogListener to define what happens with the information provided by the
+// ContactDialog fragment when is need
+public class HomeFeedFragment extends Fragment implements ContactDialog.ContactDialogListener {
     private HomeFeedFragmentBinding _binding;
     private HomeFeedViewModel _viewModel;
     private PostAdapter _adapter;
@@ -60,16 +62,19 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         _binding.ibContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openContactDialog();
+                openContactDialog(); // Shows DialogFragment
             }
         });
         setUpRecyclerView();
         populatePostsList();
     }
 
+    /**
+     * Shows the ContactDialogFragment to fill a form with information about contact information to help
+     */
     private void openContactDialog() {
         ContactDialog dialog = new ContactDialog();
-        // Adding the Contact info if it exist
+        // Adding the Contact info as an Argument
         Bundle bundle = new Bundle();
         bundle.putParcelable("Contact", Parcels.wrap(_viewModel.getContact()));
         dialog.setArguments(bundle);
@@ -77,21 +82,25 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         dialog.show(getParentFragmentManager(), "Dialog tag");
     }
 
-    public void onClickPostNow(){
-        String postText = _binding.etPost.getText().toString();
-        if(postText.isEmpty()){
+    /**
+     * When the Post button is clicked, the program will try to save the information on the backend
+     */
+    public void onClickPostNow() {
+        String postText = _binding.etPost.getText().toString(); // Gets the info
+        if (postText.isEmpty()) { // Validates the information
             Toast.makeText(getActivity(), getResources().getString(R.string.text_required), Toast.LENGTH_SHORT).show();
             return;
         }
-        _binding.btnPost.setEnabled(false);
-        savePostInBackground(createNewPost());
+        _binding.btnPost.setEnabled(false); // Disables the button to avoid some post with the same information while the process happens
+        savePostInBackground(createNewPost()); // Saves the Post if possible
     }
 
     /**
      * Creates a new Post with the information provided
+     *
      * @return
      */
-    private Post createNewPost(){
+    private Post createNewPost() {
         Post newPost = new Post();
         newPost.setAuthor(ParseUser.getCurrentUser());
         String postText = _binding.etPost.getText().toString();
@@ -101,15 +110,16 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
 
     /**
      * Push a new Post to the backend server.
+     *
      * @return
      */
-    private void savePostInBackground(Post newPost){
+    private void savePostInBackground(Post newPost) {
         newPost.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 _binding.etPost.setText("");
                 _binding.btnPost.setEnabled(true);
-                if(e!=null){
+                if (e != null) {
                     Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -135,26 +145,31 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
      * Populates Posts list retrieving them from de backend server
      */
     private void populatePostsList() {
-         ParseQuery<Post> query = ParseQuery.getQuery("Post");
-         query.orderByDescending("createdAt");
-         query.include(Post.KEY_TASK);
-         query.include(Post.KEY_AUTHOR);
-         query.findInBackground(new FindCallback<Post>() {
-             @Override
-             public void done(List<Post> receivedPosts, ParseException e) {
-                 if (e != null) {
-                     Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
-                     return;
-                 }
-                 // Save received posts
-                 _posts.clear();
-                 _posts.addAll(receivedPosts);
-                 // Notify the adapter of data change
-                 _adapter.notifyDataSetChanged();
-             }
-         });
+        ParseQuery<Post> query = ParseQuery.getQuery("Post");
+        query.orderByDescending("createdAt");
+        query.include(Post.KEY_TASK);
+        query.include(Post.KEY_AUTHOR);
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> receivedPosts, ParseException e) {
+                if (e != null) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                // Save received posts
+                _posts.clear();
+                _posts.addAll(receivedPosts);
+                // Notify the adapter of data change
+                _adapter.notifyDataSetChanged();
+            }
+        });
     }
 
+    /**
+     * Method called when the ContactDialog Fragment has a Positive answer and a new Contact has been created.
+     *
+     * @param contact
+     */
     @Override
     public void saveInformation(Contact contact) {
         _binding.cvContactCard.setVisibility(View.VISIBLE);

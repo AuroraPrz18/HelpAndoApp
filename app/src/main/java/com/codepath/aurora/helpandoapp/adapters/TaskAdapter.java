@@ -85,7 +85,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 public void onClick(View v) {
                     if (_binding.btnDone.getVisibility() == View.GONE) { // If the button was not visible
                         _binding.btnDone.setVisibility(View.VISIBLE); //Show it
-                        if(_completed)
+                        if (_completed)
                             _binding.ibComment.setVisibility(View.VISIBLE); //Show it
                     } else {
                         _binding.btnDone.setVisibility(View.GONE); // else, hide it

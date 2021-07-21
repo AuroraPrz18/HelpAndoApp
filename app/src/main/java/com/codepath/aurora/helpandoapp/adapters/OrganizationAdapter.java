@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapter.ViewHolder>{
+public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapter.ViewHolder> {
 
     Context _context;
     List<Organization> _orgs;
@@ -61,48 +61,57 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemOrganizationBinding _binding;
+
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             _binding = ItemOrganizationBinding.bind(itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String mission = _binding.tvMission.getText().toString();
-                    String end = mission.substring(mission.length()-3, mission.length());
-                    if(mission.length()>3 && end.equals("...")){
-                        _binding.tvMission.setText(_orgs.get(getAdapterPosition()).getMission());
-                    }else{
-                        if(mission.length()>200) {
-                            mission = mission.substring(0, 200) + "...";
-                        }
-                        _binding.tvMission.setText(mission);
-                    }
+                    showOrHideMission(); // Dec
                 }
             });
         }
 
         /**
-         * Method to custom the data inside each item view
+         * If the Mission has been cut to display it in the item, it will show the complete Mission
+         * If the Mission has more then 200 characters it will only show the first 200.
+         */
+        private void showOrHideMission() {
+            String missionTV = _binding.tvMission.getText().toString();
+            String missionObj = _orgs.get(getAdapterPosition()).getMission();
+            if (missionTV.length() <= 3) { // If the TextView has not been populated
+                missionTV = missionObj;
+            }
+            String end = missionTV.substring(missionTV.length() - 3, missionTV.length());
+            if (end.equals("...")) { // If the Mission has been cut before
+                _binding.tvMission.setText(missionObj); // Shows the complete Mission
+            } else {
+                if (missionTV.length() > 200) { // If the Mission has not been cut before and it has more than 200 characters
+                    missionTV = missionTV.substring(0, 200) + "..."; // Cuts the Mission to don't show it complete
+                }
+                _binding.tvMission.setText(missionTV); // Displays it in the TextView
+            }
+        }
+
+        /**
+         * Method to custom the data inside each item view and populate all their views
          *
          * @param org
          */
-
         public void bind(Organization org) {
             _binding.tvName.setText(org.getName());
-            String mission = org.getMission();
-            if(mission.length()>200) {
-                mission = mission.substring(0, 200) + "...";
+            if (!org.getMission().isEmpty()) {
+                showOrHideMission();
             }
-            _binding.tvMission.setText(mission);
-            String address = "<b>" + _context.getResources().getString(R.string.address) + "</b>"
-                    + "<br>" + org.getAddressLine1() + "<br>" + org.getAddressLine2();
+            String address = String.format("<b>%s</b><br>%s<br>%s", _context.getResources().getString(R.string.address), org.getAddressLine1(), org.getAddressLine2());
             _binding.tvAddress.setText(Html.fromHtml(address));
             _binding.tvLocation.setText(org.getCity() + ", " + org.getState() + ", " + org.getCountry());
             _binding.tvUrl.setText(org.getUrl());
             String urlLogo = org.getLogoUrl();
+            // Loads the Logo with Glide into ivLogo
             GlideApp.with(_context)
                     .load(urlLogo)
-                    .override(100, 100) // Resizing the image
                     .fitCenter()
                     .error(_context.getDrawable(R.drawable.ic_business))
                     .into(_binding.ivLogo);

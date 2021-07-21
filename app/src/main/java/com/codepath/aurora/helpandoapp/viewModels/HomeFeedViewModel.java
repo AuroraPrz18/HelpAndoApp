@@ -8,8 +8,8 @@ public class HomeFeedViewModel extends ViewModel {
     private Contact _contact;
 
     public Contact getContact() {
-        if(_contact == null){
-             _contact = new Contact();
+        if (_contact == null) {
+            _contact = new Contact();
         }
         return _contact;
     }

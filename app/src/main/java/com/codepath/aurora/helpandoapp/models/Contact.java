@@ -15,27 +15,27 @@ public class Contact extends ParseObject {
     public Contact(String name, String telephone, String extraInfo) {
     }
 
-    public String getName(){
+    public String getName() {
         return getString(KEY_NAME);
     }
 
-    public void setName(String name){
+    public void setName(String name) {
         put(KEY_NAME, name);
     }
 
-    public String getTelephone(){
+    public String getTelephone() {
         return getString(KEY_TELEPHONE);
     }
 
-    public void setTelephone(String telephone){
+    public void setTelephone(String telephone) {
         put(KEY_TELEPHONE, telephone);
     }
 
-    public String getExtraInfo(){
+    public String getExtraInfo() {
         return getString(KEY_EXTRA_INFO);
     }
 
-    public void setExtraInfo(String extraInfo){
+    public void setExtraInfo(String extraInfo) {
         put(KEY_EXTRA_INFO, extraInfo);
     }
 }
