@@ -63,7 +63,7 @@ API used to obtain nonprofit organizations data: https://www.globalgiving.org/ap
 * [ ] User can see a list of other user followers.
 * [ ] User can see a list of their followers and following users.
 * [ ] User can share publications outside the app to reach out to more people to help any specific project/person.
-* [ ] User can chose a photo from galery and post it.
+* [X] User can chose a photo from galery and post it.
 * [ ] User can define if its publications are in a private timeline or public timeline.
 * [ ] -> User should be able to find information about places that need help. This information should be obtained by a backend server that is fill by the users.
 * [ ] Suggested tasks are received by the admin.
@@ -442,3 +442,8 @@ Model: Contact
               });
             ```
     To find more code: https://parse-dashboard.back4app.com/
+    
+ ## 📃 Libraries Used
+   * Android Codepath AsyncHttpClient: https://github.com/codepath/CPAsyncHttpClient
+   * Secrets Gradle Plugin for Android: https://github.com/google/secrets-gradle-plugin
+   * Image Picker for Android: https://github.com/Dhaval2404/ImagePicker
