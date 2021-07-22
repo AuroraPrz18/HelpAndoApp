@@ -9,13 +9,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ActivityMapsBinding;
 import com.codepath.aurora.helpandoapp.models.PlaceP;
-import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -132,7 +130,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Log.i("MAP", place.getAddress());
                 // Clean any other marker
                 _mMap.clear();
-                // Add a marker in Sydney and move the camera
+                // Add a marker in the place and move the camera
                 _mMap.addMarker(new MarkerOptions().position(place.getLatLng()).title(getResources().getString(R.string.place)));
                 _mMap.moveCamera(CameraUpdateFactory.newLatLng(place.getLatLng())); // Centers the map at the LatLng given
                 // Set up the place added

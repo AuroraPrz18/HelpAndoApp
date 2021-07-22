@@ -1,6 +1,7 @@
 package com.codepath.aurora.helpandoapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,9 +12,11 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codepath.aurora.helpandoapp.R;
+import com.codepath.aurora.helpandoapp.activities.MapsActivityInPost;
 import com.codepath.aurora.helpandoapp.databinding.ItemPostBinding;
 import com.codepath.aurora.helpandoapp.fragments.ContactDialogInPost;
 import com.codepath.aurora.helpandoapp.models.Contact;
+import com.codepath.aurora.helpandoapp.models.PlaceP;
 import com.codepath.aurora.helpandoapp.models.Post;
 import com.codepath.aurora.helpandoapp.models.Task;
 import com.codepath.aurora.helpandoapp.models.User;
@@ -78,13 +81,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
          */
         public void bind(Post post) {
             _binding.tvUser.setText(post.getAuthor().getString(User.KEY_NAME));
-            if (post.getTask() != null) { // if it is a Post about some Task, show Task's information
+            _binding.tvText.setText(post.getText());
+            // TODO: Add when it was published
+            // if it is a Post about some Task, show Task's information
+            if (post.getTask() != null) {
                 _binding.tvTask.setVisibility(View.VISIBLE);
                 _binding.tvTask.setText(_context.getResources().getString(R.string.answerTask, ((Task) post.getTask()).getName()));
             } else {
                 _binding.tvTask.setVisibility(View.GONE);
             }
-            if (post.getContact() != null) { // if it is a Post about some a ContactCard, show Contact information icon
+            // if this post contain ContactCard, show Contact information icon
+            if (post.getContact() != null) {
                 _binding.ibShowContact.setVisibility(View.VISIBLE);
                 // If the icon is clicked, show all the information about how to help
                 _binding.ibShowContact.setOnClickListener(new View.OnClickListener() {
@@ -96,7 +103,30 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             } else {
                 _binding.ibShowContact.setVisibility(View.GONE);
             }
-            _binding.tvText.setText(post.getText());
+            // if this post contains PlaceCard, show Place information card
+            if (post.getPlace() != null) {
+                _binding.cvPlace.setVisibility(View.VISIBLE);
+                _binding.tvAddress.setText(((PlaceP) post.getPlace()).getAddress());
+                // If the icon is clicked, show a map with this information
+                _binding.cvPlace.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openPlace((PlaceP) post.getPlace());
+                    }
+                });
+            } else {
+                _binding.cvPlace.setVisibility(View.GONE);
+            }
+
+        }
+
+        /**
+         * Shows MapsActivity with the place information attached to this post
+         */
+        private void openPlace(PlaceP place) {
+            Intent intent = new Intent(_context, MapsActivityInPost.class);
+            intent.putExtra("Place", Parcels.wrap(place));
+            _context.startActivity(intent);
         }
 
         /**
@@ -108,7 +138,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             Bundle bundle = new Bundle();
             bundle.putParcelable("Contact", Parcels.wrap(contact));
             dialog.setArguments(bundle);
-            dialog.show(((FragmentActivity)_context).getSupportFragmentManager(), "Contact Show");
+            dialog.show(((FragmentActivity) _context).getSupportFragmentManager(), "Contact Show");
         }
     }
 }

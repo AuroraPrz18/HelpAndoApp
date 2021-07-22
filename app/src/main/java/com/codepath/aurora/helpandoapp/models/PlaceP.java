@@ -3,6 +3,9 @@ package com.codepath.aurora.helpandoapp.models;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
+import org.parceler.Parcel;
+
+@Parcel(analyze = PlaceP.class)
 @ParseClassName("Place")
 public class PlaceP extends ParseObject {
     private static final String KEY_ADDRESS = "address";

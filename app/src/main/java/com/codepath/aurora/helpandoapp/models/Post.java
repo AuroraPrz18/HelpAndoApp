@@ -9,7 +9,7 @@ public class Post extends ParseObject {
     public final static String KEY_TEXT_POST = "text";
     public final static String KEY_TASK = "task";
     public final static String KEY_IMAGE = "image";
-    public final static String KEY_LOCATION = "location";
+    public final static String KEY_PLACE = "place";
     public final static String KEY_CONTACT_INFO = "contactInfo";
 
     public ParseObject getAuthor() {
@@ -42,6 +42,14 @@ public class Post extends ParseObject {
 
     public void setContact(ParseObject contact) {
         put(KEY_CONTACT_INFO, contact);
+    }
+
+    public ParseObject getPlace() {
+        return getParseObject(KEY_PLACE);
+    }
+
+    public void setPlace(ParseObject place) {
+        put(KEY_PLACE, place);
     }
 
 }

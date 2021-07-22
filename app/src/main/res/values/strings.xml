@@ -90,5 +90,6 @@
     <string name="etFilter_hint">Choose filter by</string>
     <string name="send_place">Save this location</string>
     <string name="save">Save</string>
+    <string name="place_card_hint">Chek this place that need help</string>
 
 </resources>

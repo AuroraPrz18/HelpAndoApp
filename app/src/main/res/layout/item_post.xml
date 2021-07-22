@@ -62,26 +62,49 @@
                 android:layout_below="@+id/tvTask"
                 android:layout_weight="1"
                 tools:text="@string/random" />
-        <!-- <fragment
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:map="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvPlace"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_alignParentRight="true"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="16dp"
             android:layout_below="@id/tvText"
-            android:layout_marginTop="@dimen/marginTop"
-            map:uiZoomControls="true"
-            tools:context=".activities.MapsActivity" /> -->
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="@string/place_card_hint"
+            android:elevation="1dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_place"
+                    app:tint="@color/gray_1" />
+
+                <TextView
+                    android:id="@+id/tvAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/marginTop"
+                    android:layout_weight="100"
+                    android:textStyle="bold"
+                    tools:text="Guanajuato, Mx"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <ImageButton
             android:id="@+id/ibShowContact"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/tvText"
+            android:layout_below="@id/cvPlace"
             android:layout_marginTop="@dimen/marginTop"
             app:srcCompat="@drawable/ic_contact"
             android:background="@android:color/transparent"

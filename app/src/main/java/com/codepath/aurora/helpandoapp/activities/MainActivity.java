@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 100){
+        if (requestCode == 100 && data != null) {
             PlaceP place = (PlaceP) Parcels.unwrap(data.getParcelableExtra("Place"));
             HomeFeedViewModel.publicPlace = place;
         }

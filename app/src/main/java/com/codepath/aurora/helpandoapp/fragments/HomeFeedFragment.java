@@ -84,7 +84,7 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         _binding.ibPlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                     // TODO: Request permission
                 }
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
@@ -94,14 +94,13 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         _binding.ibDeleteContactCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                closeContactCard(); // Shows DialogFragment
+                closeContactCard();
             }
         });
         _binding.ibClosePlace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _viewModel.cleanPlace();
-                _binding.cvPlace.setVisibility(View.GONE);
+                closePlaceCard();
             }
         });
     }
@@ -112,6 +111,14 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
     private void closeContactCard() {
         _viewModel.cleanContact();
         _binding.cvContactCard.setVisibility(View.GONE);
+    }
+
+    /**
+     * Closes the PlaceCard view and delete information related with this
+     */
+    private void closePlaceCard() {
+        _viewModel.cleanPlace();
+        _binding.cvPlace.setVisibility(View.GONE);
     }
 
     /**
@@ -147,8 +154,11 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
      */
     private Post createNewPost() {
         Post newPost = new Post();
-        if(_viewModel.getContact().getName()!=null){ // If this Post include a Contact, add this
+        if (_viewModel.getContact().getName() != null) { // If this Post include a Contact, add this
             newPost.setContact(_viewModel.getContact());
+        }
+        if (_viewModel.getPlace().getAddress() != null) { // If this Post include a Location, add this
+            newPost.setPlace(_viewModel.getPlace());
         }
         newPost.setAuthor(ParseUser.getCurrentUser());
         String postText = _binding.etPost.getText().toString();
@@ -175,6 +185,8 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
                 Toast.makeText(getActivity(), getResources().getString(R.string.success_post), Toast.LENGTH_SHORT).show();
                 // Clean the Contact Info
                 closeContactCard();
+                // Clean the Place Card
+                closePlaceCard();
             }
         });
     }
@@ -198,6 +210,7 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         query.orderByDescending("createdAt");
         query.include(Post.KEY_TASK);
         query.include(Post.KEY_AUTHOR);
+        query.include(Post.KEY_PLACE);
         query.include(Post.KEY_CONTACT_INFO);
         query.findInBackground(new FindCallback<Post>() {
             @Override
@@ -235,19 +248,20 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
     @Override
     public void onResume() {
         super.onResume();
-        if(HomeFeedViewModel.publicPlace != null){
+        if (HomeFeedViewModel.publicPlace != null) {
             setPlaceInfo(HomeFeedViewModel.publicPlace);
         }
     }
 
     /**
      * Display the place info in the Post Section
+     *
      * @param place
      */
-    public void setPlaceInfo(PlaceP place){
-            _viewModel.setPlace(place);
-            _binding.cvPlace.setVisibility(View.VISIBLE);
-            _binding.tvAddress.setText(_viewModel.getPlace().getAddress());
+    public void setPlaceInfo(PlaceP place) {
+        _viewModel.setPlace(place);
+        _binding.cvPlace.setVisibility(View.VISIBLE);
+        _binding.tvAddress.setText(_viewModel.getPlace().getAddress());
     }
 
 }
