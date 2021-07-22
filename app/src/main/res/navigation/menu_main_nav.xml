@@ -25,4 +25,9 @@
         android:name="com.codepath.aurora.helpandoapp.fragments.ToDoFragment"
         android:label="to_do_fragment"
         tools:layout="@layout/to_do_fragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.codepath.aurora.helpandoapp.fragments.SearchFragment"
+        android:label="search_fragment"
+        tools:layout="@layout/search_fragment" />
 </navigation>

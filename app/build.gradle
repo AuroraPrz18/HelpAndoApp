@@ -70,4 +70,6 @@ dependencies {
     // and handling the result once it is dispatched by the system.
     implementation "androidx.activity:activity-ktx:1.2.4"
     implementation "androidx.fragment:fragment-ktx:1.3.6"
+    // CircleImageView Library
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
 }

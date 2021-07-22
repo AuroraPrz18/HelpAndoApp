@@ -15,6 +15,12 @@
         android:contentDescription="@string/itemToDo"
         app:showAsAction="always" />
     <item
+        android:id="@+id/searchFragment"
+        android:icon="@drawable/ic_search"
+        android:title="@string/itemSearch"
+        android:contentDescription="@string/itemSearch"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/organizationsFragment"
         android:icon="@drawable/ic_business"
         android:title="@string/itemNonProfit"

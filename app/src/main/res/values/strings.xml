@@ -91,5 +91,8 @@
     <string name="send_place">Save this location</string>
     <string name="save">Save</string>
     <string name="place_card_hint">Chek this place that need help</string>
+    <string name="itemSearch">Search people</string>
+    <string name="tasksC_title">Task completed</string>
+    <string name="tasksS_title">Tasks created</string>
 
 </resources>
