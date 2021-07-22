@@ -3,6 +3,7 @@ package com.codepath.aurora.helpandoapp;
 import android.app.Application;
 
 import com.codepath.aurora.helpandoapp.models.Contact;
+import com.codepath.aurora.helpandoapp.models.PlaceP;
 import com.codepath.aurora.helpandoapp.models.Post;
 import com.codepath.aurora.helpandoapp.models.Task;
 import com.codepath.aurora.helpandoapp.models.User;
@@ -24,6 +25,8 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(Post.class);
         //Register Contact as a Parse Object
         ParseObject.registerSubclass(Contact.class);
+        //Register Place as a Parse Object
+        ParseObject.registerSubclass(PlaceP.class);
         // Initialize Parse SDK when the application is created
         Parse.initialize(new Parse.Configuration.Builder(this)
                 .applicationId(getString(R.string.applicationId))

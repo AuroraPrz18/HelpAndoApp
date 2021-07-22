@@ -1,5 +1,8 @@
 package com.codepath.aurora.helpandoapp.fragments;
 
+import android.Manifest;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -10,14 +13,17 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.codepath.aurora.helpandoapp.R;
+import com.codepath.aurora.helpandoapp.activities.MapsActivity;
 import com.codepath.aurora.helpandoapp.adapters.PostAdapter;
 import com.codepath.aurora.helpandoapp.databinding.HomeFeedFragmentBinding;
 import com.codepath.aurora.helpandoapp.models.Contact;
+import com.codepath.aurora.helpandoapp.models.PlaceP;
 import com.codepath.aurora.helpandoapp.models.Post;
 import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
 import com.parse.FindCallback;
@@ -75,10 +81,27 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
                 openContactDialog(); // Shows DialogFragment
             }
         });
+        _binding.ibPlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+                    // TODO: Request permission
+                }
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                getActivity().startActivityForResult(intent, 100);
+            }
+        });
         _binding.ibDeleteContactCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 closeContactCard(); // Shows DialogFragment
+            }
+        });
+        _binding.ibClosePlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _viewModel.cleanPlace();
+                _binding.cvPlace.setVisibility(View.GONE);
             }
         });
     }
@@ -208,4 +231,23 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
                 + contact.getExtraInfo()));
         _viewModel.setContact(contact);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(HomeFeedViewModel.publicPlace != null){
+            setPlaceInfo(HomeFeedViewModel.publicPlace);
+        }
+    }
+
+    /**
+     * Display the place info in the Post Section
+     * @param place
+     */
+    public void setPlaceInfo(PlaceP place){
+            _viewModel.setPlace(place);
+            _binding.cvPlace.setVisibility(View.VISIBLE);
+            _binding.tvAddress.setText(_viewModel.getPlace().getAddress());
+    }
+
 }

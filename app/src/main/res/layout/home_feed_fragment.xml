@@ -116,22 +116,70 @@
 
             </androidx.cardview.widget.CardView>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cvPlace"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/marginTop"
+                android:layout_below="@id/cvContactCard"
+                android:elevation="10dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/padding"
+                    android:orientation="horizontal">
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_place"
+                        app:tint="@color/gray_1" />
+
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/marginTop"
+                        android:layout_weight="100"
+                        android:textStyle="bold"
+                        tools:text="Guanajuato, Mx"/>
+                    <ImageButton
+                        android:id="@+id/ibClosePlace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/transparent"
+                        android:src="@drawable/ic_close"
+                        app:tint="@color/gray_1" />
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
             <LinearLayout
                 android:id="@+id/optionsLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/padding"
+                android:layout_marginTop="16dp"
                 android:layout_marginBottom="@dimen/padding"
-                android:layout_below="@id/cvContactCard"
-                android:orientation="vertical">
+                android:layout_below="@id/cvPlace"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/ibContact"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/marginTop"
                     android:background="@android:color/transparent"
                     android:src="@drawable/ic_contact"
+                    app:tint="@color/green_3" />
+                <ImageButton
+                    android:id="@+id/ibPlace"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/marginTop"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_place"
                     app:tint="@color/green_3" />
             </LinearLayout>
             <com.google.android.material.button.MaterialButton

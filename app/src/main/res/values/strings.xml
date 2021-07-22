@@ -57,6 +57,14 @@
     <string name="success_task">Your task has been submitted!</string>
     <string name="try_again">Try again!</string>
     <string name="success_sign_up">You can log in now!</string>
+    <!-- Maps Activity -->
+    <string-array name="filter_by">
+        <item>ADDRESS</item>
+        <item>CITIES </item>
+        <item>ESTABLISHMENT</item>
+        <item>GEOCODE</item>
+        <item>REGIONS</item>
+    </string-array>
     <!-- User Profile -->
     <string name="points_title">Points</string>
     <string name="etPost_hint">How do you help today?</string>
@@ -77,5 +85,10 @@
     <string name="card_contact_title">Contact Information to help the cause</string>
     <string name="show_contact_hint">Show the contact to help</string>
     <string name="ok">Okay</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="place">This place need help</string>
+    <string name="etFilter_hint">Choose filter by</string>
+    <string name="send_place">Save this location</string>
+    <string name="save">Save</string>
 
 </resources>

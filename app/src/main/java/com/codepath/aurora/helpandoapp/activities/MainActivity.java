@@ -7,6 +7,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -15,7 +16,11 @@ import androidx.navigation.ui.NavigationUI;
 import com.codepath.aurora.helpandoapp.LoginActivity;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ActivityMainBinding;
+import com.codepath.aurora.helpandoapp.models.PlaceP;
+import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
 import com.parse.ParseUser;
+
+import org.parceler.Parcels;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -63,4 +68,14 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, getResources().getString(R.string.try_again), Toast.LENGTH_SHORT).show();
         }
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == 100){
+            PlaceP place = (PlaceP) Parcels.unwrap(data.getParcelableExtra("Place"));
+            HomeFeedViewModel.publicPlace = place;
+        }
+    }
+
 }
