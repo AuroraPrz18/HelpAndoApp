@@ -1,6 +1,7 @@
 package com.codepath.aurora.helpandoapp.models;
 
 import com.parse.ParseClassName;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 
 @ParseClassName("Post")
@@ -50,6 +51,14 @@ public class Post extends ParseObject {
 
     public void setPlace(ParseObject place) {
         put(KEY_PLACE, place);
+    }
+
+    public ParseFile getImage() {
+        return getParseFile(KEY_IMAGE);
+    }
+
+    public void setImage(ParseFile image) {
+        put(KEY_IMAGE, image);
     }
 
 }

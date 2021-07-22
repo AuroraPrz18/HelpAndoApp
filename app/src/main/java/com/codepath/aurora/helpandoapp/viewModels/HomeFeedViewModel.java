@@ -4,10 +4,12 @@ import androidx.lifecycle.ViewModel;
 
 import com.codepath.aurora.helpandoapp.models.Contact;
 import com.codepath.aurora.helpandoapp.models.PlaceP;
+import com.parse.ParseFile;
 
 public class HomeFeedViewModel extends ViewModel {
     private Contact _contact;
     private PlaceP _place;
+    private ParseFile _image;
     public static PlaceP publicPlace = null;
 
     public Contact getContact() {
@@ -39,6 +41,18 @@ public class HomeFeedViewModel extends ViewModel {
     public void cleanPlace() {
         _place = null;
         publicPlace = null;
+    }
+
+    public ParseFile getImage() {
+        return _image;
+    }
+
+    public void setImage(ParseFile image) {
+        this._image = image;
+    }
+
+    public void cleanImage() {
+        _image = null;
     }
 
 }

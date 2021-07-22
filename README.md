@@ -40,9 +40,9 @@ Encourage people to do things that can help to build a better world. It is possi
 * [ ] -> User profile should display the dashboard of self-improvement based on its performance.
 * [X] User profile should display the total points of the user, based on its performance.
 * [X] User can post text information about the tasks that it had completed.
-* [ ] User can take a picture and post it inside the app.
+* [X] User can take a picture and post it inside the app.
 * [X] User can post information about people that need help, this post will have a button to display information to contact the user to help her or him.
-* [ ] -> User can post information about places that need help, including the place's Location.
+* [X] -> User can post information about places that need help, including the place's Location.
 * [X] User can watch posts of other users.
 * [ ] Sponsors can find information about how to contact volunteers to know more about its altruistic projects.
 * [X] The app integrates with at least one SDK or API

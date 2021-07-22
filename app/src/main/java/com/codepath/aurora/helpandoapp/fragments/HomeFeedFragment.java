@@ -1,8 +1,10 @@
 package com.codepath.aurora.helpandoapp.fragments;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -26,14 +28,19 @@ import com.codepath.aurora.helpandoapp.models.Contact;
 import com.codepath.aurora.helpandoapp.models.PlaceP;
 import com.codepath.aurora.helpandoapp.models.Post;
 import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import org.parceler.Parcels;
 
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -103,6 +110,23 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
                 closePlaceCard();
             }
         });
+        _binding.ibImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseAnImage();
+            }
+        });
+    }
+
+    /**
+     * Using ImagePicker library, you can choose a image from you gallery or take one with you camera.
+     */
+    private void chooseAnImage() {
+        ImagePicker.with(this)
+                .crop()
+                .compress(1024) // Final image size will be less than 1 MB
+                .maxResultSize(1080, 1080) // Resolution should be less than 1080 x 1080
+                .start();
     }
 
     /**
@@ -119,6 +143,14 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
     private void closePlaceCard() {
         _viewModel.cleanPlace();
         _binding.cvPlace.setVisibility(View.GONE);
+    }
+
+    /**
+     * Closes the PlaceCard view and delete information related with this
+     */
+    private void closeImageCard() {
+        _viewModel.cleanImage();
+        _binding.cvImage.setVisibility(View.GONE);
     }
 
     /**
@@ -160,6 +192,9 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         if (_viewModel.getPlace().getAddress() != null) { // If this Post include a Location, add this
             newPost.setPlace(_viewModel.getPlace());
         }
+        if (_viewModel.getImage() != null) { // If this Post include an iMAGE, add this
+            newPost.setImage(_viewModel.getImage());
+        }
         newPost.setAuthor(ParseUser.getCurrentUser());
         String postText = _binding.etPost.getText().toString();
         newPost.setText(postText);
@@ -187,6 +222,8 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
                 closeContactCard();
                 // Clean the Place Card
                 closePlaceCard();
+                // Clean the Image Card
+                closeImageCard();
             }
         });
     }
@@ -262,6 +299,27 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         _viewModel.setPlace(place);
         _binding.cvPlace.setVisibility(View.VISIBLE);
         _binding.tvAddress.setText(_viewModel.getPlace().getAddress());
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) { // If everything went well
+            // Get the Uri of the Image, use it instead of File to avoid storage permissions
+            Uri uri = data.getData();
+            _binding.ivImagePost.setImageURI(uri);
+            File file = null;
+            try {
+                file = new File(new URI(uri.toString()));
+            } catch (URISyntaxException e) {
+                e.printStackTrace();
+            }
+            // Change the post's image
+            _viewModel.setImage(new ParseFile(file));
+            _binding.cvImage.setVisibility(View.VISIBLE);
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.activities.MapsActivityInPost;
 import com.codepath.aurora.helpandoapp.databinding.ItemPostBinding;
@@ -116,6 +117,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 });
             } else {
                 _binding.cvPlace.setVisibility(View.GONE);
+            }
+            // if this post contains ImageCard, show it
+            if (post.getImage() != null) {
+                _binding.cvImage.setVisibility(View.VISIBLE);
+                Glide.with(_context).load(post.getImage().getUrl()).into(_binding.ivImagePost);
+            } else {
+                _binding.cvImage.setVisibility(View.GONE);
             }
 
         }

@@ -99,12 +99,35 @@
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cvPlace"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginRight="16dp"
+            android:elevation="10dp"
+            android:layout_centerHorizontal="true">
+
+                <ImageView
+                    android:id="@+id/ivImagePost"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxHeight="300dp"
+                    android:adjustViewBounds="true"
+                    android:layout_weight="1"
+                    android:scaleType="centerInside"
+                    tools:src="@tools:sample/avatars" />
+
+        </androidx.cardview.widget.CardView>
+
         <ImageButton
             android:id="@+id/ibShowContact"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
-            android:layout_below="@id/cvPlace"
+            android:layout_below="@id/cvImage"
             android:layout_marginTop="@dimen/marginTop"
             app:srcCompat="@drawable/ic_contact"
             android:background="@android:color/transparent"
