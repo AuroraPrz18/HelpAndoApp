@@ -118,7 +118,7 @@ public class ToDoFragment extends Fragment {
      * Initializes the RecyclerView with a LayoutManager and with an Adapter
      */
     private void setUpRecyclerView() {
-        _binding.rvTasks.setLayoutManager(new LinearLayoutManager(_binding.getRoot().getContext()));
+        _binding.rvTasks.setLayoutManager(new LinearLayoutManager(getContext()));
         _tasks = new ArrayList<>();
         _adapter = new TaskAdapter(_tasks, _binding.getRoot().getContext());
         _binding.rvTasks.setAdapter(_adapter);

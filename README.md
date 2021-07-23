@@ -442,8 +442,9 @@ Model: Contact
               });
             ```
     To find more code: https://parse-dashboard.back4app.com/
-    
+
  ## 📃 Libraries Used
    * Android Codepath AsyncHttpClient: https://github.com/codepath/CPAsyncHttpClient
    * Secrets Gradle Plugin for Android: https://github.com/google/secrets-gradle-plugin
    * Image Picker for Android: https://github.com/Dhaval2404/ImagePicker
+   * CircleImageView: https://github.com/hdodenhof/CircleImageView

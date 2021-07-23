@@ -1,0 +1,81 @@
+package com.codepath.aurora.helpandoapp.adapters;
+
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.codepath.aurora.helpandoapp.R;
+import com.codepath.aurora.helpandoapp.databinding.ItemUserBinding;
+import com.codepath.aurora.helpandoapp.models.User;
+import com.parse.ParseUser;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
+
+public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
+    Context _context;
+    List<ParseUser> _users;
+
+    public UserAdapter(Context _context, List<ParseUser> _users) {
+        this._context = _context;
+        this._users = _users;
+    }
+
+    /**
+     * Method called whenever the RecyclerView needs to create a new holder
+     */
+    @NonNull
+    @NotNull
+    @Override
+    public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+        // Create and inflate a new view for an item
+        View view = LayoutInflater.from(_context).inflate(R.layout.item_user, parent, false);
+        return new UserAdapter.ViewHolder(view);
+    }
+
+    /**
+     * Method that associates a ViewHolder with data.
+     */
+    @Override
+    public void onBindViewHolder(@NonNull @NotNull ViewHolder holder, int position) {
+        ParseUser user = _users.get(position);
+        holder.bind(user);
+    }
+
+    /**
+     * Method to get the size of the data
+     *
+     * @return
+     */
+    @Override
+    public int getItemCount() {
+        return _users.size();
+    }
+
+    /**
+     * Class that provides a reference to the type of view used
+     */
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ItemUserBinding _binding;
+
+        public ViewHolder(@NonNull @NotNull View itemView) {
+            super(itemView);
+            _binding = ItemUserBinding.bind(itemView);
+        }
+
+        public void bind(ParseUser user) {
+            //_binding.ivPhotoUser.setImageDrawable(R.drawable.ic_user_24);
+            _binding.tvName.setText(user.getString(User.KEY_NAME));
+            _binding.tvUsername.setText(user.getString(User.KEY_USERNAME));
+            _binding.tvType.setText("Volunteer");
+            _binding.tvPoints.setText(user.getNumber(User.KEY_POINTS)+"");
+            _binding.tvTaskC.setText("Not available yet");
+            _binding.tvTaskS.setText("Not available yet");
+        }
+    }
+}

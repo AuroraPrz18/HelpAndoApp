@@ -1,4 +1,4 @@
-package com.codepath.aurora.helpandoapp.fragments;
+package com.codepath.aurora.helpandoapp.viewModels;
 
 import androidx.lifecycle.ViewModel;
 
