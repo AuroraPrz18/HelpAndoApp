@@ -11,6 +11,10 @@ public class User extends ParseObject {
     public static final String KEY_PASSWORD = "password";
     public static final String KEY_TYPE = "type";
     public static final String KEY_POINTS = "points";
+    public static final String KEY_TASKS_C = "tasksCompleted";
+    public static final String KEY_TASKS_S = "tasksSuggested";
+    public static final String KEY_EMAIL = "contactEmail";
+    public static final String KEY_PHONE = "telephone";
 
     // Required empty constructor
     public User() {
@@ -70,6 +74,9 @@ public class User extends ParseObject {
         Integer points = (Integer) currentUser.getNumber(User.KEY_POINTS);
         points += (Integer) ((int) task.getPoints());
         currentUser.put(User.KEY_POINTS, points);
+        //-------- Update User's tasksCompleted -------/
+        Integer tasksCompleted = (Integer) currentUser.getNumber(User.KEY_TASKS_C);
+        currentUser.put(User.KEY_TASKS_C, tasksCompleted + 1);
         // Saves the object.
         currentUser.saveInBackground();
     }

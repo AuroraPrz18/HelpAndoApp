@@ -1,19 +1,23 @@
 package com.codepath.aurora.helpandoapp.adapters;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ItemUserBinding;
+import com.codepath.aurora.helpandoapp.fragments.ContactDialogInPost;
 import com.codepath.aurora.helpandoapp.models.User;
 import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -66,6 +70,15 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             _binding = ItemUserBinding.bind(itemView);
+            if(isCurrentUserASponsor()){
+                // Only Sponsors can see email and phone from the volunteers to get in touch with them
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        openContactDialog(_users.get(getAdapterPosition()));
+                    }
+                });
+            }
         }
 
         public void bind(ParseUser user) {
@@ -74,8 +87,25 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             _binding.tvUsername.setText(user.getString(User.KEY_USERNAME));
             _binding.tvType.setText("Volunteer");
             _binding.tvPoints.setText(user.getNumber(User.KEY_POINTS)+"");
-            _binding.tvTaskC.setText("Not available yet");
-            _binding.tvTaskS.setText("Not available yet");
+            _binding.tvTaskC.setText(user.getNumber(User.KEY_TASKS_C)+"");
+            _binding.tvTaskS.setText(user.getNumber(User.KEY_TASKS_S)+"");
+
         }
+
+        /**
+         * Shows the ContactDialogInPost with the contact information attached to this user
+         */
+        private void openContactDialog(ParseUser user) {
+            ContactDialogInPost dialog = new ContactDialogInPost();
+            // Adding the Contact info as an Argument
+            Bundle bundle = new Bundle();
+            bundle.putParcelable("Volunteer", Parcels.wrap(user));
+            dialog.setArguments(bundle);
+            dialog.show(((FragmentActivity) _context).getSupportFragmentManager(), "Contact Info Show");
+        }
+    }
+
+    private boolean isCurrentUserASponsor() {
+        return ParseUser.getCurrentUser().getString(User.KEY_TYPE).equals("Sponsor");
     }
 }

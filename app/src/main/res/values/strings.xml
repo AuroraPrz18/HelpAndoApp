@@ -94,5 +94,10 @@
     <string name="itemSearch">Search people</string>
     <string name="tasksC_title">Task completed</string>
     <string name="tasksS_title">Tasks created</string>
+    <string name="etEmail_hint">Email to be contacted by sponsors (Optional)</string>
+    <string name="etTelephone_hint">Telephone to be contacted by sponsors (Optional)</string>
+    <string name="dialog_contact_in_post_title">Contact information</string>
+    <string name="not_provided">Not provided</string>
+    <string name="email">Contact Email:</string>
 
 </resources>

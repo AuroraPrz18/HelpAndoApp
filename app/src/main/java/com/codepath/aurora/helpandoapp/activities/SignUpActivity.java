@@ -43,6 +43,13 @@ public class SignUpActivity extends AppCompatActivity {
         _binding.acUserType.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 0) { // Volunteer
+                    _binding.tfEmail.setVisibility(View.VISIBLE);
+                    _binding.tfPhone.setVisibility(View.VISIBLE);
+                } else {
+                    _binding.tfEmail.setVisibility(View.GONE);
+                    _binding.tfPhone.setVisibility(View.GONE);
+                }
                 // _userType saves the last user type clicked
                 _viewModel.setTypeUser(position);
             }
@@ -87,6 +94,12 @@ public class SignUpActivity extends AppCompatActivity {
         newUser.put(User.KEY_NAME, _binding.etName.getText().toString());
         newUser.setPassword(_binding.etPassword.getText().toString());
         newUser.put(User.KEY_TYPE, getUserType());
+        if (!_binding.etEmail.getText().toString().isEmpty()) {
+            newUser.put(User.KEY_EMAIL, _binding.etEmail.getText().toString());
+        }
+        if (!_binding.etPhone.getText().toString().isEmpty()) {
+            newUser.put(User.KEY_PHONE, _binding.etPhone.getText().toString());
+        }
         return newUser;
     }
 

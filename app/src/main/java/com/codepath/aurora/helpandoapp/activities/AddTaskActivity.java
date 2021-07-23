@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ActivityAddTaskBinding;
 import com.codepath.aurora.helpandoapp.models.Task;
+import com.codepath.aurora.helpandoapp.models.User;
 import com.codepath.aurora.helpandoapp.viewModels.AddTaskViewModel;
 import com.parse.ParseUser;
 
@@ -111,6 +112,9 @@ public class AddTaskActivity extends AppCompatActivity {
                 return;
             }
             Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.success_task), Toast.LENGTH_SHORT).show();
+            //-------- Update User's tasksSuggested -------/
+            Integer tasksSuggested = (Integer) ParseUser.getCurrentUser().getNumber(User.KEY_TASKS_S);
+            ParseUser.getCurrentUser().put(User.KEY_TASKS_S, tasksSuggested + 1);
             finish();
         });
     }
