@@ -11,12 +11,16 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.UserProfileFragmentBinding;
 import com.codepath.aurora.helpandoapp.models.User;
 import com.codepath.aurora.helpandoapp.viewModels.UserProfileViewModel;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class UserProfileFragment extends Fragment {
     private UserProfileFragmentBinding _binding;
@@ -38,10 +42,21 @@ public class UserProfileFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+
+    /**
+     * Retrieve the month as a String
+     * @return
+     */
+    private String getMonth(int month) {
+        String [] monthName = getResources().getStringArray(R.array.month_abrev);
+        return monthName[month];
+    }
+
     /**
      * Set initial text for all the views in the layout.
      */
     private void setUpProfile() {
+        _viewModel.setUser(ParseUser.getCurrentUser());
         _binding.tvName.setText(_viewModel.getUser().getString(User.KEY_NAME));
         _binding.tvUsername.setText(_viewModel.getUser().getString(User.KEY_USERNAME));
         _binding.tvType.setText(_viewModel.getUser().getString(User.KEY_TYPE));
@@ -54,14 +69,19 @@ public class UserProfileFragment extends Fragment {
         _viewModel = new ViewModelProvider(this).get(UserProfileViewModel.class);
         _viewModel.setUser(ParseUser.getCurrentUser());
         setUpProfile();
-        //setUpAllTheObservers();
+        setUpAllTheObservers();
     }
 
     private void setUpAllTheObservers() {
-        _viewModel.getPoints().observe(getViewLifecycleOwner(), new Observer<Integer>() {
+        _viewModel.getTasksCompleted().observe(getViewLifecycleOwner(), new Observer<List<ParseObject>>() {
             @Override
-            public void onChanged(Integer integer) {
-                _binding.tvPoints.setText(String.valueOf(integer));
+            public void onChanged(List<ParseObject> parseObjects) {
+                // Update the chart
+                _binding.chartProgressBar.setMaxValue(_viewModel.getMax());
+                _binding.chartProgressBar.setDataList(_viewModel.getDataList());
+                _binding.chartProgressBar.build();
+                _binding.tvMaxPointsPerDay.setText(_viewModel.getMax()+"");
+                _binding.tvWorkedDays.setText(_viewModel.getDataList().size()+"");
             }
         });
     }
