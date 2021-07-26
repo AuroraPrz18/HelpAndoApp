@@ -7,6 +7,7 @@
     <color name="gray_1">#4f5b62</color>
     <color name="gray_2">#000a12</color>
     <color name="black">#FF000000</color>
+    <color name="orange_1">#F5A623</color>
     <color name="white">#FFFFFFFF</color>
     <color name="tv_login">#FFFFFFFF</color>
 </resources>

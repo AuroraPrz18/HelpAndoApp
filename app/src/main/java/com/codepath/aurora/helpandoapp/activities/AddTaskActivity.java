@@ -1,26 +1,26 @@
 package com.codepath.aurora.helpandoapp.activities;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ActivityAddTaskBinding;
 import com.codepath.aurora.helpandoapp.models.Task;
-import com.codepath.aurora.helpandoapp.models.User;
-import com.codepath.aurora.helpandoapp.viewModels.AddTaskViewModel;
+import com.codepath.aurora.helpandoapp.viewModels.TasksViewModel;
 import com.parse.ParseUser;
 
 
 public class AddTaskActivity extends AppCompatActivity {
     private ActivityAddTaskBinding _binding;
-    private AddTaskViewModel _viewModel;
+    private TasksViewModel _viewModel; // Will use the same ViewModel than ToDoFragment
+    public static boolean newTaskAdded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +29,9 @@ public class AddTaskActivity extends AppCompatActivity {
         setContentView(_binding.getRoot());
         // Creates a ViewModel the first time the system calls an activity's onCreate() method
         // On the other hand, if the activity is re-created it receives the same viewModel than the first Activity
-        _viewModel = new ViewModelProvider(this).get(AddTaskViewModel.class);
+        _viewModel = new ViewModelProvider(this).get(TasksViewModel.class);
         setUpDropDownMenu();
+        setUpAllTheObservers();
     }
 
     /***
@@ -67,7 +68,7 @@ public class AddTaskActivity extends AppCompatActivity {
 
     public void onClickAddTask(View view) {
         if (isValid()) { // If all the data provided is complete
-            addTaskInBackground(createTask());
+            _viewModel.addTaskInBackground(createTask());
         } else {
             Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.fields_required), Toast.LENGTH_SHORT).show();
         }
@@ -99,27 +100,6 @@ public class AddTaskActivity extends AppCompatActivity {
     }
 
     /**
-     * Adds a task given to the backend server
-     *
-     * @param newTask
-     */
-    private void addTaskInBackground(Task newTask) {
-        // Saves the new object.
-        newTask.saveInBackground(e -> {
-            if (e != null) { // Something went wrong
-                Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
-                Log.e("ERROR", e + "");
-                return;
-            }
-            Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.success_task), Toast.LENGTH_SHORT).show();
-            //-------- Update User's tasksSuggested -------/
-            Integer tasksSuggested = (Integer) ParseUser.getCurrentUser().getNumber(User.KEY_TASKS_S);
-            ParseUser.getCurrentUser().put(User.KEY_TASKS_S, tasksSuggested + 1);
-            finish();
-        });
-    }
-
-    /**
      * Returns the category selected in a String format
      *
      * @return
@@ -127,5 +107,25 @@ public class AddTaskActivity extends AppCompatActivity {
     private String getCategory() {
         String[] categories = getResources().getStringArray(R.array.categories);
         return categories[_viewModel.getCategory()];
+    }
+
+    /**
+     * Set Up all the observers to listen the changes inside the View Model and update the UI
+     */
+    private void setUpAllTheObservers() {
+        // This also going to listen when the user create a new Task to update the UI in the moment
+        _viewModel.getResultToOperation().observe(this, new Observer<Byte>() {
+            @Override
+            public void onChanged(Byte resultToOperations) {
+                if (resultToOperations == _viewModel.NEW_TASK_ADDED) {
+                    Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.success_task), Toast.LENGTH_SHORT).show();
+                    newTaskAdded = true;
+                    finish();
+                } else if (resultToOperations == _viewModel.SOMETHING_WRONG_ADDING_TASK) { // Something went wrong
+                    Toast.makeText(AddTaskActivity.this, getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
+                    newTaskAdded = false;
+                }
+            }
+        });
     }
 }

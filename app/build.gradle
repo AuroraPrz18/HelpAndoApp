@@ -74,4 +74,6 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     // ChartProgressBar - Android library
     implementation 'com.github.hadiidbouk:ChartProgressBar-Android:2.0.6'
+    // Lottie for Android
+    implementation 'com.airbnb.android:lottie:3.7.2'
 }

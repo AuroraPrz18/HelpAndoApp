@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.activities.NewPostActivity;
+import com.codepath.aurora.helpandoapp.activities.TaskDoneActivity;
 import com.codepath.aurora.helpandoapp.databinding.ItemTaskBinding;
 import com.codepath.aurora.helpandoapp.models.Task;
 import com.codepath.aurora.helpandoapp.models.User;
@@ -119,6 +120,8 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                     _binding.ibCheck.setVisibility(View.VISIBLE); // Show that it has been completed
                     _binding.ibComment.setVisibility(View.GONE); // User can now comment about this task
                     _completed = true;
+                    Intent intent = new Intent(_context, TaskDoneActivity.class);
+                    _context.startActivity(intent);
                 }
             });
             // When the button btnComment is clicked, it means that the user will be able to post something about that specific task

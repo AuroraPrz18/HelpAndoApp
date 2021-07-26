@@ -47,7 +47,7 @@ Encourage people to do things that can help to build a better world. It is possi
 * [X] Sponsors can find information about how to contact volunteers to know more about its altruistic projects.
 * [X] The app integrates with at least one SDK or API
 * [ ] The app uses at least one gesture (e.g. double tap to like, e.g. pinch to scale)
-* [ ] The app uses at least one animation (e.g. fade in/out, e.g. animating a view growing and shrinking)
+* [X] The app uses at least one animation (e.g. fade in/out, e.g. animating a view growing and shrinking)
 * [ ] The app incorporates at least one external library to add visual polish
 
 API used to obtain nonprofit organizations data: https://www.globalgiving.org/api/
@@ -449,3 +449,4 @@ Model: Contact
    * Image Picker for Android: https://github.com/Dhaval2404/ImagePicker
    * CircleImageView: https://github.com/hdodenhof/CircleImageView
    * ChartProgressBar-Android: https://github.com/hadiidbouk/ChartProgressBar-Android
+   * Lottie for Android: https://github.com/airbnb/lottie-android

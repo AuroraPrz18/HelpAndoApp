@@ -89,7 +89,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             _binding.tvPoints.setText(user.getNumber(User.KEY_POINTS)+"");
             _binding.tvTaskC.setText(user.getNumber(User.KEY_TASKS_C)+"");
             _binding.tvTaskS.setText(user.getNumber(User.KEY_TASKS_S)+"");
-
+            _binding.ivAnimation.setVisibility(View.GONE);
+            if(isCurrentUserASponsor()) _binding.ivAnimation.setVisibility(View.VISIBLE);
         }
 
         /**
