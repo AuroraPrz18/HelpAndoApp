@@ -10,9 +10,11 @@ import java.util.List;
 public class OrganizationsViewModel extends ViewModel {
     public List<Organization> orgs = new ArrayList<>();
     public static final String host = "https://api.globalgiving.org";
-    public static final String organizations = "/api/public/orgservice/all/organizations/vetted";
-
+    //public static final String organizations = "/api/public/orgservice/all/organizations/vetted";
+    public static final String organizations = "/api/public/orgservice/all/organizations/vetted/download";
     public String getURLOrganizations(String apiKey) {
         return host + organizations + "?api_key=" + apiKey;
     }
+
+
 }

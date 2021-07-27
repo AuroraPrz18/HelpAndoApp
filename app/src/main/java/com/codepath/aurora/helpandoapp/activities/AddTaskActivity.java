@@ -19,7 +19,7 @@ import com.parse.ParseUser;
 
 public class AddTaskActivity extends AppCompatActivity {
     private ActivityAddTaskBinding _binding;
-    private TasksViewModel _viewModel; // Will use the same ViewModel than ToDoFragment
+    private TasksViewModel _viewModel;
     public static boolean newTaskAdded = false;
 
     @Override

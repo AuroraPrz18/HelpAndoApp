@@ -34,6 +34,8 @@ public class OrganizationsFragment extends Fragment {
     private OrganizationsViewModel _viewModel;
     private OrganizationAdapter _adapter;
 
+
+
     public static OrganizationsFragment newInstance() {
         return new OrganizationsFragment();
     }
@@ -50,8 +52,10 @@ public class OrganizationsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         _viewModel = new ViewModelProvider(this).get(OrganizationsViewModel.class);
         setUpRecyclerView();
-        populateOrganizations();
+        //populateOrganizations();
     }
+
+
 
     /**
      * Initializes the RecyclerView with a LayoutManager and with an Adapter
@@ -68,7 +72,7 @@ public class OrganizationsFragment extends Fragment {
      * onSuccess when the response returns a success code and onFailure if the response does not.
      * Using AsyncHttpClient library.
      */
-    private void populateOrganizations() {
+    private void populateOrganizationsINITIAL() {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         RequestHeaders headers = new RequestHeaders();
@@ -96,5 +100,4 @@ public class OrganizationsFragment extends Fragment {
             }
         });
     }
-
 }

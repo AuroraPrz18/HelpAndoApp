@@ -63,7 +63,7 @@ API used to obtain nonprofit organizations data: https://www.globalgiving.org/ap
 * [ ] User can see a list of other user followers.
 * [ ] User can see a list of their followers and following users.
 * [ ] User can share publications outside the app to reach out to more people to help any specific project/person.
-* [X] User can chose a photo from galery and post it.
+* [X] User can chose a photo from gallery and post it.
 * [ ] User can define if its publications are in a private timeline or public timeline.
 * [ ] -> User should be able to find information about places that need help. This information should be obtained by a backend server that is fill by the users.
 * [ ] Suggested tasks are received by the admin.
@@ -75,7 +75,7 @@ API used to obtain nonprofit organizations data: https://www.globalgiving.org/ap
 * [ ] User can like publications.
 * [ ] User can find publications by category.
 * [ ] User can have preferred categories of tasks and subscribe to them.
-* [ ] -> Conect the App to receive post of different sources, for example FB API,Twitter API, etc.
+* [ ] -> Connect the App to receive post of different sources, for example FB API,Twitter API, etc.
 * [ ] Each month recognition to the volunteer and sponsor of the month.
 
 ### 2. Screen Archetypes
@@ -147,7 +147,7 @@ API used to obtain nonprofit organizations data: https://www.globalgiving.org/ap
 * Profile Screen
 * Add Task
    * Todo
-* SuggestedTasks Sceen (optional)
+* SuggestedTasks Screen (optional)
    * Todo
    * EvaluateTask
 * EvaluateTask Screen (optional)
