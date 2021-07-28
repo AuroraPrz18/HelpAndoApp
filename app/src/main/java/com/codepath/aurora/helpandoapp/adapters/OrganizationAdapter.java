@@ -65,33 +65,28 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             _binding = ItemOrganizationBinding.bind(itemView);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    showOrHideMission(); // Dec
-                }
-            });
+
         }
 
         /**
          * If the Mission has been cut to display it in the item, it will show the complete Mission
          * If the Mission has more then 200 characters it will only show the first 200.
          */
-        private void showOrHideMission() {
+        private void showOrHideMission(Organization org) {
+            String missionObj = org.getMission();
             String missionTV = _binding.tvMission.getText().toString();
-            String missionObj = _orgs.get(getAdapterPosition()).getMission();
-            if (missionTV.length() <= 3) { // If the TextView has not been populated
-                missionTV = missionObj;
-            }
-            String end = missionTV.substring(missionTV.length() - 3, missionTV.length());
-            if (end.equals("...")) { // If the Mission has been cut before
-                _binding.tvMission.setText(missionObj); // Shows the complete Mission
-            } else {
-                if (missionTV.length() > 200) { // If the Mission has not been cut before and it has more than 200 characters
-                    missionTV = missionTV.substring(0, 200) + "..."; // Cuts the Mission to don't show it complete
-                }
-                _binding.tvMission.setText(missionTV); // Displays it in the TextView
-            }
+            String end = "";
+            //  if(missionTV.length()>3){
+            //     end = missionTV.substring(missionTV.length() - 3, missionObj.length());
+            //  }
+            //  if (end.equals("...")) { // If the Mission has been cut before
+            _binding.tvMission.setText(missionObj); // Shows the complete Mission
+            //  } else {
+            //      if (missionObj.length() > 200) { // If the Mission has not been cut before and it has more than 200 characters
+            //          missionObj = missionObj.substring(0, 200) + "..."; // Cuts the Mission to don't show it complete
+            //      }
+            //     _binding.tvMission.setText(missionObj); // Displays it in the TextView
+            // }
         }
 
         /**
@@ -100,9 +95,21 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
          * @param org
          */
         public void bind(Organization org) {
+            _binding.tvMission.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!org.getMission().isEmpty()) {
+                        showOrHideMission(org);
+                    } else {
+                        _binding.tvMission.setText("");
+                    }
+                }
+            });
             _binding.tvName.setText(org.getName());
             if (!org.getMission().isEmpty()) {
-                showOrHideMission();
+                showOrHideMission(org);
+            } else {
+                _binding.tvMission.setText("");
             }
             String address = String.format("<b>%s</b><br>%s<br>%s", _context.getResources().getString(R.string.address), org.getAddressLine1(), org.getAddressLine2());
             _binding.tvAddress.setText(Html.fromHtml(address));

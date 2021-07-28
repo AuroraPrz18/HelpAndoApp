@@ -2,6 +2,7 @@ package com.codepath.aurora.helpandoapp.viewModels;
 
 import android.app.DownloadManager;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import androidx.lifecycle.LiveData;
@@ -22,7 +23,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
@@ -31,8 +31,9 @@ public class OrganizationsViewModel extends ViewModel {
     private long _downloadId;
     public File dir;
     private MutableLiveData<File> _file;
+    private MutableLiveData<List<Organization>> _orgs;
+    private DownloadManager _downloadManager;
 
-    public List<Organization> orgs = new ArrayList<>();
     public static final String host = "https://api.globalgiving.org";
     //public static final String organizations = "/api/public/orgservice/all/organizations/vetted";
     public static final String organizations = "/api/public/orgservice/all/organizations/vetted/download";
@@ -49,6 +50,20 @@ public class OrganizationsViewModel extends ViewModel {
             _file = new MutableLiveData<File>();
         }
         this._file.setValue(file);
+    }
+
+    public LiveData<List<Organization>> getOrgs() {
+        if(_orgs==null){
+            _orgs = new MutableLiveData<>();
+        }
+        return _orgs;
+    }
+
+    public void setOrgs(List<Organization> _orgs) {
+        if(_orgs==null){
+            this._orgs = new MutableLiveData<>();
+        }
+        this._orgs.setValue(_orgs);
     }
 
     public long getDownloadId() {
@@ -102,32 +117,49 @@ public class OrganizationsViewModel extends ViewModel {
         _downloadId = downloadManager.enqueue(request);
     }
 
+    /**
+     * Convert the file downloaded into an array and saves it inside the ViewModel
+     * @param downloadManager
+     */
     public void onFileDownloaded(DownloadManager downloadManager) {
-        try {
-            // Obtains input bytes from the file the app just downloaded in a file system
-            FileInputStream fileInputStream = new FileInputStream(new File(_file.getValue().toURI()));
+        new setUpFileDownloadedAsync().execute();
+        _downloadManager = downloadManager;
+    }
+
+    private class setUpFileDownloadedAsync extends AsyncTask {
+        @Override
+        protected void onPostExecute(Object o) {
+            Log.d("orgs", _orgs.getValue().size()+" nonprofits downloaded");
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
             try {
-                // Parse XML file into an array
-                OrganizationsXmlParser orgXmlParser = new OrganizationsXmlParser();
-                List<Organization> orgs = orgXmlParser.parseXml(fileInputStream);
-                Log.e("orgs", orgs.size()+"");
-                Log.e("orgs", orgs.toString()+"");
-            }catch (IOException e) {
-                e.printStackTrace();
-            }
-            finally {
-                // Remove downloaded file from cache
-                downloadManager.remove(_downloadId);
+                // Obtains input bytes from the file the app just downloaded in a file system
+                FileInputStream fileInputStream = new FileInputStream(new File(_file.getValue().toURI()));
                 try {
-                    fileInputStream.close();
-                } catch (IOException e) {
+                    // Parse XML file into an array
+                    OrganizationsXmlParser orgXmlParser = new OrganizationsXmlParser();
+                    if(_orgs == null) getOrgs();
+                    _orgs.postValue(orgXmlParser.parseXml(fileInputStream));
+                }catch (IOException e) {
                     e.printStackTrace();
                 }
+                finally {
+                    // Remove downloaded file from cache
+                    _downloadManager.remove(_downloadId);
+                    try {
+                        fileInputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (XmlPullParserException e) {
+                e.printStackTrace();
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (XmlPullParserException e) {
-            e.printStackTrace();
+            return null;
         }
     }
 }

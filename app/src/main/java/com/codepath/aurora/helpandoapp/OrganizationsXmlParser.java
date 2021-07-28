@@ -34,6 +34,7 @@ public class OrganizationsXmlParser {
 
     /**
      * Find each 'Organization' tag to parse all the data inside this tag and build an Organization object
+     *
      * @param parser
      * @return
      * @throws XmlPullParserException
@@ -64,7 +65,7 @@ public class OrganizationsXmlParser {
     /**
      * Parses the XML content of an Organization.
      */
-    private Object readOrganization(XmlPullParser parser) throws XmlPullParserException, IOException{
+    private Object readOrganization(XmlPullParser parser) throws XmlPullParserException, IOException {
         parser.require(XmlPullParser.START_TAG, null, "organization");
         Organization org = new Organization();
         // While the next tag is different than the end tag
@@ -78,33 +79,33 @@ public class OrganizationsXmlParser {
             // Look for what type of attribute of the organization this tag is
             // when It decide, add it attribute to the organization object (org)
             if (name.equals(Organization.KEY_ID)) {
-                org.setId((int)Integer.valueOf(readField(parser,Organization.KEY_ID, 1)));
-            }else if (name.equals(Organization.KEY_ACT_PROJ)) {
-                org.setActiveProjects((int)Integer.valueOf(readField(parser,Organization.KEY_ACT_PROJ, 1)));
-            }else if (name.equals(Organization.KEY_TOTAL_PROJ)) {
-                org.setTotalProjects((int)Integer.valueOf(readField(parser,Organization.KEY_TOTAL_PROJ, 1)));
-            }else if (name.equals(Organization.KEY_ADDRESS1)) {
-                org.setAddressLine1(readField(parser,Organization.KEY_ADDRESS1, 0));
-            }else if (name.equals(Organization.KEY_ADDRESS2)) {
-                org.setAddressLine2(readField(parser,Organization.KEY_ADDRESS2, 0));
-            }else if (name.equals(Organization.KEY_CITY)) {
-                org.setCity(readField(parser,Organization.KEY_CITY, 0));
-            }else if (name.equals(Organization.KEY_COUNTRY)) {
-                org.setCountry(readField(parser,Organization.KEY_COUNTRY, 0));
-            }else if (name.equals(Organization.KEY_EIN)) {
-                org.setEin(readField(parser,Organization.KEY_EIN, 0));
-            }else if (name.equals(Organization.KEY_LOGO)) {
-                org.setLogoUrl(readField(parser,Organization.KEY_LOGO, 0));
-            }else if (name.equals(Organization.KEY_MISSION)) {
-                org.setMission(readField(parser,Organization.KEY_MISSION, 0));
-            }else if (name.equals(Organization.KEY_NAME)) {
-                org.setName(readField(parser,Organization.KEY_NAME, 0));
-            }else if (name.equals(Organization.KEY_POSTAL)) {
-                org.setPostal(readField(parser,Organization.KEY_POSTAL, 0));
-            }else if (name.equals(Organization.KEY_STATE)) {
-                org.setState(readField(parser,Organization.KEY_STATE, 0));
-            }else if (name.equals(Organization.KEY_URL)) {
-                org.setUrl(readField(parser,Organization.KEY_URL, 0));
+                org.setId((int) Integer.valueOf(readField(parser, Organization.KEY_ID, 1)));
+            } else if (name.equals(Organization.KEY_ACT_PROJ)) {
+                org.setActiveProjects((int) Integer.valueOf(readField(parser, Organization.KEY_ACT_PROJ, 1)));
+            } else if (name.equals(Organization.KEY_TOTAL_PROJ)) {
+                org.setTotalProjects((int) Integer.valueOf(readField(parser, Organization.KEY_TOTAL_PROJ, 1)));
+            } else if (name.equals(Organization.KEY_ADDRESS1)) {
+                org.setAddressLine1(readField(parser, Organization.KEY_ADDRESS1, 0));
+            } else if (name.equals(Organization.KEY_ADDRESS2)) {
+                org.setAddressLine2(readField(parser, Organization.KEY_ADDRESS2, 0));
+            } else if (name.equals(Organization.KEY_CITY)) {
+                org.setCity(readField(parser, Organization.KEY_CITY, 0));
+            } else if (name.equals(Organization.KEY_COUNTRY)) {
+                org.setCountry(readField(parser, Organization.KEY_COUNTRY, 0));
+            } else if (name.equals(Organization.KEY_EIN)) {
+                org.setEin(readField(parser, Organization.KEY_EIN, 0));
+            } else if (name.equals(Organization.KEY_LOGO)) {
+                org.setLogoUrl(readField(parser, Organization.KEY_LOGO, 0));
+            } else if (name.equals(Organization.KEY_MISSION)) {
+                org.setMission(readField(parser, Organization.KEY_MISSION, 0));
+            } else if (name.equals(Organization.KEY_NAME)) {
+                org.setName(readField(parser, Organization.KEY_NAME, 0));
+            } else if (name.equals(Organization.KEY_POSTAL)) {
+                org.setPostal(readField(parser, Organization.KEY_POSTAL, 0));
+            } else if (name.equals(Organization.KEY_STATE)) {
+                org.setState(readField(parser, Organization.KEY_STATE, 0));
+            } else if (name.equals(Organization.KEY_URL)) {
+                org.setUrl(readField(parser, Organization.KEY_URL, 0));
             } else {
                 skipTag(parser);
             }
@@ -114,14 +115,15 @@ public class OrganizationsXmlParser {
 
     /**
      * Parse each XML content for an specific attribute of the organization and return is value as a String
+     *
      * @param parser
-     * @param tag Name of the field
-     * @param type 0 if the value is an int and 1 if it should be an String
+     * @param tag    Name of the field
+     * @param type   0 if the value is an int and 1 if it should be an String
      * @return
      * @throws IOException
      * @throws XmlPullParserException
      */
-    private String readField(XmlPullParser parser, String tag, int type) throws IOException, XmlPullParserException{
+    private String readField(XmlPullParser parser, String tag, int type) throws IOException, XmlPullParserException {
         parser.require(XmlPullParser.START_TAG, null, tag);
         String value = "";
         // If the next in our file is the information for a specific tag
@@ -135,6 +137,7 @@ public class OrganizationsXmlParser {
 
     /**
      * Ignore tag that are not relevant for this app
+     *
      * @param parser
      * @throws XmlPullParserException
      * @throws IOException
@@ -155,6 +158,4 @@ public class OrganizationsXmlParser {
             }
         }
     }
-
-
 }

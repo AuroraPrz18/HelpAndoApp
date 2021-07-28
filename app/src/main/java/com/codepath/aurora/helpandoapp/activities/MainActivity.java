@@ -112,17 +112,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
     /**
      * Check if the file has been downloaded
+     *
      * @return
      */
     private class downloadBroadcastReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(Context context, Intent intent) {
-            if(intent!=null){
+            if (intent != null) {
                 long idDownload = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
-                if(_viewModel.getDownloadId() == idDownload){
+                if (_viewModel.getDownloadId() == idDownload) {
                     _viewModel.onFileDownloaded(downloadManager);
                 }
             }

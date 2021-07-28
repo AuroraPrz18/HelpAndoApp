@@ -8,32 +8,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.codepath.asynchttpclient.AsyncHttpClient;
-import com.codepath.asynchttpclient.RequestHeaders;
-import com.codepath.asynchttpclient.RequestParams;
-import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.adapters.OrganizationAdapter;
 import com.codepath.aurora.helpandoapp.databinding.OrganizationsFragmentBinding;
 import com.codepath.aurora.helpandoapp.models.Organization;
 import com.codepath.aurora.helpandoapp.viewModels.OrganizationsViewModel;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-
-import okhttp3.Headers;
+import java.util.List;
 
 public class OrganizationsFragment extends Fragment {
     private OrganizationsFragmentBinding _binding;
     private OrganizationsViewModel _viewModel;
     private OrganizationAdapter _adapter;
-
 
 
     public static OrganizationsFragment newInstance() {
@@ -50,54 +39,35 @@ public class OrganizationsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        _viewModel = new ViewModelProvider(this).get(OrganizationsViewModel.class);
+        _viewModel = new ViewModelProvider(getActivity()).get(OrganizationsViewModel.class);
         setUpRecyclerView();
-        //populateOrganizations();
+        setUpAllTheObservers();
     }
 
+    /**
+     * Set Up all the observers to listen the changes inside the View Model and update the UI
+     * Specifically to listen when the list that has all the nonprofits organizations is updated
+     */
+    private void setUpAllTheObservers() {
+        _viewModel.getOrgs().observe(getViewLifecycleOwner(), new Observer<List<Organization>>() {
+            @Override
+            public void onChanged(List<Organization> organizations) {
+                if (_viewModel.getOrgs().getValue() != null) {
+                    // Notify the adapter of data change
+                    _adapter.notifyDataSetChanged();
+                }
 
+            }
+        });
+    }
 
     /**
      * Initializes the RecyclerView with a LayoutManager and with an Adapter
      */
     private void setUpRecyclerView() {
         _binding.rvOrganizations.setLayoutManager(new LinearLayoutManager(_binding.getRoot().getContext()));
-        _viewModel.orgs = new ArrayList<>();
-        _adapter = new OrganizationAdapter(_binding.getRoot().getContext(), _viewModel.orgs);
+        _adapter = new OrganizationAdapter(_binding.getRoot().getContext(), _viewModel.getOrgs().getValue());
         _binding.rvOrganizations.setAdapter(_adapter);
     }
 
-    /**
-     * Executes a request asynchronously asking our API for non-profit organizations and fire the
-     * onSuccess when the response returns a success code and onFailure if the response does not.
-     * Using AsyncHttpClient library.
-     */
-    private void populateOrganizationsINITIAL() {
-        AsyncHttpClient client = new AsyncHttpClient();
-        RequestParams params = new RequestParams();
-        RequestHeaders headers = new RequestHeaders();
-        headers.put("Accept", "application/json"); // To get the response in JSON format - XML is the default value
-        String url = _viewModel.getURLOrganizations(getResources().getString(R.string.api_organizations));
-        client.get(url, headers, params, new JsonHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Headers headers, JSON json) {
-                // Access a JSON array response with `json.jsonArray`
-                try {
-                    JSONObject organizations = json.jsonObject.getJSONObject("organizations");
-                    JSONArray organizationsArray = organizations.getJSONArray("organization");
-                    // Save received Organizations
-                    _viewModel.orgs.addAll(Organization.fromJsonArray(organizationsArray));
-                    // Notify the adapter of data change
-                    _adapter.notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                //Log.d("DEBUG ARRAY", response);
-            }
-        });
-    }
 }
