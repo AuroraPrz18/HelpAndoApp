@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HelpAndoApp</string>
     <!-- LogIn Activity -->
-    <string name="ivLogo_description">Logo app</string>
+    <string name="ivLogo_description">App logo</string>
     <string name="etUser_hint">Username</string>
     <string name="etPassword_hint">Password</string>
     <string name="tvSignUp_description">Sign up here</string>
@@ -9,9 +9,9 @@
     <string name="btnSignIn_description">Button to sign in</string>
     <string name="btnSignIn_text">Sign In</string>
     <!-- Sign Up Activity -->
-    <string name="ivIcon_description">Icon of a user</string>
+    <string name="ivIcon_description">User icon</string>
     <string name="etName_hint">Name</string>
-    <string name="etUserType_hint">Choose a type of user</string>
+    <string name="etUserType_hint">Select user type</string>
     <string name="btnSignUp_text">Sign Up</string>
     <string name="btnSignUp_description">Sign Up</string>
     <string-array name="user_type">
@@ -45,7 +45,7 @@
     <string name="category">Category: %s</string>
     <string name="points">Points: %s</string>
     <string name="order_by">Order by:</string>
-    <string name="btnComplete">I am done it!</string>
+    <string name="btnComplete">Done!</string>
     <string-array name="order_by">
         <item>Week</item>
         <item>Month</item>
@@ -67,40 +67,40 @@
     </string-array>
     <!-- User Profile -->
     <string name="points_title">Points</string>
-    <string name="etPost_hint">How do you help today?</string>
+    <string name="etPost_hint">What have you done to help today?</string>
     <string name="btnPost">Post now</string>
     <string name="text_required">The post requires text.</string>
-    <string name="success_post">Posted successful!</string>
+    <string name="success_post">Post successful! Posted successfully.</string>
     <string name="postAboutTask">What do you have to say about the task \"%s\"?</string>
     <string name="random">Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.</string>
     <string name="answerTask">In response to \'%s\' task:</string>
     <string name="address">Address:</string>
     <string name="credits">Data provided by: https://www.globalgiving.org/</string>
-    <string name="etNameContact_hint">Name of the person that need help:</string>
+    <string name="etNameContact_hint">Name of the person that needs help:</string>
     <string name="etTelContact_hint">Contact Telephone:</string>
     <string name="etExtraInfoContact_hint">Add any extra contact information to help this person:</string>
     <string name="dialog_contact_title">Add contact information</string>
     <string name="dialog_cancel">Cancel</string>
     <string name="dialog_use_contact_info">Apply</string>
     <string name="card_contact_title">Contact Information to help the cause</string>
-    <string name="show_contact_hint">Show the contact to help</string>
+    <string name="show_contact_hint">Show the contact info of the person in need</string>
     <string name="ok">Okay</string>
     <string name="title_activity_maps">Map</string>
-    <string name="place">This place need help</string>
-    <string name="etFilter_hint">Choose filter by</string>
+    <string name="place">Help is needed here</string>
+    <string name="etFilter_hint">Add filter</string>
     <string name="send_place">Save this location</string>
     <string name="save">Save</string>
-    <string name="place_card_hint">Chek this place that need help</string>
-    <string name="itemSearch">Search people</string>
+    <string name="place_card_hint">See more information about the help needed here</string>
+    <string name="itemSearch">Find volunteers</string>
     <string name="tasksC_title">Task completed</string>
     <string name="tasksS_title">Tasks created</string>
-    <string name="etEmail_hint">Email to be contacted by sponsors (Optional)</string>
-    <string name="etTelephone_hint">Telephone to be contacted by sponsors (Optional)</string>
+    <string name="etEmail_hint">Contact email for sponsors (Optional)</string>
+    <string name="etTelephone_hint">Contact phone number for sponsors(Optional)</string>
     <string name="dialog_contact_in_post_title">Contact information</string>
     <string name="not_provided">Not provided</string>
     <string name="email">Contact Email:</string>
     <string name="title_chart_user">Points per day</string>
-    <string name="title_worked_days">Worked days</string>
+    <string name="title_worked_days">Days worked</string>
     <string name="title_maximum_day_points">Max. points per day</string>
     <string-array name="month_abrev">
         <item>Jan.</item>
