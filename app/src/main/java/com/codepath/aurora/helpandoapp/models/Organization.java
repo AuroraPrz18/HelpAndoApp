@@ -1,13 +1,30 @@
 package com.codepath.aurora.helpandoapp.models;
 
+import androidx.annotation.NonNull;
+
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class Organization {
+    public static String KEY_ID = "id";
+    public static String KEY_ACT_PROJ = "activeProjects";
+    public static String KEY_TOTAL_PROJ = "totalProjects";
+    public static String KEY_ADDRESS1 = "addressLine1";
+    public static String KEY_ADDRESS2 = "addressLine2";
+    public static String KEY_CITY = "city";
+    public static String KEY_COUNTRY = "country";
+    public static String KEY_EIN = "ein";
+    public static String KEY_LOGO = "logoUrl";
+    public static String KEY_MISSION = "mission";
+    public static String KEY_NAME = "name";
+    public static String KEY_POSTAL = "postal";
+    public static String KEY_STATE = "state";
+    public static String KEY_URL = "url";
+
     private int id;
     private int activeProjects;
     private int totalProjects;
@@ -186,5 +203,15 @@ public class Organization {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @NonNull
+    @NotNull
+    @Override
+    public String toString() {
+        return "\n ->"+ this.name + " - "+ this.activeProjects + " - "+totalProjects+ " - "+addressLine1+
+                " - "+addressLine2+ " - "+city+ " - "+country+ " - "+ein+ " - "+logoUrl+ " - "+mission+ " - "+
+                name+ " - "+postal+ " - "+state+ " - "+url;
+
     }
 }

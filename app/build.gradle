@@ -77,8 +77,6 @@ dependencies {
     implementation 'com.github.hadiidbouk:ChartProgressBar-Android:2.0.6'
     // Lottie for Android
     implementation 'com.airbnb.android:lottie:3.7.2'
-    // XStream library
-    implementation files('libs/xstream-1.4.17.jar')
 
 
 }

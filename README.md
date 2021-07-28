@@ -450,3 +450,6 @@ Model: Contact
    * CircleImageView: https://github.com/hdodenhof/CircleImageView
    * ChartProgressBar-Android: https://github.com/hadiidbouk/ChartProgressBar-Android
    * Lottie for Android: https://github.com/airbnb/lottie-android
+ ## 📃 More Resources Used
+   * Parse XML data: https://developer.android.com/training/basics/network-ops/xml#parse
+
