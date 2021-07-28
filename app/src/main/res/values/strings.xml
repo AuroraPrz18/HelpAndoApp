@@ -29,7 +29,37 @@
     <string name="etPoints_hint">Points</string>
     <string name="btnSend_text">Add Task</string>
     <!-- AddTask Activity -->
-    <string-array name="categories">
+    <string-array name="categories1">
+        <item>Animal Welfare</item>
+        <item>Child Protection</item>
+        <item>Climate Action</item>
+        <item>Peace and Reconciliation</item>
+        <item>Disaster Response</item>
+        <item>Economic Growth</item>
+        <item>Education</item>
+        <item>Ecosystem Restoration</item>
+        <item>Gender Equality</item>
+        <item>Physical Health</item>
+        <item>Ending Human Trafficking</item>
+        <item>Justice and Human Rights</item>
+        <item>Sport</item>
+        <item>Digital Literacy</item>
+        <item>Food Security</item>
+        <item>Arts and Culture</item>
+        <item>LGBTQIA+ Equality</item>
+        <item>COVID-19</item>
+        <item>Clean Water</item>
+        <item>Disability Rights</item>
+        <item>Ending Abuse</item>
+        <item>Mental Health</item>
+        <item>Racial Justice</item>
+        <item>Refugee Rights</item>
+        <item>Reproductive Health</item>
+        <item>Safe Housing</item>
+        <item>Sustainable Agriculture</item>
+        <item>Wildlife Conservation</item>
+    </string-array>
+    <string-array name="categoriesOpc1">
         <item>Arts, Culture and Humanities</item>
         <item>Education</item>
         <item>Environment and Animals</item>

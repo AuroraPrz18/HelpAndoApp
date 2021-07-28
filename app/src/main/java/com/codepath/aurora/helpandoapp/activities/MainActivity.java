@@ -49,29 +49,33 @@ public class MainActivity extends AppCompatActivity {
         // set up the bottom navigation view
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
+
         // Creates a ViewModel the first time the system calls an activity's onCreate() method
         // On the other hand, if the activity is re-created it receives the same viewModel than the first Activity
         _viewModel = new ViewModelProvider(this).get(OrganizationsViewModel.class);
+        _viewModel.apiKey = getResources().getString(R.string.api_organizations);
         // Initialize the DownloadManager
         downloadManager = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
         // Creates the Files where the information about nonprofits is going to be
         _viewModel.dir = new File(getExternalCacheDir(), "api");
         _viewModel.setFile(new File(_viewModel.dir.getPath() + File.separator + "nonprofits"));
         _brDownload = new downloadBroadcastReceiver();
+        // Get the themes
+        _viewModel.getThemes();
         // To received information when this event happens
         registerReceiver(_brDownload, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         // Only download the Organizations File once a day if the user has it file in its cache
-        if(_viewModel.isFileEmpty()){ // If it needs to download it
+        if (_viewModel.isFileEmpty()) { // If it needs to download it
             _viewModel.fileIsEmpty = true;
-            _viewModel.populateOrganizations(getResources().getString(R.string.api_organizations), downloadManager);
-        }
-        else{ // If it doesn't need to read it, just convert to XML
+            _viewModel.populateOrganizations(downloadManager);
+        } else { // If it doesn't need to read it, just convert to XML
             _viewModel.fileIsEmpty = false;
             _viewModel.onFileDownloaded();
             // To listen if an update is needed based in its last update
             setUpAllTheObservers();
             _viewModel.needUpdate(); // It will change the value of doesItNeedUpdate to true or false
         }
+
     }
 
     @Override
@@ -121,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
         unregisterReceiver(_brDownload);
     }
 
-
     /**
      * Check if the file has been downloaded
      *
@@ -147,8 +150,8 @@ public class MainActivity extends AppCompatActivity {
         _viewModel.doesItNeedUpdate().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean doesItNeedUpdate) {
-                if(doesItNeedUpdate==true){ // The file is one day or more old, it has to be updated
-                    _viewModel.populateOrganizations(getResources().getString(R.string.api_organizations), downloadManager);
+                if (doesItNeedUpdate == true) { // The file is one day or more old, it has to be updated
+                    _viewModel.populateOrganizations(downloadManager);
                 }
             }
         });

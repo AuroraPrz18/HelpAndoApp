@@ -16,13 +16,16 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.codepath.aurora.helpandoapp.OrganizationsXmlParser;
 import com.codepath.aurora.helpandoapp.models.Organization;
 import com.codepath.aurora.helpandoapp.models.OrganizationsLastUpdate;
+import com.codepath.aurora.helpandoapp.models.Theme;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.File;
@@ -35,6 +38,10 @@ import java.util.List;
 import okhttp3.Headers;
 
 public class OrganizationsViewModel extends ViewModel {
+    public static final String host = "https://api.globalgiving.org";
+    public static final String organizations = "/api/public/orgservice/all/organizations/active/download";
+    public static final String themes = "/api/public/projectservice/themes";
+
     public boolean fileIsEmpty;
     private long _downloadId;
     public File dir;
@@ -43,42 +50,40 @@ public class OrganizationsViewModel extends ViewModel {
     public String lastUpdateID;
     public boolean lastUpdateSaved;
     private MutableLiveData<Boolean> _doesItNeedUpdate;
+    public String apiKey;
 
-    public LiveData<Boolean> doesItNeedUpdate(){
-        if(_doesItNeedUpdate == null){
+    public LiveData<Boolean> doesItNeedUpdate() {
+        if (_doesItNeedUpdate == null) {
             _doesItNeedUpdate = new MutableLiveData<>();
             _doesItNeedUpdate.setValue(false);
         }
         return _doesItNeedUpdate;
     }
 
-    public static final String host = "https://api.globalgiving.org";
-    //public static final String organizations = "/api/public/orgservice/all/organizations/vetted";
-    public static final String organizations = "/api/public/orgservice/all/organizations/vetted/download";
 
     public LiveData<File> getFile() {
-        if(_file==null){
+        if (_file == null) {
             _file = new MutableLiveData<File>();
         }
         return _file;
     }
 
     public void setFile(File file) {
-        if(_file==null){
+        if (_file == null) {
             _file = new MutableLiveData<File>();
         }
         this._file.setValue(file);
     }
 
     public LiveData<List<Organization>> getOrgs() {
-        if(_orgs==null){
+        if (_orgs == null) {
             _orgs = new MutableLiveData<>();
         }
         return _orgs;
     }
 
     public void setOrgs(List<Organization> _orgs) {
-        if(_orgs==null){
+        if (_orgs == null) {
             this._orgs = new MutableLiveData<>();
         }
         this._orgs.setValue(_orgs);
@@ -92,17 +97,21 @@ public class OrganizationsViewModel extends ViewModel {
         return host + organizations + "?api_key=" + apiKey;
     }
 
+    public String getURLThemes(String apiKey) {
+        return host + themes + "?api_key=" + apiKey;
+    }
+
     /**
      * Executes a request asynchronously asking our API for non-profit organizations and fire the
      * onSuccess when the response returns a success code and onFailure if the response does not.
      * Using AsyncHttpClient library.
      */
-    public void populateOrganizations(String urlHost, DownloadManager downloadManager) {
+    public void populateOrganizations(DownloadManager downloadManager) {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         RequestHeaders headers = new RequestHeaders();
         headers.put("Accept", "application/json"); // To get the response in JSON format - XML is the default value
-        String url = getURLOrganizations(urlHost);
+        String url = getURLOrganizations(apiKey);
         client.get(url, headers, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
@@ -123,7 +132,7 @@ public class OrganizationsViewModel extends ViewModel {
         });
     }
 
-    public void downloadFile(String urlToDownload,DownloadManager downloadManager) {
+    public void downloadFile(String urlToDownload, DownloadManager downloadManager) {
         // Request a new download
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(urlToDownload));
         // Delete previous file if exists
@@ -140,13 +149,14 @@ public class OrganizationsViewModel extends ViewModel {
 
     /**
      * Convert the file downloaded into an array and saves it inside the ViewModel
+     *
      * @param
      */
     public void onFileDownloaded() {
         boolean needUpdate = doesItNeedUpdate().getValue();
-        if(lastUpdateSaved ){
+        if (lastUpdateSaved) {
             updateDateDownloaded(ParseUser.getCurrentUser());
-        }else if((!lastUpdateSaved && needUpdate)|| fileIsEmpty){
+        } else if ((!lastUpdateSaved && needUpdate) || fileIsEmpty) {
             createDateDownloaded(ParseUser.getCurrentUser());
         }
         new setUpFileDownloadedAsync().execute();
@@ -173,29 +183,30 @@ public class OrganizationsViewModel extends ViewModel {
 
     /**
      * Look for the last update of the file, it should be one per day that the user opens the app
+     *
      * @return
      */
     public void needUpdate() {
         ParseQuery<OrganizationsLastUpdate> lastUpdateQuery = ParseQuery.getQuery("OrganizationsLastUpdate");
         lastUpdateQuery.whereEqualTo("user", ParseUser.getCurrentUser());
         lastUpdateQuery.orderByDescending("updatedAt");
-        if(_doesItNeedUpdate == null){
+        if (_doesItNeedUpdate == null) {
             _doesItNeedUpdate = new MutableLiveData<>();
         }
         _doesItNeedUpdate.setValue(false);
         lastUpdateQuery.findInBackground(new FindCallback<OrganizationsLastUpdate>() {
             @Override
             public void done(List<OrganizationsLastUpdate> updates, ParseException e) {
-                if(e!=null) return;
-                if(updates.size()==0){
+                if (e != null) return;
+                if (updates.size() == 0) {
                     Log.d("Organizations", "New user, need download");
                     lastUpdateSaved = false; // The backend don't have a row for this person
                     _doesItNeedUpdate.setValue(true); // Also when there is a file, it should download again because there is not a register for this user
-                }else {
-                    if(wasUpdatedToday(updates.get(0))){
+                } else {
+                    if (wasUpdatedToday(updates.get(0))) {
                         Log.d("Organizations", "NO need download");
                         _doesItNeedUpdate.setValue(false);
-                    }else{
+                    } else {
                         //TODO: Debug it other day
                         Log.d("Organizations", "Late, need download");
                         lastUpdateID = updates.get(0).getObjectId();
@@ -207,32 +218,62 @@ public class OrganizationsViewModel extends ViewModel {
         });
     }
 
+    /**
+     * Retrieve all the themes from the API
+     */
+    public void getThemes() {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        RequestHeaders headers = new RequestHeaders();
+        headers.put("Accept", "application/json"); // To get the response in JSON format - XML is the default value
+        String url = getURLThemes(apiKey);
+        client.get(url, headers, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                try {
+                    JSONObject themes = json.jsonObject.getJSONObject("themes");
+                    JSONArray themesArray = themes.getJSONArray("theme");
+                    Theme.jsonArrayToObjects(themesArray);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.e("Error", response);
+            }
+        });
+    }
+
     public boolean wasUpdatedToday(ParseObject update) {
         Date date = update.getUpdatedAt();
         Date today = new Date();
-        if(date.getYear()!=today.getYear()) return false;
-        if(date.getMonth()!=today.getMonth()) return false;
-        if(date.getDay()!=today.getDay()) return false;
+        if (date.getYear() != today.getYear()) return false;
+        if (date.getMonth() != today.getMonth()) return false;
+        if (date.getDay() != today.getDay()) return false;
         return true;
     }
 
     /**
      * Check if the Organizations file has information
+     *
      * @return False if this user has been update this before, TRUE if there is not the file
      */
     public boolean isFileEmpty() {
         File file = new File(dir.getPath() + File.separator + "nonprofits");
-        if(file.length() == 0) {
+        if (file.length() == 0) {
             Log.d("Organizations", "Download needed (file empty)");
-            return  true;
+            return true;
         }
         return false;
     }
 
+
     private class setUpFileDownloadedAsync extends AsyncTask {
         @Override
         protected void onPostExecute(Object o) {
-            Log.d("orgs", _orgs.getValue().size()+" nonprofits downloaded");
+            Log.d("orgs", _orgs.getValue().size() + " nonprofits downloaded");
         }
 
         @Override
@@ -243,12 +284,11 @@ public class OrganizationsViewModel extends ViewModel {
                 try {
                     // Parse XML file into an array
                     OrganizationsXmlParser orgXmlParser = new OrganizationsXmlParser();
-                    if(_orgs == null) getOrgs();
+                    if (_orgs == null) getOrgs();
                     _orgs.postValue(orgXmlParser.parseXml(fileInputStream));
-                }catch (IOException e) {
+                } catch (IOException e) {
                     e.printStackTrace();
-                }
-                finally {
+                } finally {
                     try {
                         fileInputStream.close();
                     } catch (IOException e) {

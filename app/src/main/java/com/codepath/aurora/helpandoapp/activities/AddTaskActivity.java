@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ActivityAddTaskBinding;
 import com.codepath.aurora.helpandoapp.models.Task;
+import com.codepath.aurora.helpandoapp.models.Theme;
 import com.codepath.aurora.helpandoapp.viewModels.TasksViewModel;
 import com.parse.ParseUser;
 
@@ -20,6 +21,7 @@ import com.parse.ParseUser;
 public class AddTaskActivity extends AppCompatActivity {
     private ActivityAddTaskBinding _binding;
     private TasksViewModel _viewModel;
+    private String[] _categories;
     public static boolean newTaskAdded = false;
 
     @Override
@@ -59,9 +61,9 @@ public class AddTaskActivity extends AppCompatActivity {
      */
     private void populateDropdownMenuCategories() {
         // Get all categories from the resources (strings.xml)
-        String[] categories = getResources().getStringArray(R.array.categories);
+        _categories = Theme.allThemes.toArray(new String[Theme.allThemes.size()]);
         // Create an adapter which will help to bind the strings with the menu
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, categories);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, _categories);
         // Set the menu's adapter
         _binding.acCategory.setAdapter(adapter);
     }
@@ -105,8 +107,8 @@ public class AddTaskActivity extends AppCompatActivity {
      * @return
      */
     private String getCategory() {
-        String[] categories = getResources().getStringArray(R.array.categories);
-        return categories[_viewModel.getCategory()];
+        ;
+        return _categories[_viewModel.getCategory()];
     }
 
     /**

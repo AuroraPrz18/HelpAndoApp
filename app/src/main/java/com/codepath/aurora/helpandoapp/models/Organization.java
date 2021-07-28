@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
 public class Organization {
     public static String KEY_ID = "id";
     public static String KEY_ACT_PROJ = "activeProjects";
@@ -39,7 +40,7 @@ public class Organization {
     private String postal;
     private String state;
     private String url;
-    // Themes and countries are available in XML
+
 
     /***
      * Returns a list of Organization objects from a JSON Array
@@ -209,9 +210,9 @@ public class Organization {
     @NotNull
     @Override
     public String toString() {
-        return "\n ->"+ this.name + " - "+ this.activeProjects + " - "+totalProjects+ " - "+addressLine1+
-                " - "+addressLine2+ " - "+city+ " - "+country+ " - "+ein+ " - "+logoUrl+ " - "+mission+ " - "+
-                name+ " - "+postal+ " - "+state+ " - "+url;
+        return "\n ->" + this.name + " - " + this.activeProjects + " - " + totalProjects + " - " + addressLine1 +
+                " - " + addressLine2 + " - " + city + " - " + country + " - " + ein + " - " + logoUrl + " - " + mission + " - " +
+                name + " - " + postal + " - " + state + " - " + url;
 
     }
 }
