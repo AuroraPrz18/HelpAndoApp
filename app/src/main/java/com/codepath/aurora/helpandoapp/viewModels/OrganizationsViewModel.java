@@ -15,6 +15,12 @@ import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.codepath.aurora.helpandoapp.OrganizationsXmlParser;
 import com.codepath.aurora.helpandoapp.models.Organization;
+import com.codepath.aurora.helpandoapp.models.OrganizationsLastUpdate;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.json.JSONException;
 import org.xmlpull.v1.XmlPullParserException;
@@ -23,16 +29,28 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Headers;
 
 public class OrganizationsViewModel extends ViewModel {
+    public boolean fileIsEmpty;
     private long _downloadId;
     public File dir;
     private MutableLiveData<File> _file;
     private MutableLiveData<List<Organization>> _orgs;
-    private DownloadManager _downloadManager;
+    public String lastUpdateID;
+    public boolean lastUpdateSaved;
+    private MutableLiveData<Boolean> _doesItNeedUpdate;
+
+    public LiveData<Boolean> doesItNeedUpdate(){
+        if(_doesItNeedUpdate == null){
+            _doesItNeedUpdate = new MutableLiveData<>();
+            _doesItNeedUpdate.setValue(false);
+        }
+        return _doesItNeedUpdate;
+    }
 
     public static final String host = "https://api.globalgiving.org";
     //public static final String organizations = "/api/public/orgservice/all/organizations/vetted";
@@ -108,10 +126,13 @@ public class OrganizationsViewModel extends ViewModel {
     public void downloadFile(String urlToDownload,DownloadManager downloadManager) {
         // Request a new download
         DownloadManager.Request request = new DownloadManager.Request(Uri.parse(urlToDownload));
+        // Delete previous file if exists
+        String pathFile = _file.getValue().toURI().toString();
+        _file.getValue().delete();
         // Set the title of the download
         request.setTitle("nonprofits")
                 .setDescription("Getting the information from the API. Please wait...")
-                .setDestinationUri(Uri.parse(_file.getValue().toURI().toString()))
+                .setDestinationUri(Uri.parse(pathFile))
                 .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         // Enqueue the download (saving its ID)
         _downloadId = downloadManager.enqueue(request);
@@ -119,11 +140,93 @@ public class OrganizationsViewModel extends ViewModel {
 
     /**
      * Convert the file downloaded into an array and saves it inside the ViewModel
-     * @param downloadManager
+     * @param
      */
-    public void onFileDownloaded(DownloadManager downloadManager) {
+    public void onFileDownloaded() {
+        boolean needUpdate = doesItNeedUpdate().getValue();
+        if(lastUpdateSaved ){
+            updateDateDownloaded(ParseUser.getCurrentUser());
+        }else if((!lastUpdateSaved && needUpdate)|| fileIsEmpty){
+            createDateDownloaded(ParseUser.getCurrentUser());
+        }
         new setUpFileDownloadedAsync().execute();
-        _downloadManager = downloadManager;
+    }
+
+    private void createDateDownloaded(ParseUser currentUser) {
+        OrganizationsLastUpdate newObj = new OrganizationsLastUpdate();
+        newObj.put("user", currentUser);
+        // Saves the new object.
+        newObj.saveInBackground();
+    }
+
+    public void updateDateDownloaded(ParseUser currentUser) {
+        ParseQuery<OrganizationsLastUpdate> query = ParseQuery.getQuery("OrganizationsLastUpdate");
+        // Retrieve the object by id
+        query.getInBackground(lastUpdateID, (object, e) -> {
+            if (e != null) {
+                return;
+            }
+            object.saveInBackground();
+        });
+
+    }
+
+    /**
+     * Look for the last update of the file, it should be one per day that the user opens the app
+     * @return
+     */
+    public void needUpdate() {
+        ParseQuery<OrganizationsLastUpdate> lastUpdateQuery = ParseQuery.getQuery("OrganizationsLastUpdate");
+        lastUpdateQuery.whereEqualTo("user", ParseUser.getCurrentUser());
+        lastUpdateQuery.orderByDescending("updatedAt");
+        if(_doesItNeedUpdate == null){
+            _doesItNeedUpdate = new MutableLiveData<>();
+        }
+        _doesItNeedUpdate.setValue(false);
+        lastUpdateQuery.findInBackground(new FindCallback<OrganizationsLastUpdate>() {
+            @Override
+            public void done(List<OrganizationsLastUpdate> updates, ParseException e) {
+                if(e!=null) return;
+                if(updates.size()==0){
+                    Log.d("Organizations", "New user, need download");
+                    lastUpdateSaved = false; // The backend don't have a row for this person
+                    _doesItNeedUpdate.setValue(true); // Also when there is a file, it should download again because there is not a register for this user
+                }else {
+                    if(wasUpdatedToday(updates.get(0))){
+                        Log.d("Organizations", "NO need download");
+                        _doesItNeedUpdate.setValue(false);
+                    }else{
+                        //TODO: Debug it other day
+                        Log.d("Organizations", "Late, need download");
+                        lastUpdateID = updates.get(0).getObjectId();
+                        lastUpdateSaved = true; // The backend has information about this user-downloads
+                        _doesItNeedUpdate.setValue(true);
+                    }
+                }
+            }
+        });
+    }
+
+    public boolean wasUpdatedToday(ParseObject update) {
+        Date date = update.getUpdatedAt();
+        Date today = new Date();
+        if(date.getYear()!=today.getYear()) return false;
+        if(date.getMonth()!=today.getMonth()) return false;
+        if(date.getDay()!=today.getDay()) return false;
+        return true;
+    }
+
+    /**
+     * Check if the Organizations file has information
+     * @return False if this user has been update this before, TRUE if there is not the file
+     */
+    public boolean isFileEmpty() {
+        File file = new File(dir.getPath() + File.separator + "nonprofits");
+        if(file.length() == 0) {
+            Log.d("Organizations", "Download needed (file empty)");
+            return  true;
+        }
+        return false;
     }
 
     private class setUpFileDownloadedAsync extends AsyncTask {
@@ -146,8 +249,6 @@ public class OrganizationsViewModel extends ViewModel {
                     e.printStackTrace();
                 }
                 finally {
-                    // Remove downloaded file from cache
-                    _downloadManager.remove(_downloadId);
                     try {
                         fileInputStream.close();
                     } catch (IOException e) {

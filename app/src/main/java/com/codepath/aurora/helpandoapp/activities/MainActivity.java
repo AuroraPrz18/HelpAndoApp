@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -51,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
         // Creates a ViewModel the first time the system calls an activity's onCreate() method
         // On the other hand, if the activity is re-created it receives the same viewModel than the first Activity
         _viewModel = new ViewModelProvider(this).get(OrganizationsViewModel.class);
-
         // Initialize the DownloadManager
         downloadManager = (DownloadManager) this.getSystemService(Context.DOWNLOAD_SERVICE);
         // Creates the Files where the information about nonprofits is going to be
@@ -60,8 +60,18 @@ public class MainActivity extends AppCompatActivity {
         _brDownload = new downloadBroadcastReceiver();
         // To received information when this event happens
         registerReceiver(_brDownload, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-        // TODO: Only make this call once a day
-        _viewModel.populateOrganizations(getResources().getString(R.string.api_organizations), downloadManager);
+        // Only download the Organizations File once a day if the user has it file in its cache
+        if(_viewModel.isFileEmpty()){ // If it needs to download it
+            _viewModel.fileIsEmpty = true;
+            _viewModel.populateOrganizations(getResources().getString(R.string.api_organizations), downloadManager);
+        }
+        else{ // If it doesn't need to read it, just convert to XML
+            _viewModel.fileIsEmpty = false;
+            _viewModel.onFileDownloaded();
+            // To listen if an update is needed based in its last update
+            setUpAllTheObservers();
+            _viewModel.needUpdate(); // It will change the value of doesItNeedUpdate to true or false
+        }
     }
 
     @Override
@@ -123,9 +133,24 @@ public class MainActivity extends AppCompatActivity {
             if (intent != null) {
                 long idDownload = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1);
                 if (_viewModel.getDownloadId() == idDownload) {
-                    _viewModel.onFileDownloaded(downloadManager);
+                    _viewModel.onFileDownloaded();
                 }
             }
         }
+    }
+
+    /**
+     * Set Up all the observers to listen the changes inside the View Model
+     */
+    private void setUpAllTheObservers() {
+        // This also going to listen when the user create a new Task to update the UI in the moment
+        _viewModel.doesItNeedUpdate().observe(this, new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean doesItNeedUpdate) {
+                if(doesItNeedUpdate==true){ // The file is one day or more old, it has to be updated
+                    _viewModel.populateOrganizations(getResources().getString(R.string.api_organizations), downloadManager);
+                }
+            }
+        });
     }
 }
