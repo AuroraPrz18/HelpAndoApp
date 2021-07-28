@@ -17,12 +17,14 @@ import com.codepath.aurora.helpandoapp.databinding.OrganizationsFragmentBinding;
 import com.codepath.aurora.helpandoapp.models.Organization;
 import com.codepath.aurora.helpandoapp.viewModels.OrganizationsViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OrganizationsFragment extends Fragment {
     private OrganizationsFragmentBinding _binding;
     private OrganizationsViewModel _viewModel;
     private OrganizationAdapter _adapter;
+    private List<Organization> _orgs;
 
 
     public static OrganizationsFragment newInstance() {
@@ -40,6 +42,7 @@ public class OrganizationsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         _viewModel = new ViewModelProvider(getActivity()).get(OrganizationsViewModel.class);
+        _orgs = new ArrayList<>();
         setUpRecyclerView();
         setUpAllTheObservers();
     }
@@ -53,6 +56,8 @@ public class OrganizationsFragment extends Fragment {
             @Override
             public void onChanged(List<Organization> organizations) {
                 if (_viewModel.getOrgs().getValue() != null) {
+                    _orgs.clear();
+                    _orgs.addAll(organizations);
                     // Notify the adapter of data change
                     _adapter.notifyDataSetChanged();
                 }
@@ -66,7 +71,7 @@ public class OrganizationsFragment extends Fragment {
      */
     private void setUpRecyclerView() {
         _binding.rvOrganizations.setLayoutManager(new LinearLayoutManager(_binding.getRoot().getContext()));
-        _adapter = new OrganizationAdapter(_binding.getRoot().getContext(), _viewModel.getOrgs().getValue());
+        _adapter = new OrganizationAdapter(_binding.getRoot().getContext(), _orgs);
         _binding.rvOrganizations.setAdapter(_adapter);
     }
 
