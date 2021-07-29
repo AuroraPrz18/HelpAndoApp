@@ -176,6 +176,8 @@ public class OrganizationsViewModel extends ViewModel {
             if (e != null) {
                 return;
             }
+            Integer times = (Integer)object.getNumber("times")+(Integer)1;
+            object.put("times", times);
             object.saveInBackground();
         });
 
@@ -199,7 +201,7 @@ public class OrganizationsViewModel extends ViewModel {
             public void done(List<OrganizationsLastUpdate> updates, ParseException e) {
                 if (e != null) return;
                 if (updates.size() == 0) {
-                    Log.d("Organizations", "New user, need download");
+                    Log.d("Organizations", "New user/No information, download required");
                     lastUpdateSaved = false; // The backend don't have a row for this person
                     _doesItNeedUpdate.setValue(true); // Also when there is a file, it should download again because there is not a register for this user
                 } else {
@@ -207,11 +209,11 @@ public class OrganizationsViewModel extends ViewModel {
                         Log.d("Organizations", "NO need download");
                         _doesItNeedUpdate.setValue(false);
                     } else {
-                        //TODO: Debug it other day
-                        Log.d("Organizations", "Late, need download");
+                        // TODO: DEBUG MORE
+                        Log.d("Organizations", "Old File, download required");
                         lastUpdateID = updates.get(0).getObjectId();
                         lastUpdateSaved = true; // The backend has information about this user-downloads
-                        _doesItNeedUpdate.setValue(true);
+                        _doesItNeedUpdate.setValue(lastUpdateSaved);
                     }
                 }
             }
@@ -249,6 +251,7 @@ public class OrganizationsViewModel extends ViewModel {
     public boolean wasUpdatedToday(ParseObject update) {
         Date date = update.getUpdatedAt();
         Date today = new Date();
+        Log.d("Organizations", "Today: "+ today.toString() + " - Last update: "+date.toString());
         if (date.getYear() != today.getYear()) return false;
         if (date.getMonth() != today.getMonth()) return false;
         if (date.getDay() != today.getDay()) return false;
@@ -274,6 +277,7 @@ public class OrganizationsViewModel extends ViewModel {
         @Override
         protected void onPostExecute(Object o) {
             Log.d("orgs", _orgs.getValue().size() + " nonprofits downloaded");
+            Log.d("orgs", _orgs.getValue().toString());
         }
 
         @Override

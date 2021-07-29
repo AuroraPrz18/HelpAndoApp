@@ -106,11 +106,51 @@ public class OrganizationsXmlParser {
                 org.setState(readField(parser, Organization.KEY_STATE, 0));
             } else if (name.equals(Organization.KEY_URL)) {
                 org.setUrl(readField(parser, Organization.KEY_URL, 0));
+            } else if (name.equals(Organization.KEY_COUNTRIES)) {
+                org.setCountries(readCountries(parser));
             } else {
                 skipTag(parser);
             }
         }
         return org;
+    }
+
+    /**
+     * Parses the XML content all the countries where the organization operates in.
+     */
+    private List<String> readCountries(XmlPullParser parser) throws IOException, XmlPullParserException {
+        List<String> countries = new ArrayList<>();
+        parser.require(XmlPullParser.START_TAG, null, Organization.KEY_COUNTRIES);
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() == XmlPullParser.START_TAG) {
+                String name = parser.getName();
+                if (name.equals(Organization.KEY_COUNTRY)) {
+                    countries.add(readCountry(parser));
+                } else {
+                    skipTag(parser);
+                }
+            }
+        }
+        return countries;
+    }
+
+    /**
+     * Parses the XML content of each country where the organization operates in.
+     */
+    private String readCountry(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, null, Organization.KEY_COUNTRY);
+        String country = "";
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() == XmlPullParser.START_TAG) {
+                String name = parser.getName();
+                if (name.equals(Organization.KEY_NAME)) {
+                    country = readField(parser, Organization.KEY_NAME, 0);
+                } else {
+                    skipTag(parser);
+                }
+            }
+        }
+        return country;
     }
 
     /**

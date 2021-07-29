@@ -3,9 +3,6 @@ package com.codepath.aurora.helpandoapp.models;
 import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +22,7 @@ public class Organization {
     public static String KEY_POSTAL = "postal";
     public static String KEY_STATE = "state";
     public static String KEY_URL = "url";
+    public static String KEY_COUNTRIES = "countries";
 
     private int id;
     private int activeProjects;
@@ -40,58 +38,10 @@ public class Organization {
     private String postal;
     private String state;
     private String url;
+    private List<String> countries; // Check, it can be duplicated - Countries where the organization operates in
 
-
-    /***
-     * Returns a list of Organization objects from a JSON Array
-     * @param jsonArray
-     * @return
-     * @throws JSONException
-     */
-    public static List<Organization> fromJsonArray(JSONArray jsonArray) throws JSONException {
-        List<Organization> organizations = new ArrayList<>();
-        for (int i = 0; i < jsonArray.length(); i++) {
-            organizations.add(fromJson(jsonArray.getJSONObject(i)));
-        }
-        return organizations;
-    }
-
-    /**
-     * Builds an Organization with the information provided inside a JSON Object
-     *
-     * @param jsonObject
-     * @return
-     * @throws JSONException
-     */
-    private static Organization fromJson(JSONObject jsonObject) throws JSONException {
-        Organization org = new Organization();
-        if (jsonObject.has("activeProjects"))
-            org.setActiveProjects(jsonObject.getInt("activeProjects"));
-        if (jsonObject.has("addressLine1"))
-            org.setAddressLine1(jsonObject.getString("addressLine1"));
-        if (jsonObject.has("addressLine2"))
-            org.setAddressLine2(jsonObject.getString("addressLine2"));
-        if (jsonObject.has("city"))
-            org.setCity(jsonObject.getString("city"));
-        if (jsonObject.has("country"))
-            org.setCountry(jsonObject.getString("country"));
-        if (jsonObject.has("ein"))
-            org.setEin(jsonObject.getString("ein"));
-        if (jsonObject.has("logoUrl"))
-            org.setLogoUrl(jsonObject.getString("logoUrl"));
-        if (jsonObject.has("mission"))
-            org.setMission(jsonObject.getString("mission"));
-        if (jsonObject.has("name"))
-            org.setName(jsonObject.getString("name"));
-        if (jsonObject.has("postal"))
-            org.setPostal(jsonObject.getString("postal"));
-        if (jsonObject.has("state"))
-            org.setState(jsonObject.getString("state"));
-        if (jsonObject.has("totalProjects"))
-            org.setTotalProjects(jsonObject.getInt("totalProjects"));
-        if (jsonObject.has("url"))
-            org.setUrl(jsonObject.getString("url"));
-        return org;
+    public Organization() {
+        this.countries = new ArrayList<>();
     }
 
     public int getId() {
@@ -206,13 +156,22 @@ public class Organization {
         this.url = url;
     }
 
+    public List<String> getCountries() {
+        return countries;
+    }
+
+    public void setCountries(List<String> countries) {
+        this.countries = countries;
+    }
+
     @NonNull
     @NotNull
     @Override
     public String toString() {
         return "\n ->" + this.name + " - " + this.activeProjects + " - " + totalProjects + " - " + addressLine1 +
                 " - " + addressLine2 + " - " + city + " - " + country + " - " + ein + " - " + logoUrl + " - " + mission + " - " +
-                name + " - " + postal + " - " + state + " - " + url;
+                name + " - " + postal + " - " + state + " - " + url
+                + "\n" + countries.toString();
 
     }
 }
