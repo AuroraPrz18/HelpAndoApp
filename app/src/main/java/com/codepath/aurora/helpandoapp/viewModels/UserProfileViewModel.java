@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.codepath.aurora.helpandoapp.models.Task;
+import com.google.android.gms.maps.model.LatLng;
 import com.hadiidbouk.charts.BarData;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.TimeZone;
 
 public class UserProfileViewModel extends ViewModel {
+
     private ParseUser _user;
     private MutableLiveData<List<ParseObject>> _tasksCompleted;
     private MutableLiveData<Integer> _points;

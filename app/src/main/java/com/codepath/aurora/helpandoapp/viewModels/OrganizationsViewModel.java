@@ -271,6 +271,7 @@ public class OrganizationsViewModel extends ViewModel {
         }
         return false;
     }
+    
 
 
     private class setUpFileDownloadedAsync extends AsyncTask {

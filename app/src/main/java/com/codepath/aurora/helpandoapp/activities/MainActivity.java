@@ -23,6 +23,7 @@ import com.codepath.aurora.helpandoapp.LoginActivity;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ActivityMainBinding;
 import com.codepath.aurora.helpandoapp.models.PlaceP;
+import com.codepath.aurora.helpandoapp.models.User;
 import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
 import com.codepath.aurora.helpandoapp.viewModels.OrganizationsViewModel;
 import com.parse.ParseUser;
@@ -115,7 +116,13 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && data != null) {
             PlaceP place = (PlaceP) Parcels.unwrap(data.getParcelableExtra("Place"));
-            HomeFeedViewModel.publicPlace = place;
+            if(data.getBooleanExtra("IsUserLocation", false)){
+                User.userLocation = PlaceP.getLatLng(place);
+                User.getCity(this);
+                User.getCountry(this);
+            }else{
+                HomeFeedViewModel.publicPlace = place;
+            }
         }
     }
 
@@ -156,4 +163,28 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Method to start receiving location updates
+     */
+    /*    public void  getLastLocation(){
+        int permission = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
+        if(permission != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }else{
+            // Create location services client
+            FusedLocationProviderClient locationUser = LocationServices.getFusedLocationProviderClient(this);
+            // Get the last known location
+            Task location = locationUser.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if(location == null){
+
+                    }
+                }
+            });
+        }
+
+    }*/
+
 }

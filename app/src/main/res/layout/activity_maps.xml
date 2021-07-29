@@ -13,6 +13,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/tvtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:text="Where are you now?"
+            android:gravity="center"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tfFilterBy"
             style="@style/AppTheme.Dark.TextInputLayout.FilledBox"

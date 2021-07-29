@@ -1,11 +1,18 @@
 package com.codepath.aurora.helpandoapp.models;
 
+import android.content.Context;
+
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 @ParseClassName("User")
 public class User extends ParseObject {
+    public static LatLng userLocation;
+    public static String userCountry;
+    public static String userCity;
+
     public static final String KEY_USERNAME = "userName";
     public static final String KEY_NAME = "name";
     public static final String KEY_PASSWORD = "password";
@@ -50,6 +57,15 @@ public class User extends ParseObject {
 
     public void setType(String type) {
         put(KEY_TYPE, type);
+    }
+
+    public static void getCountry(Context context){
+        userCountry = PlaceP.getCountry(context, userLocation);
+    }
+
+
+    public static void getCity(Context context){
+        userCity = PlaceP.getCity(context, userLocation);
     }
 
     /**

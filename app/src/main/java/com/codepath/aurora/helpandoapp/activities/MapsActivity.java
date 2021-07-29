@@ -38,6 +38,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap _mMap;
     private ActivityMapsBinding _binding;
     private PlaceP _place;
+    private boolean _isUserLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +49,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         populateDropdownMenu();
 
         _place = null;
+
+        if(getIntent().getExtras()!=null){
+            String title = getIntent().getStringExtra("Title");
+            _binding.tvtTitle.setText(title);
+            _binding.tfFilterBy.setVisibility(View.GONE);
+            _isUserLocation = true;
+        }else{
+            _isUserLocation = false;
+        }
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         // It manages the life cycle of the map and is the parent of the app's UI
@@ -82,6 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         Intent intent = new Intent();
         intent.putExtra("Place", Parcels.wrap(_place));
+        intent.putExtra("IsUserLocation", _isUserLocation);
         setResult(100,  intent);
         finish();
     }
@@ -112,8 +123,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Initialize the AutocompleteSupportFragment
         AutocompleteSupportFragment autocompleteSupportFragment =
                 (AutocompleteSupportFragment) getSupportFragmentManager().findFragmentById(R.id.autocomplete_fragment);
-        // Type of space the user will type in -> Addresses
-        autocompleteSupportFragment.setTypeFilter(TypeFilter.REGIONS);
+        // Type of space the user will type in -> Cities
+        autocompleteSupportFragment.setTypeFilter(TypeFilter.CITIES);
         // Favor results in this bounds (From Washington to Florida) -> Improve the prediction
         autocompleteSupportFragment.setLocationBias(RectangularBounds.newInstance(
                 new LatLng(28.932025, -81.582632),
