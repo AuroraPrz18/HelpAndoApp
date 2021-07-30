@@ -11,32 +11,40 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.codepath.aurora.helpandoapp.LoginActivity;
 import com.codepath.aurora.helpandoapp.R;
+import com.codepath.aurora.helpandoapp.adapters.FragmentAdapter;
 import com.codepath.aurora.helpandoapp.databinding.ActivityMainBinding;
 import com.codepath.aurora.helpandoapp.models.PlaceP;
 import com.codepath.aurora.helpandoapp.models.User;
 import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
 import com.codepath.aurora.helpandoapp.viewModels.OrganizationsViewModel;
+import com.google.android.material.navigation.NavigationBarView;
 import com.parse.ParseUser;
 
+import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
 
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
+    // Number of fragment inside it
+    private static final int _NUM_FRAGMENT = 5;
+    private ViewPager2 _vPager;
+    private FragmentStateAdapter _pAdapter; // To provide the pages to the view pager
     ActivityMainBinding binding;
     private BroadcastReceiver _brDownload;
     private OrganizationsViewModel _viewModel;
     DownloadManager downloadManager;
+    ViewPager2.OnPageChangeCallback onPageChangeCallback;
 
 
     @Override
@@ -46,10 +54,43 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         OrganizationsViewModel.apiKey = getResources().getString(R.string.api_organizations);
         // Define a navigation controller, which is the object that manages app navigation within a NavHost
-        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
-        NavController navController = navHostFragment.getNavController();
+                //NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.pager);
+                //NavController navController = navHostFragment.getNavController();
         // set up the bottom navigation view
-        NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
+                //NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
+
+        _vPager = binding.pager;
+        _pAdapter = new FragmentAdapter(getSupportFragmentManager(), getLifecycle());
+        _vPager.setAdapter(_pAdapter);
+
+        binding.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+                if(item.getItemId() == R.id.homeFeedFragment){
+                    _vPager.setCurrentItem(0);
+                }else if(item.getItemId() == R.id.toDoFragment){
+                    _vPager.setCurrentItem(1);
+                }
+                else if(item.getItemId() == R.id.searchFragment){
+                    _vPager.setCurrentItem(2);
+                }
+                else if(item.getItemId() == R.id.organizationsFragment){
+                    _vPager.setCurrentItem(3);
+                }
+                else if(item.getItemId() == R.id.userProfileFragment){
+                    _vPager.setCurrentItem(4);
+                }
+                _pAdapter.notifyDataSetChanged();
+                return true;
+            }
+        });
+        onPageChangeCallback = new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                binding.bottomNavigationView.getMenu().getItem(position).setChecked(true);
+            }
+        };
+        binding.pager.registerOnPageChangeCallback(onPageChangeCallback);
 
 
         // Creates a ViewModel the first time the system calls an activity's onCreate() method
@@ -132,6 +173,7 @@ public class MainActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
         unregisterReceiver(_brDownload);
+        binding.pager.unregisterOnPageChangeCallback(onPageChangeCallback);
     }
 
     /**
@@ -189,4 +231,16 @@ public class MainActivity extends AppCompatActivity {
 
     }*/
 
+    @Override
+    public void onBackPressed() {
+        if(_vPager.getCurrentItem()==0)
+            super.onBackPressed(); // If we don't have any other previous step
+        else
+            _vPager.setCurrentItem(_vPager.getCurrentItem() - 1); // Return to previous step
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

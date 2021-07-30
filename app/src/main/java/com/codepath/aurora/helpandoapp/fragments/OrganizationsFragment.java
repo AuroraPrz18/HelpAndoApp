@@ -56,10 +56,14 @@ public class OrganizationsFragment extends Fragment {
         _orgs = new ArrayList<>();
         setUpRecyclerView();
         setUpAllTheObservers();
-        if(User.userLocation==null){
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (User.userLocation == null) {
             getLocation();
         }
-
     }
 
     /**
