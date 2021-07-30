@@ -37,7 +37,6 @@ import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
     // Number of fragment inside it
-    private static final int _NUM_FRAGMENT = 5;
     private ViewPager2 _vPager;
     private FragmentStateAdapter _pAdapter; // To provide the pages to the view pager
     ActivityMainBinding binding;
@@ -53,11 +52,6 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         OrganizationsViewModel.apiKey = getResources().getString(R.string.api_organizations);
-        // Define a navigation controller, which is the object that manages app navigation within a NavHost
-                //NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.pager);
-                //NavController navController = navHostFragment.getNavController();
-        // set up the bottom navigation view
-                //NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
 
         _vPager = binding.pager;
         _pAdapter = new FragmentAdapter(getSupportFragmentManager(), getLifecycle());
@@ -66,18 +60,15 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
-                if(item.getItemId() == R.id.homeFeedFragment){
+                if (item.getItemId() == R.id.homeFeedFragment) {
                     _vPager.setCurrentItem(0);
-                }else if(item.getItemId() == R.id.toDoFragment){
+                } else if (item.getItemId() == R.id.toDoFragment) {
                     _vPager.setCurrentItem(1);
-                }
-                else if(item.getItemId() == R.id.searchFragment){
+                } else if (item.getItemId() == R.id.searchFragment) {
                     _vPager.setCurrentItem(2);
-                }
-                else if(item.getItemId() == R.id.organizationsFragment){
+                } else if (item.getItemId() == R.id.organizationsFragment) {
                     _vPager.setCurrentItem(3);
-                }
-                else if(item.getItemId() == R.id.userProfileFragment){
+                } else if (item.getItemId() == R.id.userProfileFragment) {
                     _vPager.setCurrentItem(4);
                 }
                 _pAdapter.notifyDataSetChanged();
@@ -158,12 +149,12 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 100 && data != null) {
             PlaceP place = (PlaceP) Parcels.unwrap(data.getParcelableExtra("Place"));
-            if(data.getBooleanExtra("IsUserLocation", false)){
+            if (data.getBooleanExtra("IsUserLocation", false)) {
                 User.userLocation = PlaceP.getLatLng(place);
                 User.getCity(this);
                 User.getCountry(this);
                 OrganizationsViewModel.setUserUpdate(true);
-            }else{
+            } else {
                 HomeFeedViewModel.publicPlace = place;
             }
         }
@@ -230,10 +221,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }*/
-
     @Override
     public void onBackPressed() {
-        if(_vPager.getCurrentItem()==0)
+        if (_vPager.getCurrentItem() == 0)
             super.onBackPressed(); // If we don't have any other previous step
         else
             _vPager.setCurrentItem(_vPager.getCurrentItem() - 1); // Return to previous step
@@ -243,4 +233,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
     }
+
+
 }

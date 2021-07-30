@@ -8,13 +8,16 @@
     tools:context=".fragments.HomeFeedFragment">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/lytMakeAPost"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:clickable="true"
         android:focusable="true">
 
         <RelativeLayout
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/padding">

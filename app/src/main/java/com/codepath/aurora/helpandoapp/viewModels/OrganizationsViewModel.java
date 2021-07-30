@@ -54,7 +54,7 @@ public class OrganizationsViewModel extends ViewModel {
     private MutableLiveData<Boolean> _doesItNeedUpdate;
     private static MutableLiveData<Boolean> _userUpdate;
 
-    public static void setUserUpdate(boolean value){
+    public static void setUserUpdate(boolean value) {
         _userUpdate.setValue(value);
     }
 
@@ -190,7 +190,7 @@ public class OrganizationsViewModel extends ViewModel {
             if (e != null) {
                 return;
             }
-            Integer times = (Integer)object.getNumber("times")+(Integer)1;
+            Integer times = (Integer) object.getNumber("times") + (Integer) 1;
             object.put("times", times);
             object.saveInBackground();
         });
@@ -265,7 +265,7 @@ public class OrganizationsViewModel extends ViewModel {
     public boolean wasUpdatedToday(ParseObject update) {
         Date date = update.getUpdatedAt();
         Date today = new Date();
-        Log.d("Organizations", "Today: "+ today.toString() + " - Last update: "+date.toString());
+        Log.d("Organizations", "Today: " + today.toString() + " - Last update: " + date.toString());
         if (date.getYear() != today.getYear()) return false;
         if (date.getMonth() != today.getMonth()) return false;
         if (date.getDay() != today.getDay()) return false;

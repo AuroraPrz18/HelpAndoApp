@@ -35,6 +35,7 @@ public class OrganizationsFragment extends Fragment {
     private OrganizationsViewModel _viewModel;
     private OrganizationAdapter _adapter;
     private List<Organization> _orgs;
+    private boolean _cancel;
 
 
 
@@ -54,6 +55,7 @@ public class OrganizationsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         _viewModel = new ViewModelProvider(getActivity()).get(OrganizationsViewModel.class);
         _orgs = new ArrayList<>();
+        _cancel = false;
         setUpRecyclerView();
         setUpAllTheObservers();
     }
@@ -61,9 +63,10 @@ public class OrganizationsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (User.userLocation == null) {
+        if (User.userLocation == null && !_cancel) {
             getLocation();
         }
+        _cancel = true;
     }
 
     /**

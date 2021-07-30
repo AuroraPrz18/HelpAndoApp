@@ -1,6 +1,7 @@
 package com.codepath.aurora.helpandoapp.fragments;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,7 +9,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -22,6 +25,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.activities.MapsActivity;
+import com.codepath.aurora.helpandoapp.activities.NewPostActivity;
 import com.codepath.aurora.helpandoapp.adapters.PostAdapter;
 import com.codepath.aurora.helpandoapp.databinding.HomeFeedFragmentBinding;
 import com.codepath.aurora.helpandoapp.models.Contact;
@@ -52,6 +56,7 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
     private PostAdapter _adapter;
     private List<Post> _posts;
 
+
     public static HomeFeedFragment newInstance() {
         return new HomeFeedFragment();
     }
@@ -63,6 +68,7 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         return _binding.getRoot();
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -75,6 +81,7 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
     /**
      * Sets all the onClickListeners for this Activity
      */
+    @SuppressLint("ClickableViewAccessibility")
     private void setOnClickListeners() {
         _binding.btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,6 +121,23 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
             @Override
             public void onClick(View v) {
                 chooseAnImage();
+            }
+        });
+        _binding.lytMakeAPost.setOnTouchListener(new View.OnTouchListener() {
+            GestureDetector gestureDetector = new GestureDetector(getActivity().getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onDoubleTap(MotionEvent e) {
+                    Intent intent = new Intent(getActivity(), NewPostActivity.class);
+                    
+                    return super.onDoubleTap(e);
+                }
+            });
+
+            @SuppressLint("ClickableViewAccessibility")
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                gestureDetector.onTouchEvent(event);
+                return false;
             }
         });
     }
