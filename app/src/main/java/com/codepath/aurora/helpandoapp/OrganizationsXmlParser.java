@@ -108,7 +108,9 @@ public class OrganizationsXmlParser {
                 org.setUrl(readField(parser, Organization.KEY_URL, 0));
             } else if (name.equals(Organization.KEY_COUNTRIES)) {
                 org.setCountries(readCountries(parser));
-            } else {
+            } else if (name.equals(Organization.KEY_THEMES)) {
+                org.setThemes(readThemes(parser));
+            }else {
                 skipTag(parser);
             }
         }
@@ -132,6 +134,44 @@ public class OrganizationsXmlParser {
             }
         }
         return countries;
+    }
+
+    /**
+     * Parses the XML all the themes of this organization
+     */
+    private List<String> readThemes(XmlPullParser parser) throws IOException, XmlPullParserException {
+        List<String> themes = new ArrayList<>();
+        parser.require(XmlPullParser.START_TAG, null, Organization.KEY_THEMES);
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() == XmlPullParser.START_TAG) {
+                String name = parser.getName();
+                if (name.equals("theme")) {
+                    themes.add(readTheme(parser));
+                } else {
+                    skipTag(parser);
+                }
+            }
+        }
+        return themes;
+    }
+
+    /**
+     * Parses the XML content of each theme
+     */
+    private String readTheme(XmlPullParser parser) throws IOException, XmlPullParserException {
+        parser.require(XmlPullParser.START_TAG, null, "theme");
+        String theme = "";
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if (parser.getEventType() == XmlPullParser.START_TAG) {
+                String name = parser.getName();
+                if (name.equals(Organization.KEY_NAME)) {
+                    theme = readField(parser, Organization.KEY_NAME, 0);
+                } else {
+                    skipTag(parser);
+                }
+            }
+        }
+        return theme;
     }
 
     /**

@@ -13,7 +13,6 @@ import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
-import com.codepath.aurora.helpandoapp.Filter;
 import com.codepath.aurora.helpandoapp.OrganizationsXmlParser;
 import com.codepath.aurora.helpandoapp.models.Organization;
 import com.codepath.aurora.helpandoapp.models.OrganizationsLastUpdate;
@@ -42,6 +41,8 @@ public class OrganizationsViewModel extends ViewModel {
     public static final String host = "https://api.globalgiving.org";
     public static final String organizations = "/api/public/orgservice/all/organizations/active/download";
     public static final String themes = "/api/public/projectservice/themes";
+    public static final String projects = "/api/public/projectservice/organizations/189/projects/active";
+    public static String apiKey = "";
 
     public boolean fileIsEmpty;
     private long _downloadId;
@@ -51,7 +52,19 @@ public class OrganizationsViewModel extends ViewModel {
     public String lastUpdateID;
     public boolean lastUpdateSaved;
     private MutableLiveData<Boolean> _doesItNeedUpdate;
-    public String apiKey;
+    private static MutableLiveData<Boolean> _userUpdate;
+
+    public static void setUserUpdate(boolean value){
+        _userUpdate.setValue(value);
+    }
+
+    public LiveData<Boolean> getUserUpdate() {
+        if (_userUpdate == null) {
+            _userUpdate = new MutableLiveData<>();
+            _userUpdate.setValue(false);
+        }
+        return _userUpdate;
+    }
 
     public LiveData<Boolean> doesItNeedUpdate() {
         if (_doesItNeedUpdate == null) {
@@ -273,10 +286,6 @@ public class OrganizationsViewModel extends ViewModel {
         return false;
     }
 
-    public void findMatch(){
-        // TODO: Hacerlo asincrono
-        Filter filter = new Filter(_orgs.getValue());
-    }
 
     private class setUpFileDownloadedAsync extends AsyncTask {
         @Override
@@ -312,4 +321,6 @@ public class OrganizationsViewModel extends ViewModel {
             return null;
         }
     }
+
+
 }

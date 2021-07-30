@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        OrganizationsViewModel.apiKey = getResources().getString(R.string.api_organizations);
         // Define a navigation controller, which is the object that manages app navigation within a NavHost
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
         NavController navController = navHostFragment.getNavController();
@@ -120,6 +121,7 @@ public class MainActivity extends AppCompatActivity {
                 User.userLocation = PlaceP.getLatLng(place);
                 User.getCity(this);
                 User.getCountry(this);
+                OrganizationsViewModel.setUserUpdate(true);
             }else{
                 HomeFeedViewModel.publicPlace = place;
             }

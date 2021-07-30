@@ -3,7 +3,9 @@ package com.codepath.aurora.helpandoapp.fragments;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -87,11 +89,18 @@ public class OrganizationsFragment extends Fragment {
                     _orgs.addAll(organizations);
                     // Notify the adapter of data change
                     _adapter.notifyDataSetChanged();
-                    // Filter it to match the user
-                    Filter filter = new Filter(_orgs);
-                    filter.execute();
+                    _viewModel.setUserUpdate(false);
                 }
-
+            }
+        });
+        _viewModel.getUserUpdate().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean locationUserHasBeenUpdated) {
+                if(locationUserHasBeenUpdated){
+                    // Filter it to match the user
+                    new AsyncFilter().execute();
+                    _viewModel.setUserUpdate(false);
+                }
             }
         });
     }
@@ -105,6 +114,22 @@ public class OrganizationsFragment extends Fragment {
         _binding.rvOrganizations.setAdapter(_adapter);
     }
 
+    // The types specified here are the input data type, the progress type, and the result type
+    private class AsyncFilter extends AsyncTask {
+        private List<Organization> _orgsAsync;
 
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            _orgsAsync = new Filter(_orgs).execute();
+            return null;
+        }
 
+        @Override
+        protected void onPostExecute(Object o) {
+            _orgs = _orgsAsync;
+            // Notify the adapter of data change
+            _adapter.notifyDataSetChanged();
+            Log.d("filter", "finish");
+        }
+    }
 }

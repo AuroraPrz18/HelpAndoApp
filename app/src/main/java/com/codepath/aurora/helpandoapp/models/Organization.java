@@ -23,6 +23,7 @@ public class Organization {
     public static String KEY_STATE = "state";
     public static String KEY_URL = "url";
     public static String KEY_COUNTRIES = "countries";
+    public static String KEY_THEMES = "themes";
 
     private int id;
     private int activeProjects;
@@ -39,6 +40,8 @@ public class Organization {
     private String state;
     private String url;
     private List<String> countries; // Check, it can be duplicated - Countries where the organization operates in
+    private List<String> themes; // Check, it can be duplicated - Countries where the organization operates in
+
 
     public Organization() {
         this.countries = new ArrayList<>();
@@ -164,6 +167,14 @@ public class Organization {
         this.countries = countries;
     }
 
+    public List<String> getThemes() {
+        return themes;
+    }
+
+    public void setThemes(List<String> themes) {
+        this.themes = themes;
+    }
+
     @NonNull
     @NotNull
     @Override
@@ -171,4 +182,6 @@ public class Organization {
         return " ->" + this.name ;
 
     }
+
+
 }

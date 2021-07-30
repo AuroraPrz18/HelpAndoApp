@@ -80,5 +80,7 @@ dependencies {
     implementation 'com.airbnb.android:lottie:3.7.2'
     // Material component Library
     implementation 'com.google.android.material:material:1.4.0'
+    // OkHttp Library
+    implementation 'com.squareup.okhttp3:okhttp:4.1.0'
 
 }

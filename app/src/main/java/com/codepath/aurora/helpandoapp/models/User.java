@@ -1,11 +1,19 @@
 package com.codepath.aurora.helpandoapp.models;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @ParseClassName("User")
 public class User extends ParseObject {
@@ -26,6 +34,48 @@ public class User extends ParseObject {
     // Required empty constructor
     public User() {
     }
+
+    public static String[] getTop3() {
+        List<ParseObject> tasks = new ArrayList<>();
+        Map <String, Integer> mp = new HashMap<>();
+        // Set up the query to obtain only id tasks completed by the user
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("TaskCompleted");
+        query.whereEqualTo("user", ParseUser.getCurrentUser());
+        query.include("task");
+        // Execute the query
+        try {
+             tasks = query.find();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        for(int i=0; i<tasks.size(); i++){
+            Task task = (Task)tasks.get(i).getParseObject("task");
+            String theme = task.getCategory();
+            if(mp.containsKey(theme)){
+                mp.put(theme, ((int)mp.get(theme)) +1);
+            }else{
+                mp.put(theme, 1);
+            }
+        }
+        String [] top3 = new String[3];
+        for(int i=0; i<3; i++){
+            long max = 0;
+            top3[i] = "";
+            for (String key: mp.keySet()) {
+                if(mp.get(key)> max){
+                    top3[i] = key;
+                }
+            }
+            if(mp.containsKey(top3[i])){
+                mp.put(top3[i], -i-1);
+            }
+        }
+        Log.d("filter", top3[0]+ " \n"+top3[1]+ " \n"+top3[2] );
+        return top3;
+    }
+
+
+
 
     public String getUsername() {
         return getString(KEY_USERNAME);
