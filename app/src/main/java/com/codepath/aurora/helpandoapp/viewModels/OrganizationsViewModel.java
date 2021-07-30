@@ -13,6 +13,7 @@ import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.codepath.aurora.helpandoapp.Filter;
 import com.codepath.aurora.helpandoapp.OrganizationsXmlParser;
 import com.codepath.aurora.helpandoapp.models.Organization;
 import com.codepath.aurora.helpandoapp.models.OrganizationsLastUpdate;
@@ -271,8 +272,11 @@ public class OrganizationsViewModel extends ViewModel {
         }
         return false;
     }
-    
 
+    public void findMatch(){
+        // TODO: Hacerlo asincrono
+        Filter filter = new Filter(_orgs.getValue());
+    }
 
     private class setUpFileDownloadedAsync extends AsyncTask {
         @Override

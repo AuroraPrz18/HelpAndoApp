@@ -16,6 +16,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.codepath.aurora.helpandoapp.Filter;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.activities.MapsActivity;
 import com.codepath.aurora.helpandoapp.adapters.OrganizationAdapter;
@@ -86,6 +87,9 @@ public class OrganizationsFragment extends Fragment {
                     _orgs.addAll(organizations);
                     // Notify the adapter of data change
                     _adapter.notifyDataSetChanged();
+                    // Filter it to match the user
+                    Filter filter = new Filter(_orgs);
+                    filter.execute();
                 }
 
             }

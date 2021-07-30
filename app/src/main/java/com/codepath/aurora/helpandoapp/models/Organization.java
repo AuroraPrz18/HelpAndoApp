@@ -168,10 +168,7 @@ public class Organization {
     @NotNull
     @Override
     public String toString() {
-        return "\n ->" + this.name + " - " + this.activeProjects + " - " + totalProjects + " - " + addressLine1 +
-                " - " + addressLine2 + " - " + city + " - " + country + " - " + ein + " - " + logoUrl + " - " + mission + " - " +
-                name + " - " + postal + " - " + state + " - " + url
-                + "\n" + countries.toString();
+        return " ->" + this.name ;
 
     }
 }

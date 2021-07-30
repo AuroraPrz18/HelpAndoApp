@@ -10,8 +10,8 @@ import com.parse.ParseUser;
 @ParseClassName("User")
 public class User extends ParseObject {
     public static LatLng userLocation;
-    public static String userCountry;
-    public static String userCity;
+    public static String userCountry = "";
+    public static String userCity= "";
 
     public static final String KEY_USERNAME = "userName";
     public static final String KEY_NAME = "name";
