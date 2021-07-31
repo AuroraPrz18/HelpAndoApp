@@ -36,7 +36,7 @@ Encourage people to do things that can help to build a better world. It is possi
 * [X] The app should allow user persistence.
 * [X] User can suggest tasks to the admin. V1 all of them will be automatically accepted.
 * [X] User should find tasks to do, ordered by week, month or year depending on their difficulty or time required.
-* [/] -> User should be able to find information about non-profit organizations. This information should be obtained by a global API.
+* [X] -> User should be able to find information about non-profit organizations. This information should be obtained by a global API.
 * [X] -> User profile should display the dashboard of self-improvement based on its performance.
 * [X] User profile should display the total points of the user, based on its performance.
 * [X] User can post text information about the tasks that it had completed.
@@ -46,11 +46,9 @@ Encourage people to do things that can help to build a better world. It is possi
 * [X] User can watch posts of other users.
 * [X] Sponsors can find information about how to contact volunteers to know more about its altruistic projects.
 * [X] The app integrates with at least one SDK or API
-* [ ] The app uses at least one gesture (e.g. double tap to like, e.g. pinch to scale)
+* [X] The app uses at least one gesture (e.g. double tap to like, e.g. pinch to scale)
 * [X] The app uses at least one animation (e.g. fade in/out, e.g. animating a view growing and shrinking)
-* [ ] The app incorporates at least one external library to add visual polish
-
-API used to obtain nonprofit organizations data: https://www.globalgiving.org/api/
+* [/] The app incorporates at least one external library to add visual polish
 
 
 **Optional Nice-to-have Stories**
@@ -450,6 +448,12 @@ Model: Contact
    * CircleImageView: https://github.com/hdodenhof/CircleImageView
    * ChartProgressBar-Android: https://github.com/hadiidbouk/ChartProgressBar-Android
    * Lottie for Android: https://github.com/airbnb/lottie-android
- ## 📃 More Resources Used
-   * Parse XML data: https://developer.android.com/training/basics/network-ops/xml#parse
+   * Material component Library
+   * OkHttp Library
 
+
+ ## 📃 More Resources Used (APIs, SDKs, etc)
+   * Parse XML data: https://developer.android.com/training/basics/network-ops/xml#parse
+   * API used to obtain nonprofit organizations data: https://www.globalgiving.org/api/
+   * Maps SDK for Android
+   * Places API
