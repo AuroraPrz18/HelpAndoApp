@@ -81,6 +81,9 @@ public class ContactDialog extends DialogFragment {
         // Verify that the host fragment implements the callback interface
         try {
             _listener = (ContactDialogListener) getTargetFragment();
+            if(_listener == null){
+                _listener = (ContactDialogListener) context;
+            }
         } catch (ClassCastException e) {
             // If the Fragment doesn't implement the interface, throw exception
             throw new ClassCastException(getTargetFragment().toString()

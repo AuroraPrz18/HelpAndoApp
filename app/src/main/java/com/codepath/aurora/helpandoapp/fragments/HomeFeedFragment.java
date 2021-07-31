@@ -127,12 +127,15 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
             GestureDetector gestureDetector = new GestureDetector(getActivity().getApplicationContext(), new GestureDetector.SimpleOnGestureListener() {
                 @Override
                 public boolean onDoubleTap(MotionEvent e) {
+                    // Open the New Post section in its own Activity
                     Intent intent = new Intent(getActivity(), NewPostActivity.class);
-                    
+                    intent.putExtra("Post", Parcels.wrap(createNewPost()));
+                    startActivity(intent);
+                    // Save received posts
+                    _posts.clear();
                     return super.onDoubleTap(e);
                 }
             });
-
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
