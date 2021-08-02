@@ -54,7 +54,7 @@ Encourage people to do things that can help to build a better world. It is possi
 **Optional Nice-to-have Stories**
 * [ ] User can have insignias and ranking based on its performance.
 * [ ] User should receive notifications about new ranking or improvement.
-* [ ] User can change its profile picture
+* [X] User can change its profile picture
 * [ ] Task can be ordered by category / amount of people that completed them / etc.
 * [ ] User can see follow people.
 * [ ] User can choose to see only post of the users that it follow.
@@ -95,7 +95,7 @@ Encourage people to do things that can help to build a better world. It is possi
         * Todo Fragment
             * User should find tasks to do (next task at the top and highlighted).
         * AddTask Fragment
-            * User can suggest tasks to the admin. V1 all of them will be automatically acepted.
+            * User can suggest tasks to the admin. V1 all of them will be automatically accepted.
         * SuggestedTasks Activity (Optional Story)
                 * Suggested tasks are received by the admin.
             * Evaluate Task Fragment (Optional story)

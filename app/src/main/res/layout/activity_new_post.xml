@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:padding="@dimen/padding">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/ivPhotoUser"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
@@ -37,8 +37,10 @@
                 android:layout_alignParentTop="true"
                 android:layout_marginStart="0dp"
                 android:layout_marginTop="0dp"
-                android:src="@drawable/ic_user_24"
-                app:tint="@color/green_1" />
+                android:elevation="3dp"
+                app:civ_border_color="@color/orange_1"
+                app:civ_border_width="3dp"
+                tools:src="@tools:sample/avatars" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tfPost"

@@ -1,16 +1,18 @@
 package com.codepath.aurora.helpandoapp.viewModels;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.codepath.aurora.helpandoapp.models.Task;
-import com.google.android.gms.maps.model.LatLng;
 import com.hadiidbouk.charts.BarData;
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,8 +25,23 @@ public class UserProfileViewModel extends ViewModel {
     private ParseUser _user;
     private MutableLiveData<List<ParseObject>> _tasksCompleted;
     private MutableLiveData<Integer> _points;
+    private MutableLiveData<Boolean> _newProfilePhoto;
     private ArrayList<BarData> _dataList = new ArrayList<>();
     private long _max;
+
+    public LiveData<Boolean> getNewProfilePhoto() {
+        if (_newProfilePhoto == null) {
+            _newProfilePhoto = new MutableLiveData<>();
+        }
+        return _newProfilePhoto;
+    }
+
+    public void setNewProfilePhoto(boolean newProfilePhoto) {
+        if (_newProfilePhoto == null) {
+            _newProfilePhoto = new MutableLiveData<>();
+        }
+        this._newProfilePhoto.setValue(newProfilePhoto);
+    }
 
     public long getMax() {
         return _max;
@@ -104,7 +121,7 @@ public class UserProfileViewModel extends ViewModel {
                         pointsPerDay += points; // Points for that day increase
                     } else {
                         // Add this day as a new bar inside the chart
-                        data = new BarData("      "+getSimpleDateString(dateAux), pointsPerDay, pointsPerDay+"\nPoints");
+                        data = new BarData("      " + getSimpleDateString(dateAux), pointsPerDay, pointsPerDay + "\nPoints");
                         if (pointsPerDay > max)
                             max = pointsPerDay; // The max amount of point earned in one day
                         _dataList.add(data);
@@ -115,7 +132,7 @@ public class UserProfileViewModel extends ViewModel {
                     dateAux = dateTask;
                 }
                 if (!pointsPerDay.equals(0)) {
-                    data = new BarData("      "+getSimpleDateString(dateAux), pointsPerDay, pointsPerDay+"\nPoints");
+                    data = new BarData("      " + getSimpleDateString(dateAux), pointsPerDay, pointsPerDay + "\nPoints");
                     if (pointsPerDay > max) max = pointsPerDay;
                     _dataList.add(data);
                 }
@@ -173,5 +190,27 @@ public class UserProfileViewModel extends ViewModel {
                 _points.postValue(totalPoints);
             }
         });
+    }
+
+    /**
+     * Save the photo selected in the backend
+     *
+     * @param file
+     */
+    public void saveProfilePhotoInDB(ParseFile file) {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            currentUser.put("profilePicture", file);
+            currentUser.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    if (e == null) {
+                        _newProfilePhoto.setValue(true);
+                    } else {
+                        _newProfilePhoto.setValue(false);
+                    }
+                }
+            });
+        }
     }
 }

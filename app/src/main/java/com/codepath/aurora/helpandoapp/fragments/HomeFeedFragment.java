@@ -23,6 +23,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.bumptech.glide.Glide;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.activities.MapsActivity;
 import com.codepath.aurora.helpandoapp.activities.NewPostActivity;
@@ -31,6 +32,7 @@ import com.codepath.aurora.helpandoapp.databinding.HomeFeedFragmentBinding;
 import com.codepath.aurora.helpandoapp.models.Contact;
 import com.codepath.aurora.helpandoapp.models.PlaceP;
 import com.codepath.aurora.helpandoapp.models.Post;
+import com.codepath.aurora.helpandoapp.models.User;
 import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
 import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.parse.FindCallback;
@@ -76,6 +78,23 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         setOnClickListeners();
         setUpRecyclerView();
         populatePostsList();
+        setUpProfilePhoto();
+    }
+
+    /**
+     * Show the profile photo of the current user if possible
+     */
+    private void setUpProfilePhoto() {
+        ParseUser user = ParseUser.getCurrentUser();
+        if(user.getParseFile(User.KEY_PROFILE_PHOTO)!=null){
+            Glide.with(getActivity()).load(user.getParseFile(User.KEY_PROFILE_PHOTO).getUrl())
+                    .centerCrop()
+                    .error(R.drawable.ic_user_24)
+                    .placeholder(R.drawable.ic_user_24)
+                    .into(_binding.ivPhotoUser);
+        }else{
+            _binding.ivPhotoUser.setImageDrawable(getActivity().getDrawable(R.drawable.ic_user_24));
+        }
     }
 
     /**

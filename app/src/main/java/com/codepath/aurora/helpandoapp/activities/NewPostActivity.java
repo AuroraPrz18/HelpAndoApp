@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.bumptech.glide.Glide;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ActivityNewPostBinding;
 import com.codepath.aurora.helpandoapp.fragments.ContactDialog;
@@ -41,7 +42,7 @@ import java.net.URISyntaxException;
 /**
  * This Activity is needed when a user want to post something about an specific Task that tha user's already done
  */
-public class NewPostActivity extends AppCompatActivity implements ContactDialog.ContactDialogListener{
+public class NewPostActivity extends AppCompatActivity implements ContactDialog.ContactDialogListener {
     private ActivityNewPostBinding _binding;
     private Task _task = null;
     private Post _post = null;
@@ -55,11 +56,11 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
         _viewModel = new ViewModelProvider(this).get(HomeFeedViewModel.class);
         setContentView(_binding.getRoot());
         if (getIntent() != null) {
-            if(getIntent().getExtras().containsKey("Post")){ // If it was sent from HomeFeedFragment
-                _post = (Post)Parcels.unwrap(getIntent().getParcelableExtra("Post"));
+            if (getIntent().getExtras().containsKey("Post")) { // If it was sent from HomeFeedFragment
+                _post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("Post"));
                 setInfoPost();
-            }else if(getIntent().getExtras().containsKey("Task")){ // If it was sent from HomeFeedFragment
-                _task = (Task)Parcels.unwrap(getIntent().getParcelableExtra("Task"));
+            } else if (getIntent().getExtras().containsKey("Task")) { // If it was sent from HomeFeedFragment
+                _task = (Task) Parcels.unwrap(getIntent().getParcelableExtra("Task"));
                 setTaskInfoVisible();
             }
         }
@@ -79,6 +80,24 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
                 startActivityForResult(intent, 100);
             }
         });
+        setUpProfilePhoto();
+    }
+
+
+    /**
+     * Show the profile photo of the current user if possible
+     */
+    private void setUpProfilePhoto() {
+        ParseUser user = ParseUser.getCurrentUser();
+        if(user.getParseFile(User.KEY_PROFILE_PHOTO)!=null){
+            Glide.with(this).load(user.getParseFile(User.KEY_PROFILE_PHOTO).getUrl())
+                    .centerCrop()
+                    .error(R.drawable.ic_user_24)
+                    .placeholder(R.drawable.ic_user_24)
+                    .into(_binding.ivPhotoUser);
+        }else{
+            _binding.ivPhotoUser.setImageDrawable(this.getDrawable(R.drawable.ic_user_24));
+        }
     }
 
     /**
@@ -211,6 +230,7 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
             }
         });
     }
+
     /**
      * Method called when the ContactDialog Fragment has a Positive answer and a new Contact has been created.
      *
@@ -227,6 +247,7 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
                 + contact.getExtraInfo()));
         _viewModel.setContact(contact);
     }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -244,8 +265,6 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
     }
 
 
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -259,8 +278,7 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
             } else {
                 setPlaceInfo(place);
             }
-        }
-        else if (resultCode == Activity.RESULT_OK) { // If everything went well
+        } else if (resultCode == Activity.RESULT_OK) { // If everything went well
             // Get the Uri of the Image, use it instead of File to avoid storage permissions
             Uri uri = data.getData();
             _binding.ivImagePost.setImageURI(uri);

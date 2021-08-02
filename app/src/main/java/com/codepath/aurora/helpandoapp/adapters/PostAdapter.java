@@ -125,7 +125,16 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             } else {
                 _binding.cvImage.setVisibility(View.GONE);
             }
-
+            // Show the profile photo if possible
+            if (post.getAuthor() != null && post.getAuthor().getParseFile(User.KEY_PROFILE_PHOTO) != null) {
+                Glide.with(_context).load(post.getAuthor().getParseFile(User.KEY_PROFILE_PHOTO).getUrl())
+                        .centerCrop()
+                        .error(R.drawable.ic_user_24)
+                        .placeholder(R.drawable.ic_user_24)
+                        .into(_binding.ivPhotoUser);
+            } else {
+                _binding.ivPhotoUser.setImageDrawable(_context.getDrawable(R.drawable.ic_user_24));
+            }
         }
 
         /**

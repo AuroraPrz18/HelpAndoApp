@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.codepath.aurora.helpandoapp.R;
 import com.codepath.aurora.helpandoapp.databinding.ItemUserBinding;
 import com.codepath.aurora.helpandoapp.fragments.ContactDialogInPost;
@@ -70,7 +71,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             _binding = ItemUserBinding.bind(itemView);
-            if(isCurrentUserASponsor()){
+            if (isCurrentUserASponsor()) {
                 // Only Sponsors can see email and phone from the volunteers to get in touch with them
                 itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -86,11 +87,27 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             _binding.tvName.setText(user.getString(User.KEY_NAME));
             _binding.tvUsername.setText(user.getString(User.KEY_USERNAME));
             _binding.tvType.setText("Volunteer");
-            _binding.tvPoints.setText(user.getNumber(User.KEY_POINTS)+"");
-            _binding.tvTaskC.setText(user.getNumber(User.KEY_TASKS_C)+"");
-            _binding.tvTaskS.setText(user.getNumber(User.KEY_TASKS_S)+"");
+            _binding.tvPoints.setText(user.getNumber(User.KEY_POINTS) + "");
+            _binding.tvTaskC.setText(user.getNumber(User.KEY_TASKS_C) + "");
+            _binding.tvTaskS.setText(user.getNumber(User.KEY_TASKS_S) + "");
             _binding.ivAnimation.setVisibility(View.GONE);
-            if(isCurrentUserASponsor()) _binding.ivAnimation.setVisibility(View.VISIBLE);
+            setUpProfilePhoto(user);
+            if (isCurrentUserASponsor()) _binding.ivAnimation.setVisibility(View.VISIBLE);
+        }
+
+        /**
+         * Show the profile photo of the user if possible
+         */
+        private void setUpProfilePhoto(ParseUser user) {
+            if (user.getParseFile(User.KEY_PROFILE_PHOTO) != null) {
+                Glide.with(_context).load(user.getParseFile(User.KEY_PROFILE_PHOTO).getUrl())
+                        .centerCrop()
+                        .error(R.drawable.ic_user_24)
+                        .placeholder(R.drawable.ic_user_24)
+                        .into(_binding.ivPhotoUser);
+            } else {
+                _binding.ivPhotoUser.setImageDrawable(_context.getDrawable(R.drawable.ic_user_24_orange));
+            }
         }
 
         /**
