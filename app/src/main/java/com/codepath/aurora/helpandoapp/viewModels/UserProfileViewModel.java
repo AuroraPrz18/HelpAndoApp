@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.codepath.aurora.helpandoapp.models.Post;
 import com.codepath.aurora.helpandoapp.models.Task;
 import com.hadiidbouk.charts.BarData;
 import com.parse.FindCallback;
@@ -24,6 +25,7 @@ public class UserProfileViewModel extends ViewModel {
 
     private ParseUser _user;
     private MutableLiveData<List<ParseObject>> _tasksCompleted;
+    private MutableLiveData<List<Post>> _posts;
     private MutableLiveData<Integer> _points;
     private MutableLiveData<Boolean> _newProfilePhoto;
     private ArrayList<BarData> _dataList = new ArrayList<>();
@@ -70,6 +72,19 @@ public class UserProfileViewModel extends ViewModel {
 
     public void setTasksCompleted(List<ParseObject> tasksCompleted) {
         this._tasksCompleted.postValue(tasksCompleted); // postValue because it is not called from the main thread
+    }
+
+    public MutableLiveData<List<Post>> getPosts() {
+        if (_posts == null) {
+            _posts = new MutableLiveData<>();
+            _posts.setValue(new ArrayList<Post>());
+            populatePostsList(); // Get the posts from backend server
+        }
+        return _posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this._posts.postValue(posts); // postValue because it is not called from the main thread
     }
 
     public MutableLiveData<Integer> getPoints() {
@@ -212,5 +227,28 @@ public class UserProfileViewModel extends ViewModel {
                 }
             });
         }
+    }
+
+    /**
+     * Populates Posts list retrieving them from de backend server made by the current
+     */
+    private void populatePostsList() {
+        ParseQuery<Post> query = ParseQuery.getQuery("Post");
+        query.orderByDescending("createdAt");
+        query.whereEqualTo(Post.KEY_AUTHOR, ParseUser.getCurrentUser());
+        query.include(Post.KEY_TASK);
+        query.include(Post.KEY_AUTHOR);
+        query.include(Post.KEY_PLACE);
+        query.include(Post.KEY_CONTACT_INFO);
+        query.findInBackground(new FindCallback<Post>() {
+            @Override
+            public void done(List<Post> receivedPosts, ParseException e) {
+                if (e != null) {
+                    return;
+                }
+                // Save received posts
+                _posts.setValue(receivedPosts);
+            }
+        });
     }
 }

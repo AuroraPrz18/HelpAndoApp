@@ -160,6 +160,7 @@
         </LinearLayout>
 
         <HorizontalScrollView
+            android:id="@+id/lytChart"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/records">
@@ -192,5 +193,27 @@
                 app:hdProgressColor="@color/green_1"
                 app:hdProgressDisableColor="@color/progress_disable" />
         </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/tvTitlePosts"
+            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/lytChart"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/your_posts" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPosts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tvTitlePosts"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="@dimen/marginTop" />
     </RelativeLayout>
 </ScrollView>

@@ -86,13 +86,13 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
      */
     private void setUpProfilePhoto() {
         ParseUser user = ParseUser.getCurrentUser();
-        if(user.getParseFile(User.KEY_PROFILE_PHOTO)!=null){
+        if (user.getParseFile(User.KEY_PROFILE_PHOTO) != null) {
             Glide.with(getActivity()).load(user.getParseFile(User.KEY_PROFILE_PHOTO).getUrl())
                     .centerCrop()
                     .error(R.drawable.ic_user_24)
                     .placeholder(R.drawable.ic_user_24)
                     .into(_binding.ivPhotoUser);
-        }else{
+        } else {
             _binding.ivPhotoUser.setImageDrawable(getActivity().getDrawable(R.drawable.ic_user_24));
         }
     }
@@ -155,6 +155,7 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
                     return super.onDoubleTap(e);
                 }
             });
+
             @SuppressLint("ClickableViewAccessibility")
             @Override
             public boolean onTouch(View v, MotionEvent event) {
