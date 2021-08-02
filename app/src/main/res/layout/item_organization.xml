@@ -74,6 +74,17 @@
             android:layout_weight="1"
             tools:text="Bellenvue, WA" />
         <TextView
+            android:id="@+id/tvThemes"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="6dp"
+            android:layout_toEndOf="@+id/ivLogo"
+            android:layout_below="@+id/tvLocation"
+            android:layout_weight="1"
+            tools:text="Themes: gdfgd" />
+        <TextView
             android:id="@+id/tvUrl"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
@@ -82,7 +93,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="6dp"
             android:layout_toEndOf="@+id/ivLogo"
-            android:layout_below="@+id/tvLocation"
+            android:layout_below="@+id/tvThemes"
             android:layout_weight="1"
             android:linksClickable="true"
             android:autoLink="web"

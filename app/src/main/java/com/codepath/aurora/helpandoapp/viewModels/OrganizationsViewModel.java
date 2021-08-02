@@ -52,7 +52,16 @@ public class OrganizationsViewModel extends ViewModel {
     public String lastUpdateID;
     public boolean lastUpdateSaved;
     private MutableLiveData<Boolean> _doesItNeedUpdate;
+    Boolean areOrgsFilter;
     private static MutableLiveData<Boolean> _userUpdate;
+
+    public Boolean getAreOrgsFilter() {
+        return areOrgsFilter;
+    }
+
+    public void setAreOrgsFilter(Boolean areOrgsFilter) {
+        this.areOrgsFilter = areOrgsFilter;
+    }
 
     public static void setUserUpdate(boolean value) {
         _userUpdate.setValue(value);
@@ -285,6 +294,7 @@ public class OrganizationsViewModel extends ViewModel {
         }
         return false;
     }
+
 
 
     private class setUpFileDownloadedAsync extends AsyncTask {

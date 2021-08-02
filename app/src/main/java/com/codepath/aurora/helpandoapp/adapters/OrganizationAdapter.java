@@ -106,6 +106,13 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
                 }
             });
             _binding.tvName.setText(org.getName());
+            String themes = "<b>Themes: </b>";
+            List<String> themesL = org.getThemes();
+            for(int i=0; i<themesL.size(); i++){
+                if(i>0) themes+=", ";
+                themes += themesL.get(i);
+            }
+            _binding.tvThemes.setText(Html.fromHtml(themes));
             if (!org.getMission().isEmpty()) {
                 showOrHideMission(org);
             } else {

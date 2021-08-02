@@ -56,8 +56,11 @@ public class OrganizationsFragment extends Fragment {
         _viewModel = new ViewModelProvider(getActivity()).get(OrganizationsViewModel.class);
         _orgs = new ArrayList<>();
         _cancel = false;
+        Log.d("filter", "estoy3");
+        _viewModel.setAreOrgsFilter(false);
         setUpRecyclerView();
         setUpAllTheObservers();
+
     }
 
     @Override
@@ -103,10 +106,14 @@ public class OrganizationsFragment extends Fragment {
         _viewModel.getUserUpdate().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean locationUserHasBeenUpdated) {
-                if(locationUserHasBeenUpdated){
+                Log.d("filter", "estoy");
+                // If there is new info about the location of the user, or there is not info about the Location of the user but it also want to be filter
+                if(locationUserHasBeenUpdated || !_viewModel.getAreOrgsFilter()){
+                    Log.d("filter", "estoy2");
                     // Filter it to match the user
                     new AsyncFilter().execute();
                     _viewModel.setUserUpdate(false);
+                    _viewModel.setAreOrgsFilter(true);
                 }
             }
         });
