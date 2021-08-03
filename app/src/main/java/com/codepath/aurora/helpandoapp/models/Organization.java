@@ -1,12 +1,20 @@
 package com.codepath.aurora.helpandoapp.models;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
+
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Parcel(analyze = Organization.class)
 public class Organization {
@@ -48,6 +56,7 @@ public class Organization {
     public Organization() {
         this.countries = new ArrayList<>();
     }
+
 
     public int getId() {
         return id;
@@ -185,5 +194,52 @@ public class Organization {
 
     }
 
+    /**
+     * Return the number of clicks earned for each organization.
+     * @return
+     */
+    public static Map<String, Long> getGeneralPopularity() {
+        Map<String, Long> mp = new HashMap<>();
+        // Set up the query
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GeneralClicksOrgs");
+        List<ParseObject> result = new ArrayList<>();
+        // Execute the query
+        try {
+            result = query.find();
+        } catch (ParseException e) {
+            Log.e("filter", e.toString());
+        }
+        for(int i=0; i<result.size(); i++){
+            mp.put(result.get(i).getString("idOrg"), result.get(i).getLong("clicks"));
+        }
+        return mp;
+    }
+
+    /**
+     * Return the number of clicks earned for each organization.
+     * @param id
+     * @return
+     */
+    public static long getPopularity(int id) {
+        //TODO: OPTIMIZE IT. IT WORKS BUT TAKES A LOT OF TIME. IN THE MEANWHILE USE getGeneralPopularity()
+        Log.d("filter", "id"+id);
+        // Set up the query
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GeneralClicksOrgs");
+        query.whereEqualTo("idOrg", id+"");
+        query.setLimit(1);
+        List<ParseObject> result = new ArrayList<>();
+        // Execute the query
+        try {
+            result = query.find();
+        } catch (ParseException e) {
+            Log.e("filter", e.toString());
+        }
+        if(result.size()==0){ // If nobody has click this organization
+            return 0;
+        }else{
+            Log.d("filter", result.get(0).getString("idOrg") + " -> "+result.get(0).getNumber("clicks"));
+            return result.get(0).getLong("clicks");
+        }
+    }
 
 }

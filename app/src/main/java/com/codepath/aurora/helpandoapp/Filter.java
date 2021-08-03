@@ -5,6 +5,7 @@ import com.codepath.aurora.helpandoapp.models.User;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -21,6 +22,7 @@ public class Filter {
     private String _country;
     private Queue<Match> _priorityQueue;
     private String [] _topThreeThemes;
+    private Map<String, Long> _mpPopularityOrg;
 
     public Filter(List<Organization> orgs) {
         _orgs = orgs;
@@ -28,6 +30,7 @@ public class Filter {
         _country = User.userCountry;
         _priorityQueue = new PriorityQueue<>(2, new MatchComparator());
         _topThreeThemes = User.getTop3();
+        _mpPopularityOrg = Organization.getGeneralPopularity();
     }
 
     /**
@@ -49,20 +52,36 @@ public class Filter {
         long pointsEarned =
                 evaluateCountry(position) +
                 evaluateCity(position) +
-                evaluateThemes(position);
+                evaluateThemes(position) +
+                evaluateGeneralPopularity(position);
         return pointsEarned;
     }
 
+    /**
+     * Evaluate each organization based on its general popularity. Each click is an extra point.
+     * @param position
+     * @return
+     */
+    private long evaluateGeneralPopularity(int position) {
+        // Look for how many clicks this Organization has received
+        String idOrg = _orgs.get(position).getId() + "";
+        long points =0;
+        if(_mpPopularityOrg.containsKey(idOrg)){
+            points = _mpPopularityOrg.get(idOrg);
+        }
+        return points;
+    }
+
+    /**
+     * Evaluate the topics that the Organization support, looking if they match with the favorite topics of the user.
+     * @param position
+     * @return
+     */
     private long evaluateThemes(int position) {
-
-
-        //List <Project> themesProjectsOrg = Project.getAllProjects(_orgs.get(position).getId()+"");
         List<String> themesProjectsOrg = _orgs.get(position).getThemes();
-        //Log.d("fil",_orgs.get(position).getId()+" -> "+themesProjectsOrg.toString());
         long points=0;
-        // Check how many of the active projects that the organization has are about themes of the user interest
+        // Check how many themes of the organization match with  the user
         for(int i=0; i<themesProjectsOrg.size(); i++){
-            //String themeOrgProj = themesProjectsOrg.get(i).getPrimaryTheme();
             String themeOrgProj = themesProjectsOrg.get(i);
             if(_topThreeThemes[0].equalsIgnoreCase(themeOrgProj)){
                 points += POINTS_PROJECTS_1;
