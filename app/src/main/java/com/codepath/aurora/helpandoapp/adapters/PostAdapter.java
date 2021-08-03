@@ -21,10 +21,12 @@ import com.codepath.aurora.helpandoapp.models.PlaceP;
 import com.codepath.aurora.helpandoapp.models.Post;
 import com.codepath.aurora.helpandoapp.models.Task;
 import com.codepath.aurora.helpandoapp.models.User;
+import com.github.marlonlom.utilities.timeago.TimeAgo;
 
 import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
 
+import java.util.Date;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
@@ -83,7 +85,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         public void bind(Post post) {
             _binding.tvUser.setText(post.getAuthor().getString(User.KEY_NAME));
             _binding.tvText.setText(post.getText());
-            // TODO: Add when it was published
+            // Add when it was published
+            Date date = post.getCreatedAt();
+            String time = TimeAgo.using(date.getTime());
+            if((time.charAt(1)!=' ' ||  time.charAt(1)>2) && time.contains("days ago")){
+                time = date.toString().substring(4, 10) + ", " + date.toString().substring(24);
+            }
+            _binding.tvTimestamp.setText(time);
             // if it is a Post about some Task, show Task's information
             if (post.getTask() != null) {
                 _binding.tvTask.setVisibility(View.VISIBLE);

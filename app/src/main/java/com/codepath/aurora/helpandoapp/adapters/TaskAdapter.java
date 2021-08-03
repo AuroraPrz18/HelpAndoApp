@@ -15,6 +15,7 @@ import com.codepath.aurora.helpandoapp.activities.TaskDoneActivity;
 import com.codepath.aurora.helpandoapp.databinding.ItemTaskBinding;
 import com.codepath.aurora.helpandoapp.models.Task;
 import com.codepath.aurora.helpandoapp.models.User;
+import com.github.marlonlom.utilities.timeago.TimeAgo;
 import com.parse.CountCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
@@ -24,6 +25,7 @@ import com.parse.ParseUser;
 import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
 
+import java.util.Date;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
@@ -103,6 +105,13 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             _binding.ibCheck.setVisibility(View.INVISIBLE);
             _binding.ibComment.setVisibility(View.INVISIBLE);
             isCompleted(task);
+            // Add when it was created
+            Date date = task.getCreatedAt();
+            String time = TimeAgo.using(date.getTime());
+            if((time.charAt(1)!=' ' ||  time.charAt(1)>2) && time.contains("days ago")){
+                time = date.toString().substring(4, 10) + ", " + date.toString().substring(24);
+            }
+            _binding.tvTimestamp.setText(_context.getResources().getString(R.string.created) + time);
             // When the button btnDone is clicked it means that the user has completed this tasks
             _binding.btnDone.setOnClickListener(new View.OnClickListener() {
                 @Override

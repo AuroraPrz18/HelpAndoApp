@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -32,23 +33,12 @@
             android:layout_alignParentEnd="true"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_check" />
-
-        <TextView
-            android:id="@+id/tvDescription"
-            style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/tvTitle"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="8dp"
-            android:text="This week carry your own reusable bags, water bottle and tupper. Think about how much plastic are you reducing." />
-
         <TextView
             android:id="@+id/tvCategory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvDescription"
-            android:layout_alignParentEnd="true"
+            android:layout_below="@id/tvTitle"
+            android:layout_alignParentStart="true"
             android:layout_marginTop="8dp"
             android:text="Category: Environment and Animals"
             android:textColor="@color/green_1" />
@@ -57,36 +47,53 @@
             android:id="@+id/tvPoints"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvCategory"
+            android:layout_toEndOf="@id/tvCategory"
+            android:layout_below="@id/tvTitle"
+            android:gravity="right"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="4dp"
             android:text="Points: 1000"
             android:textColor="@color/green_1" />
-        <!-- Buttons -->
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/tvDescription"
+            style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvCategory"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="8dp"
+            android:text="This week carry your own reusable bags, water bottle and tupper. Think about how much plastic are you reducing." />
+        <TextView
+            android:id="@+id/tvTimestamp"
+            style="@style/TextAppearance.AppCompat.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvPoints"
-            android:layout_margin="8dp">
+            android:layout_below="@+id/tvDescription"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="12dp"
+            tools:text="1 hr ago" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnDone"
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:contentDescription="@string/btnComplete"
-                android:text="@string/btnComplete"
-                android:textColor="@color/green_3" />
-        </LinearLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDone"
+            style="?attr/borderlessButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/btnComplete"
+            android:layout_below="@id/tvDescription"
+            android:layout_alignParentEnd="true"
+            android:text="@string/btnComplete"
+            android:textColor="@color/green_3" />
 
         <ImageButton
             android:id="@+id/ibComment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvPoints"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="20dp"
+            android:layout_below="@+id/tvDescription"
+            android:layout_marginEnd="@dimen/marginTop"
+            android:layout_toStartOf="@id/btnDone"
+            android:layout_marginTop="12dp"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_comment" />
     </RelativeLayout>

@@ -155,5 +155,6 @@
     <string name="where_org">Where can you find it?</string>
     <string name="title_themes">Themes:</string>
     <string name="title_countries">Countries where the organization operates in:</string>
+    <string name="created">"Published: "</string>
 
 </resources>

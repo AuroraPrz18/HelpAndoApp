@@ -450,6 +450,7 @@ Model: Contact
    * Lottie for Android: https://github.com/airbnb/lottie-android
    * Material component Library
    * OkHttp Library
+   * TimeAgo Library: https://github.com/marlonlom/timeago
 
 
  ## 📃 More Resources Used (APIs, SDKs, etc)
