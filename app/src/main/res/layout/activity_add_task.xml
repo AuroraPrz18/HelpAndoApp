@@ -1,92 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.AddTaskActivity"
-    android:padding="@dimen/padding">
+    tools:context=".activities.AddTaskActivity">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfName"
-        style="@style/AppTheme.Dark.TextInputLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
+        android:layout_height="match_parent"
+        android:padding="@dimen/padding">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etName"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tfName"
+            style="@style/AppTheme.Dark.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etNameTask_hint" />
-    </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/etNameTask_hint" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfDescription"
-        style="@style/AppTheme.Dark.TextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/tfName">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etDescription"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tfDescription"
+            style="@style/AppTheme.Dark.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etTaskDescription_hint" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/tfName">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/etTaskDescription_hint" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfCategory"
-        style="@style/AppTheme.Dark.TextInputLayout.FilledBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/tfDescription">
-
-        <AutoCompleteTextView
-            android:id="@+id/acCategory"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tfCategory"
+            style="@style/AppTheme.Dark.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etCategory_hint"
-            android:inputType="none" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/tfDescription">
+
+            <AutoCompleteTextView
+                android:id="@+id/acCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/etCategory_hint"
+                android:inputType="none" />
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfPoints"
-        style="@style/AppTheme.Dark.TextInputLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tfCategory"
-        android:layout_marginTop="24dp"
-        app:layout_constraintTop_toBottomOf="@+id/tfCategory"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etPoint"
-            android:layout_width="100dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tfPoints"
+            style="@style/AppTheme.Dark.TextInputLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etPoints_hint"
-            android:inputType="number" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_below="@+id/tfCategory"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@+id/tfCategory">
 
-    <Button
-        android:id="@+id/btnSend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/btnSend_text"
-        android:contentDescription="@string/btnSend_text"
-        android:onClick="onClickAddTask"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tfPoints" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etPoint"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/etPoints_hint"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="70dp"
+            android:contentDescription="@string/btnSend_text"
+            android:onClick="onClickAddTask"
+            android:text="@string/btnSend_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tfPoints" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

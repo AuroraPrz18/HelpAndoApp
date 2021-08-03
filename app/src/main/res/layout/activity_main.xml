@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".activities.MainActivity">
 
-    <androidx.viewpager2.widget.ViewPager2 xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/pager"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"

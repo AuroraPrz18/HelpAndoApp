@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding">
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/ivPhotoUser"
             android:layout_width="60dp"
             android:layout_height="60dp"
@@ -35,7 +35,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="4dp"
             android:layout_toEndOf="@+id/ivPhotoUser"
-            android:layout_weight="1"
             android:textColor="@color/green_1"
             android:textStyle="bold"
             tools:text="Aurora Perez" />
@@ -49,7 +48,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="4dp"
             android:layout_toEndOf="@+id/ivPhotoUser"
-            android:layout_weight="1"
             android:textStyle="bold"
             tools:text="About 'Community help' task" />
 
@@ -62,7 +60,6 @@
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="6dp"
             android:layout_toEndOf="@+id/ivPhotoUser"
-            android:layout_weight="1"
             tools:text="@string/random" />
 
         <androidx.cardview.widget.CardView
@@ -89,6 +86,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@android:color/transparent"
+                    android:contentDescription="@string/place_description_post"
                     android:src="@drawable/ic_place"
                     app:tint="@color/gray_1" />
 
@@ -120,6 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:adjustViewBounds="true"
+                android:contentDescription="@string/image_description_post"
                 android:maxHeight="300dp"
                 android:scaleType="centerInside"
                 tools:src="@tools:sample/avatars" />

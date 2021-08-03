@@ -23,7 +23,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/ibCheck"
-            android:text="Only reusable items this week" />
+            tools:text="Only reusable items this week" />
 
         <ImageButton
             android:id="@+id/ibCheck"
@@ -32,6 +32,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/complete"
             app:srcCompat="@drawable/ic_check" />
 
         <TextView
@@ -41,8 +42,8 @@
             android:layout_below="@id/tvTitle"
             android:layout_alignParentStart="true"
             android:layout_marginTop="8dp"
-            android:text="Category: Environment and Animals"
-            android:textColor="@color/green_1" />
+            android:textColor="@color/green_1"
+            tools:text="Category: Environment and Animals" />
 
         <TextView
             android:id="@+id/tvPoints"
@@ -53,8 +54,8 @@
             android:layout_marginTop="4dp"
             android:layout_toEndOf="@id/tvCategory"
             android:gravity="right"
-            android:text="Points: 1000"
-            android:textColor="@color/green_1" />
+            android:textColor="@color/green_1"
+            tools:text="Points: 1000" />
 
         <TextView
             android:id="@+id/tvDescription"
@@ -64,7 +65,7 @@
             android:layout_below="@id/tvCategory"
             android:layout_alignParentStart="true"
             android:layout_marginTop="8dp"
-            android:text="This week carry your own reusable bags, water bottle and tupper. Think about how much plastic are you reducing." />
+            tools:text="This week carry your own reusable bags, water bottle and tupper. Think about how much plastic are you reducing." />
 
         <TextView
             android:id="@+id/tvTimestamp"
@@ -97,6 +98,7 @@
             android:layout_marginEnd="@dimen/marginTop"
             android:layout_toStartOf="@id/btnDone"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/comment_btn_description"
             app:srcCompat="@drawable/ic_comment" />
 
         <ImageButton
@@ -104,17 +106,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/btnDone"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/show_comments"
             app:srcCompat="@drawable/ic_arrow_down" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvComments"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/ibArrow"
             android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@id/ibArrow"/>
+            android:layout_alignParentEnd="true" />
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

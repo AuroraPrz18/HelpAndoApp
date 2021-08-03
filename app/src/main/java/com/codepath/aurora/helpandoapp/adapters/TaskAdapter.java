@@ -150,12 +150,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             _binding.ibArrow.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!_down){
+                    if (!_down) {
                         _comments.clear();
                         _binding.ibArrow.setImageDrawable(_context.getResources().getDrawable(R.drawable.ic_arrow_down));
                         _adapter.notifyDataSetChanged();
                         _down = true;
-                    }else{
+                    } else {
                         setUpRecyclerView(task);
                         _binding.ibArrow.setImageDrawable(_context.getResources().getDrawable(R.drawable.ic_arrow_up));
                         _down = false;
@@ -163,11 +163,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 }
             });
             _binding.ibArrow.setImageDrawable(_context.getResources().getDrawable(R.drawable.ic_arrow_down));
-            if(_comments == null){
+            if (_comments == null) {
                 _comments = new ArrayList<>();
             }
             _comments.clear();
-            if(_adapter != null)
+            if (_adapter != null)
                 _adapter.notifyDataSetChanged();
             // Add when it was created
             Date date = task.getCreatedAt();

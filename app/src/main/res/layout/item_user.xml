@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:paddingBottom="@dimen/padding">
 
-    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivPhotoUser"
         android:layout_width="90dp"
         android:layout_height="90dp"

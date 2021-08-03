@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
     android:id="@+id/cvItem"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
@@ -23,7 +22,9 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="0dp"
-            tools:srcCompat="@drawable/ic_business"/>
+            android:contentDescription="@string/logo_org_description"
+            tools:srcCompat="@drawable/ic_business" />
+
         <TextView
             android:id="@+id/tvName"
             style="@style/TextAppearance.AppCompat.Subhead"
@@ -34,7 +35,6 @@
             android:layout_marginLeft="4dp"
             android:layout_toEndOf="@+id/ivLogo"
             android:textColor="@color/green_1"
-            android:layout_weight="1"
             android:textStyle="bold"
             tools:text="Organization name" />
 
@@ -43,11 +43,10 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tvName"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="4dp"
             android:layout_toEndOf="@+id/ivLogo"
-            android:layout_below="@+id/tvName"
-            android:layout_weight="1"
             android:textStyle="bold"
             tools:text="Mission of the company" />
 
@@ -56,48 +55,47 @@
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding"
+            android:layout_below="@+id/tvMission"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="6dp"
+            android:layout_marginTop="@dimen/padding"
             android:layout_toEndOf="@+id/ivLogo"
-            android:layout_below="@+id/tvMission"
-            android:layout_weight="1"
             tools:text="@string/address" />
+
         <TextView
             android:id="@+id/tvLocation"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tvAddress"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="6dp"
             android:layout_toEndOf="@+id/ivLogo"
-            android:layout_below="@+id/tvAddress"
-            android:layout_weight="1"
             tools:text="Bellenvue, WA" />
+
         <TextView
             android:id="@+id/tvThemes"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tvLocation"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="6dp"
             android:layout_toEndOf="@+id/ivLogo"
-            android:layout_below="@+id/tvLocation"
-            android:layout_weight="1"
             tools:text="Themes: gdfgd" />
+
         <TextView
             android:id="@+id/tvUrl"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/padding"
+            android:layout_below="@+id/tvThemes"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="6dp"
+            android:layout_marginTop="@dimen/padding"
             android:layout_toEndOf="@+id/ivLogo"
-            android:layout_below="@+id/tvThemes"
-            android:layout_weight="1"
-            android:linksClickable="true"
             android:autoLink="web"
+            android:linksClickable="true"
             tools:text="www.site.com" />
 
     </RelativeLayout>

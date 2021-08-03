@@ -15,11 +15,11 @@
 
         <TextView
             android:id="@+id/tvtTitle"
+            style="@style/TextAppearance.AppCompat.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/TextAppearance.AppCompat.Title"
-            android:text="Where are you now?"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="@string/where_are_you_now" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tfFilterBy"
@@ -35,21 +35,17 @@
                 android:inputType="none" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:map="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
             android:id="@+id/autocomplete_fragment"
             android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:map="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.SupportMapFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="100"
             map:uiZoomControls="true"
             tools:context=".activities.MapsActivity" />
@@ -61,21 +57,23 @@
 
             <Button
                 android:id="@+id/btnCancel"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:text="@string/dialog_cancel"
-                android:textColor="@color/white" />
+                android:textColor="@color/green_1" />
 
             <Button
                 android:id="@+id/btnSave"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:layout_weight="1"
                 android:text="@string/save"
-                android:textColor="@color/white" />
+                android:textColor="@color/green_1" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -1,54 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/padding">
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        style="@style/AppTheme.Dark.TextInputLayout"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/etNameContact_hint" />
-    </com.google.android.material.textfield.TextInputLayout>
+    android:layout_height="wrap_content">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfTelephone"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tfName"
-        android:layout_marginTop="@dimen/marginTop"
-        android:layout_alignParentLeft="true"
-        style="@style/AppTheme.Dark.TextInputLayout"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etTelephone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            android:hint="@string/etTelContact_hint" />
-    </com.google.android.material.textfield.TextInputLayout>
+        android:padding="@dimen/padding">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tfExtraInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tfTelephone"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="@dimen/marginTop"
-        style="@style/AppTheme.Dark.TextInputLayout"
-        >
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/etExtraInfo"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tfName"
+            style="@style/AppTheme.Dark.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/etExtraInfoContact_hint" />
-    </com.google.android.material.textfield.TextInputLayout>
-</RelativeLayout>
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/etNameContact_hint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tfTelephone"
+            style="@style/AppTheme.Dark.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tfName"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etTelephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/etTelContact_hint"
+                android:inputType="phone" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/tfExtraInfo"
+            style="@style/AppTheme.Dark.TextInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tfTelephone"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="@dimen/marginTop">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etExtraInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/etExtraInfoContact_hint" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </RelativeLayout>
+</ScrollView>

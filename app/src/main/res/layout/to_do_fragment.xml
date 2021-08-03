@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".fragments.ToDoFragment">
 
-    <!-- include a layout for suggested Task-->
+    <!-- todo: include a layout for suggested Task if i have enough time-->
 
     <TextView
         style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@id/tfChooser"
         android:layout_marginTop="25dp"
         android:layout_marginEnd="12dp"
+        android:layout_toStartOf="@id/tfChooser"
         android:text="@string/order_by" />
 
     <com.google.android.material.textfield.TextInputLayout
-       android:id="@+id/tfChooser"
+        android:id="@+id/tfChooser"
         style="@style/AppTheme.Dark.TextInputLayout.FilledBox"
         android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        >
+        android:layout_alignParentRight="true">
+
         <AutoCompleteTextView
             android:id="@+id/acChooser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="none"
-            tools:text="Week"/>
+            tools:text="Week" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -40,8 +39,8 @@
         android:id="@+id/rvTasks"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_below="@id/tfChooser" />
+        android:layout_below="@id/tfChooser"
+        android:layout_alignParentStart="true" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSuggestTask"
@@ -52,5 +51,6 @@
         android:layout_marginEnd="30dp"
         android:layout_marginBottom="30dp"
         android:clickable="true"
+        android:contentDescription="@string/add_task_btn_description"
         android:src="@android:drawable/ic_input_add" />
 </RelativeLayout>
