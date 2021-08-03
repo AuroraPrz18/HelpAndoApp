@@ -84,14 +84,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (_binding.btnDone.getVisibility() == View.GONE) { // If the button was not visible
-                        _binding.btnDone.setVisibility(View.VISIBLE); //Show it
-                        if (_completed)
-                            _binding.ibComment.setVisibility(View.VISIBLE); //Show it
-                    } else {
-                        _binding.btnDone.setVisibility(View.GONE); // else, hide it
-                        _binding.ibComment.setVisibility(View.GONE);
-                    }
+
                 }
             });
         }
@@ -107,18 +100,16 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
             _binding.tvDescription.setText(task.getDescription());
             _binding.tvCategory.setText(_context.getResources().getString(R.string.category, task.getCategory()));
             _binding.tvPoints.setText(_context.getResources().getString(R.string.points, task.getPoints() + ""));
-            _binding.btnDone.setVisibility(View.GONE);
             _binding.ibCheck.setVisibility(View.INVISIBLE);
-            _binding.ibComment.setVisibility(View.GONE);
+            _binding.ibComment.setVisibility(View.INVISIBLE);
             isCompleted(task);
             // When the button btnDone is clicked it means that the user has completed this tasks
             _binding.btnDone.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     User.newTaskCompleted(task); // Add this relation user-task into the TaskCompleted table
-                    _binding.btnDone.setVisibility(View.GONE); // Hide de button
                     _binding.ibCheck.setVisibility(View.VISIBLE); // Show that it has been completed
-                    _binding.ibComment.setVisibility(View.GONE); // User can now comment about this task
+                    _binding.ibComment.setVisibility(View.VISIBLE); // Show that it has been completed
                     _completed = true;
                     Intent intent = new Intent(_context, TaskDoneActivity.class);
                     _context.startActivity(intent);
@@ -151,6 +142,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 public void done(int count, ParseException e) {
                     if (count > 0) { // If the user completed the task at least once, set the check icon to be visible
                         _binding.ibCheck.setVisibility(View.VISIBLE);
+                        _binding.ibComment.setVisibility(View.VISIBLE); // Show that it has been completed
                         _completed = true;
                     }
                 }
