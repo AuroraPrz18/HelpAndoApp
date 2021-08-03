@@ -64,6 +64,7 @@ public class TasksViewModel extends ViewModel {
         query.whereEqualTo(Task.KEY_APPROVED, true); // Only tasks accepted
         query.whereGreaterThanOrEqualTo(Task.KEY_POINTS, minimum);
         query.whereLessThanOrEqualTo(Task.KEY_POINTS, maximum);
+        query.orderByDescending("createdAt");
         query.findInBackground(new FindCallback<Task>() {
             @Override
             public void done(List<Task> receivedTasks, ParseException e) {
