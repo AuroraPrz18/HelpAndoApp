@@ -13,16 +13,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding">
+
         <TextView
             android:id="@+id/tvName"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
             android:textColor="@color/orange_1"
             android:textStyle="bold"
-            android:textAlignment="center"
-            android:layout_centerHorizontal="true"
             tools:text="Organization name" />
 
         <ImageView
@@ -30,20 +31,21 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_below="@id/tvName"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/marginTop"
             tools:srcCompat="@drawable/ic_business" />
+
         <TextView
             android:id="@+id/tvTitleWhere"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_below="@+id/ivLogo"
-            android:textStyle="bold"
-            android:textColor="@color/green_3"
             android:layout_centerHorizontal="true"
-            android:text="@string/where_org" />
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/where_org"
+            android:textColor="@color/green_3"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvAddress"
@@ -51,11 +53,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvTitleWhere"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
             android:layout_marginTop="@dimen/marginTop"
+            android:gravity="center"
             tools:text="@string/address" />
 
         <TextView
@@ -64,12 +66,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvAddress"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerHorizontal="true"
-            android:gravity="center"
             android:layout_marginTop="@dimen/marginTop"
+            android:gravity="center"
             tools:text="Bellenvue, WA" />
+
         <TextView
             android:id="@+id/tvUrl"
             style="@style/TextAppearance.AppCompat.Body1"
@@ -81,17 +84,18 @@
             android:autoLink="web"
             android:linksClickable="true"
             tools:text="www.site.com" />
+
         <TextView
             android:id="@+id/tvTitleCountries"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_below="@+id/tvUrl"
-            android:textStyle="bold"
-            android:textColor="@color/green_3"
             android:layout_centerHorizontal="true"
-            android:text="@string/title_countries" />
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/title_countries"
+            android:textColor="@color/green_3"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvCountries"
@@ -108,12 +112,12 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_below="@+id/tvCountries"
-            android:textStyle="bold"
-            android:textColor="@color/green_3"
             android:layout_centerHorizontal="true"
-            android:text="@string/title_themes" />
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/title_themes"
+            android:textColor="@color/green_3"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvThemes"
@@ -130,20 +134,21 @@
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/marginTop"
             android:layout_below="@+id/tvThemes"
-            android:textStyle="bold"
-            android:textColor="@color/green_3"
             android:layout_centerHorizontal="true"
-            android:text="@string/mission" />
+            android:layout_marginTop="@dimen/marginTop"
+            android:text="@string/mission"
+            android:textColor="@color/green_3"
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/tvMission"
             style="@style/TextAppearance.AppCompat.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvTitleMission"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
             android:layout_weight="1"
             tools:text="Mission of the company" />
 

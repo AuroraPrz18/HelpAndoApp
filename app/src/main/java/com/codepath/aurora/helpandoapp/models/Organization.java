@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcel;
@@ -56,6 +57,7 @@ public class Organization {
     public Organization() {
         this.countries = new ArrayList<>();
     }
+
 
     public int getId() {
         return id;
@@ -216,6 +218,29 @@ public class Organization {
     }
 
     /**
+     * Return the number of clicks earned for each organization, where each click was made by the current user
+     *
+     * @return
+     */
+    public static Map<String, Long> getIndividualPopularity(ParseUser currentUser) {
+        Map<String, Long> mp = new HashMap<>();
+        // Set up the query
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("IndividualClicksOrgs");
+        query.whereEqualTo("user", currentUser); // Only the clicks made by this user
+        List<ParseObject> result = new ArrayList<>();
+        // Execute the query
+        try {
+            result = query.find();
+        } catch (ParseException e) {
+            Log.e("filter", e.toString());
+        }
+        for (int i = 0; i < result.size(); i++) {
+            mp.put(result.get(i).getString("idOrg"), result.get(i).getLong("clicks"));
+        }
+        return mp;
+    }
+
+    /**
      * Return the number of clicks earned for each organization.
      *
      * @param id
@@ -245,14 +270,15 @@ public class Organization {
 
     /**
      * Return a string with all the countries where an specific organization operates in
+     *
      * @param org
      * @return
      */
     public static String getCountriesAsString(Organization org) {
         String countries = "";
-        for(int i=0; i<org.getCountries().size(); i++){
-            if(i>0)countries+=", ";
-            countries +=org.getCountries().get(i);
+        for (int i = 0; i < org.getCountries().size(); i++) {
+            if (i > 0) countries += ", ";
+            countries += org.getCountries().get(i);
         }
         return countries;
     }

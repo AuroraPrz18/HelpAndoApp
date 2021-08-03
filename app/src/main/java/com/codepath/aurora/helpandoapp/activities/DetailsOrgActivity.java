@@ -48,9 +48,9 @@ public class DetailsOrgActivity extends AppCompatActivity {
             _binding.tvMission.setVisibility(View.GONE);
             _binding.tvTitleMission.setVisibility(View.GONE);
         }
-        String address = _org.getAddressLine1() + (_org.getAddressLine2().length()>0?"\n": "")+ _org.getAddressLine2();
+        String address = _org.getAddressLine1() + (_org.getAddressLine2().length() > 0 ? "\n" : "") + _org.getAddressLine2();
         _binding.tvAddress.setText(address);
-        _binding.tvLocation.setText(_org.getCity() + (_org.getState().length()>0?", ": "") + _org.getState() + (_org.getCountry().length()>0?", ": "") + _org.getCountry());
+        _binding.tvLocation.setText(_org.getCity() + (_org.getState().length() > 0 ? ", " : "") + _org.getState() + (_org.getCountry().length() > 0 ? ", " : "") + _org.getCountry());
         _binding.tvUrl.setText(_org.getUrl());
         String urlLogo = _org.getLogoUrl();
         // Loads the Logo with Glide into ivLogo

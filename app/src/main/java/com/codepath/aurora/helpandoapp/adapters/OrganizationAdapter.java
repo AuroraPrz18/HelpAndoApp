@@ -19,6 +19,7 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
@@ -138,25 +139,65 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
     }
 
     /**
-     * Save the click in the DB, it will help to now which Organization is more popular
+     * Save the click in the DB, it will help to now which Organization is more popular in general and for the user
+     *
      * @param id
      */
     private void newClickInOrgWithId(int id) {
+        generalPopularity(id);
+        individualPopularity(id);
+    }
+
+    /**
+     * Save the click in a general table of popularity
+     *
+     * @param id
+     */
+    private void generalPopularity(int id) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("GeneralClicksOrgs");
-        query.whereEqualTo("idOrg", id+"");
+        query.whereEqualTo("idOrg", id + "");
         // Check if this organization already exists
         query.getFirstInBackground(new GetCallback<ParseObject>() {
             @Override
             public void done(ParseObject object, ParseException e) {
-                if(e==null){ //Row already exists -> Update it
-                    object.put("clicks", (Integer)object.getNumber("clicks") + (Integer)1);
+                if (e == null) { //Row already exists -> Update it
+                    object.put("clicks", object.getLong("clicks") + (Long) 1L);
                     object.saveInBackground();
-                }else{
-                    if(e.getCode() == ParseException.OBJECT_NOT_FOUND){ // Row not exists -> create it
+                } else {
+                    if (e.getCode() == ParseException.OBJECT_NOT_FOUND) { // Row not exists -> create it
                         ParseObject newRowClicks = new ParseObject("GeneralClicksOrgs");
                         newRowClicks.put("clicks", 1);
-                        newRowClicks.put("idOrg", id+"");
+                        newRowClicks.put("idOrg", id + "");
                         newRowClicks.saveInBackground();
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * Save the click in a table to bind the user with its clicks made
+     *
+     * @param id
+     */
+    private void individualPopularity(int id) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("IndividualClicksOrgs");
+        query.whereEqualTo("idOrg", id + "");
+        query.whereEqualTo("user", ParseUser.getCurrentUser());
+        // Check if this relation already exists (If this user has already click this organization)
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) { //Row already exists -> Update it
+                    object.put("clicks", object.getLong("clicks") + (Long) 1L);
+                    object.saveInBackground();
+                } else {
+                    if (e.getCode() == ParseException.OBJECT_NOT_FOUND) { // Row not exists -> create it
+                        ParseObject click = new ParseObject("IndividualClicksOrgs");
+                        click.put("user", ParseUser.getCurrentUser());
+                        click.put("idOrg", id + "");
+                        click.put("clicks", 1);
+                        click.saveInBackground();
                     }
                 }
             }

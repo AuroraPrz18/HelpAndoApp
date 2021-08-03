@@ -1,9 +1,13 @@
 package com.codepath.aurora.helpandoapp;
 
+import android.util.Log;
+
 import com.codepath.aurora.helpandoapp.models.Organization;
 import com.codepath.aurora.helpandoapp.models.User;
+import com.parse.ParseUser;
 
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -16,6 +20,7 @@ public class Filter {
     private final int POINTS_PROJECTS_1 = 3000;
     private final int POINTS_PROJECTS_2 = 2000;
     private final int POINTS_PROJECTS_3 = 1000;
+    private final int POINTS_USER_ALL_CLICKS = 10000;
 
     private List<Organization> _orgs;
     private String _city;
@@ -23,6 +28,8 @@ public class Filter {
     private Queue<Match> _priorityQueue;
     private String[] _topThreeThemes;
     private Map<String, Long> _mpPopularityOrg;
+    private Map<String, Long> _mpIndividualPopularityOrg;
+    private long _totalClicksMadeByThisUser;
 
     public Filter(List<Organization> orgs) {
         _orgs = orgs;
@@ -30,7 +37,22 @@ public class Filter {
         _country = User.userCountry;
         _priorityQueue = new PriorityQueue<>(2, new MatchComparator());
         _topThreeThemes = User.getTop3();
+        _mpPopularityOrg = new HashMap<>();
         _mpPopularityOrg = Organization.getGeneralPopularity();
+        _mpIndividualPopularityOrg = new HashMap<>();
+        _mpIndividualPopularityOrg = Organization.getIndividualPopularity(ParseUser.getCurrentUser());
+        getTotalClicks();
+    }
+
+    /**
+     * Get the total number of clicks made by the current user in all the organizations
+     */
+    private void getTotalClicks() {
+        _totalClicksMadeByThisUser = 0;
+        for (Map.Entry<String, Long> clicks : _mpIndividualPopularityOrg.entrySet()) {
+            _totalClicksMadeByThisUser += clicks.getValue();
+        }
+        Log.d("filter", "clicks:" + _totalClicksMadeByThisUser);
     }
 
     /**
@@ -53,8 +75,25 @@ public class Filter {
                 evaluateCountry(position) +
                         evaluateCity(position) +
                         evaluateThemes(position) +
-                        evaluateGeneralPopularity(position);
+                        evaluateGeneralPopularity(position) +
+                        evaluateIndividualPopularity(position);
         return pointsEarned;
+    }
+
+    /**
+     * Evaluate each organization based on its popularity with the current user.
+     *
+     * @param position
+     * @return
+     */
+    private long evaluateIndividualPopularity(int position) {
+        // Look for how many clicks this Organization has received
+        String idOrg = _orgs.get(position).getId() + "";
+        long points = 0;
+        if (_mpIndividualPopularityOrg.containsKey(idOrg)) {
+            points = (_mpIndividualPopularityOrg.get(idOrg) * POINTS_USER_ALL_CLICKS) / _totalClicksMadeByThisUser;
+        }
+        return points;
     }
 
     /**
