@@ -57,7 +57,6 @@ public class Organization {
         this.countries = new ArrayList<>();
     }
 
-
     public int getId() {
         return id;
     }
@@ -196,6 +195,7 @@ public class Organization {
 
     /**
      * Return the number of clicks earned for each organization.
+     *
      * @return
      */
     public static Map<String, Long> getGeneralPopularity() {
@@ -209,7 +209,7 @@ public class Organization {
         } catch (ParseException e) {
             Log.e("filter", e.toString());
         }
-        for(int i=0; i<result.size(); i++){
+        for (int i = 0; i < result.size(); i++) {
             mp.put(result.get(i).getString("idOrg"), result.get(i).getLong("clicks"));
         }
         return mp;
@@ -217,15 +217,16 @@ public class Organization {
 
     /**
      * Return the number of clicks earned for each organization.
+     *
      * @param id
      * @return
      */
     public static long getPopularity(int id) {
         //TODO: OPTIMIZE IT. IT WORKS BUT TAKES A LOT OF TIME. IN THE MEANWHILE USE getGeneralPopularity()
-        Log.d("filter", "id"+id);
+        Log.d("filter", "id" + id);
         // Set up the query
         ParseQuery<ParseObject> query = ParseQuery.getQuery("GeneralClicksOrgs");
-        query.whereEqualTo("idOrg", id+"");
+        query.whereEqualTo("idOrg", id + "");
         query.setLimit(1);
         List<ParseObject> result = new ArrayList<>();
         // Execute the query
@@ -234,12 +235,26 @@ public class Organization {
         } catch (ParseException e) {
             Log.e("filter", e.toString());
         }
-        if(result.size()==0){ // If nobody has click this organization
+        if (result.size() == 0) { // If nobody has click this organization
             return 0;
-        }else{
-            Log.d("filter", result.get(0).getString("idOrg") + " -> "+result.get(0).getNumber("clicks"));
+        } else {
+            Log.d("filter", result.get(0).getString("idOrg") + " -> " + result.get(0).getNumber("clicks"));
             return result.get(0).getLong("clicks");
         }
+    }
+
+    /**
+     * Return a string with all the countries where an specific organization operates in
+     * @param org
+     * @return
+     */
+    public static String getCountriesAsString(Organization org) {
+        String countries = "";
+        for(int i=0; i<org.getCountries().size(); i++){
+            if(i>0)countries+=", ";
+            countries +=org.getCountries().get(i);
+        }
+        return countries;
     }
 
 }

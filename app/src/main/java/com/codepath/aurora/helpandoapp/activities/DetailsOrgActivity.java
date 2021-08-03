@@ -59,5 +59,6 @@ public class DetailsOrgActivity extends AppCompatActivity {
                 .fitCenter()
                 .error(getDrawable(R.drawable.ic_business))
                 .into(_binding.ivLogo);
+        _binding.tvCountries.setText(Organization.getCountriesAsString(_org));
     }
 }

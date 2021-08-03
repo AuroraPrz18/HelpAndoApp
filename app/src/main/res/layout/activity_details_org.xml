@@ -82,12 +82,34 @@
             android:linksClickable="true"
             tools:text="www.site.com" />
         <TextView
-            android:id="@+id/tvTitleThemes"
+            android:id="@+id/tvTitleCountries"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginTop"
             android:layout_below="@+id/tvUrl"
+            android:textStyle="bold"
+            android:textColor="@color/green_3"
+            android:layout_centerHorizontal="true"
+            android:text="@string/title_countries" />
+
+        <TextView
+            android:id="@+id/tvCountries"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTitleCountries"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/marginTop"
+            tools:text="gdfgd" />
+
+        <TextView
+            android:id="@+id/tvTitleThemes"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_below="@+id/tvCountries"
             android:textStyle="bold"
             android:textColor="@color/green_3"
             android:layout_centerHorizontal="true"
