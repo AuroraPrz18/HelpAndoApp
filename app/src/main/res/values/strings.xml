@@ -151,5 +151,8 @@
     <string name="where_are_you">Where are you now?</string>
     <string name="success_profile_photo">New profile photo has been successfully updated</string>
     <string name="your_posts">Your posts:</string>
+    <string name="mission">Mission:</string>
+    <string name="where_org">Where can you find it?</string>
+    <string name="title_themes">Themes:</string>
 
 </resources>

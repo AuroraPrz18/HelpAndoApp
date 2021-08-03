@@ -1,6 +1,7 @@
 package com.codepath.aurora.helpandoapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,10 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.codepath.aurora.helpandoapp.GlideApp;
 import com.codepath.aurora.helpandoapp.R;
+import com.codepath.aurora.helpandoapp.activities.DetailsOrgActivity;
 import com.codepath.aurora.helpandoapp.databinding.ItemOrganizationBinding;
 import com.codepath.aurora.helpandoapp.models.Organization;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
 import org.jetbrains.annotations.NotNull;
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -65,28 +72,18 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             _binding = ItemOrganizationBinding.bind(itemView);
-
         }
 
         /**
          * If the Mission has been cut to display it in the item, it will show the complete Mission
          * If the Mission has more then 200 characters it will only show the first 200.
          */
-        private void showOrHideMission(Organization org) {
+        private void hideMission(Organization org) {
             String missionObj = org.getMission();
-            String missionTV = _binding.tvMission.getText().toString();
-            String end = "";
-            //  if(missionTV.length()>3){
-            //     end = missionTV.substring(missionTV.length() - 3, missionObj.length());
-            //  }
-            //  if (end.equals("...")) { // If the Mission has been cut before
-            _binding.tvMission.setText(missionObj); // Shows the complete Mission
-            //  } else {
-            //      if (missionObj.length() > 200) { // If the Mission has not been cut before and it has more than 200 characters
-            //          missionObj = missionObj.substring(0, 200) + "..."; // Cuts the Mission to don't show it complete
-            //      }
-            //     _binding.tvMission.setText(missionObj); // Displays it in the TextView
-            // }
+            if (missionObj.length() > 200) { // If the Mission has not been cut before and it has more than 200 characters
+                missionObj = missionObj.substring(0, 200) + "..."; // Cuts the Mission to don't show it complete
+            }
+            _binding.tvMission.setText(missionObj); // Displays it in the TextView
         }
 
         /**
@@ -95,26 +92,23 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
          * @param org
          */
         public void bind(Organization org) {
-            _binding.tvMission.setOnClickListener(new View.OnClickListener() {
+            _binding.cvItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!org.getMission().isEmpty()) {
-                        showOrHideMission(org);
-                    } else {
-                        _binding.tvMission.setText("");
-                    }
+                    openDetailsActivity(org);
+                    newClickInOrgWithId(org.getId());
                 }
             });
             _binding.tvName.setText(org.getName());
             String themes = "<b>Themes: </b>";
             List<String> themesL = org.getThemes();
-            for(int i=0; i<themesL.size(); i++){
-                if(i>0) themes+=", ";
+            for (int i = 0; i < themesL.size(); i++) {
+                if (i > 0) themes += ", ";
                 themes += themesL.get(i);
             }
             _binding.tvThemes.setText(Html.fromHtml(themes));
             if (!org.getMission().isEmpty()) {
-                showOrHideMission(org);
+                hideMission(org);
             } else {
                 _binding.tvMission.setText("");
             }
@@ -130,6 +124,43 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
                     .error(_context.getDrawable(R.drawable.ic_business))
                     .into(_binding.ivLogo);
         }
+
+        /**
+         * Start a new Activity that contain more information about an specific organization
+         *
+         * @param org
+         */
+        private void openDetailsActivity(Organization org) {
+            Intent intent = new Intent(_context, DetailsOrgActivity.class);
+            intent.putExtra("Org", Parcels.wrap(org));
+            _context.startActivity(intent);
+        }
+    }
+
+    /**
+     * Save the click in the DB, it will help to now which Organization is more popular
+     * @param id
+     */
+    private void newClickInOrgWithId(int id) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GeneralClicksOrgs");
+        query.whereEqualTo("idOrg", id+"");
+        // Check if this organization already exists
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                if(e==null){ //Row already exists -> Update it
+                    object.put("clicks", (Integer)object.getNumber("clicks") + (Integer)1);
+                    object.saveInBackground();
+                }else{
+                    if(e.getCode() == ParseException.OBJECT_NOT_FOUND){ // Row not exists -> create it
+                        ParseObject newRowClicks = new ParseObject("GeneralClicksOrgs");
+                        newRowClicks.put("clicks", 1);
+                        newRowClicks.put("idOrg", id+"");
+                        newRowClicks.saveInBackground();
+                    }
+                }
+            }
+        });
     }
 }
 

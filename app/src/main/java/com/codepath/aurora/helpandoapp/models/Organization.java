@@ -3,10 +3,12 @@ package com.codepath.aurora.helpandoapp.models;
 import androidx.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
+import org.parceler.Parcel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Parcel(analyze = Organization.class)
 public class Organization {
     public static String KEY_ID = "id";
     public static String KEY_ACT_PROJ = "activeProjects";
@@ -179,7 +181,7 @@ public class Organization {
     @NotNull
     @Override
     public String toString() {
-        return " ->" + this.name ;
+        return " ->" + this.name;
 
     }
 
