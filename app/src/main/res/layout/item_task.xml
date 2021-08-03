@@ -98,5 +98,23 @@
             android:layout_toStartOf="@id/btnDone"
             android:background="@android:color/transparent"
             app:srcCompat="@drawable/ic_comment" />
+
+        <ImageButton
+            android:id="@+id/ibArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnDone"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_arrow_down" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvComments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/ibArrow"/>
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>
