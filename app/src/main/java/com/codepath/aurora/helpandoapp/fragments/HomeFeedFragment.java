@@ -8,7 +8,6 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -20,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
@@ -35,20 +35,14 @@ import com.codepath.aurora.helpandoapp.models.Post;
 import com.codepath.aurora.helpandoapp.models.User;
 import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
 import com.github.dhaval2404.imagepicker.ImagePicker;
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import org.parceler.Parcels;
 
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
-import java.util.List;
 
 // This class implements ContactDialogListener to define what happens with the information provided by the
 // ContactDialog fragment when is need
@@ -56,7 +50,6 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
     private HomeFeedFragmentBinding _binding;
     private HomeFeedViewModel _viewModel;
     private PostAdapter _adapter;
-    private List<Post> _posts;
 
 
     public static HomeFeedFragment newInstance() {
@@ -77,8 +70,50 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         _viewModel = new ViewModelProvider(this).get(HomeFeedViewModel.class);
         setOnClickListeners();
         setUpRecyclerView();
-        populatePostsList();
+        _viewModel.populatePostsList();
         setUpProfilePhoto();
+        setUpListeners();
+    }
+
+    /**
+     * Listeners of the ViewModel and LiveData
+     */
+    private void setUpListeners() {
+        _viewModel.getResultPostSaved().observe(getViewLifecycleOwner(), new Observer<Byte>() {
+            @Override
+            public void onChanged(Byte result) {
+                if (result != 0) {
+                    _binding.etPost.setText("");
+                    _binding.btnPost.setEnabled(true);
+                }
+                if (result == -1) { //Something went wrong
+                    Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
+                    _viewModel.setResultPostSaved((byte) 0);
+                } else if (result == 1) {
+                    Toast.makeText(getActivity(), getResources().getString(R.string.success_post), Toast.LENGTH_SHORT).show();
+                    // Clean the Contact Info
+                    closeContactCard();
+                    // Clean the Place Card
+                    closePlaceCard();
+                    // Clean the Image Card
+                    closeImageCard();
+                    _viewModel.setResultPostSaved((byte) 0);
+                }
+            }
+        });
+        _viewModel.getResultPost().observe(getViewLifecycleOwner(), new Observer<Byte>() {
+            @Override
+            public void onChanged(Byte result) {
+                if (result == -1) { //Something went wrong
+                    Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
+                    _viewModel.setResultPost((byte) 0);
+                } else if (result == 1) {
+                    // Notify the adapter of data change
+                    _adapter.notifyDataSetChanged();
+                    _viewModel.setResultPost((byte) 0);
+                }
+            }
+        });
     }
 
     /**
@@ -150,8 +185,6 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
                     Intent intent = new Intent(getActivity(), NewPostActivity.class);
                     intent.putExtra("Post", Parcels.wrap(createNewPost()));
                     startActivity(intent);
-                    // Save received posts
-                    _posts.clear();
                     return super.onDoubleTap(e);
                 }
             });
@@ -226,6 +259,11 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         savePostInBackground(createNewPost()); // Saves the Post if possible
     }
 
+    private void savePostInBackground(Post newPost) {
+        _viewModel.setResultPost((byte) 0); // Initialize the result
+        _viewModel.savePostInBackground(newPost);
+    }
+
     /**
      * Creates a new Post with the information provided
      *
@@ -249,68 +287,14 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
     }
 
     /**
-     * Push a new Post to the backend server.
-     *
-     * @return
-     */
-    private void savePostInBackground(Post newPost) {
-        newPost.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                _binding.etPost.setText("");
-                _binding.btnPost.setEnabled(true);
-                if (e != null) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
-                    Log.e("ERROR", e.toString());
-                    return;
-                }
-                Toast.makeText(getActivity(), getResources().getString(R.string.success_post), Toast.LENGTH_SHORT).show();
-                // Clean the Contact Info
-                closeContactCard();
-                // Clean the Place Card
-                closePlaceCard();
-                // Clean the Image Card
-                closeImageCard();
-            }
-        });
-    }
-
-
-    /**
      * Initializes the RecyclerView with a LayoutManager and with an Adapter
      */
     private void setUpRecyclerView() {
         _binding.rvPosts.setLayoutManager(new LinearLayoutManager(_binding.getRoot().getContext()));
-        _posts = new ArrayList<>();
-        _adapter = new PostAdapter(_binding.getRoot().getContext(), _posts);
+        _adapter = new PostAdapter(_binding.getRoot().getContext(), _viewModel.posts);
         _binding.rvPosts.setAdapter(_adapter);
     }
 
-    /**
-     * Populates Posts list retrieving them from de backend server
-     */
-    private void populatePostsList() {
-        ParseQuery<Post> query = ParseQuery.getQuery("Post");
-        query.orderByDescending("createdAt");
-        query.include(Post.KEY_TASK);
-        query.include(Post.KEY_AUTHOR);
-        query.include(Post.KEY_PLACE);
-        query.include(Post.KEY_CONTACT_INFO);
-        query.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> receivedPosts, ParseException e) {
-                if (e != null) {
-                    Toast.makeText(getActivity(), getResources().getString(R.string.wrong), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                // Save received posts
-                _posts.clear();
-                _posts.addAll(receivedPosts);
-                // Notify the adapter of data change
-                _adapter.notifyDataSetChanged();
-            }
-        });
-    }
 
     /**
      * Method called when the ContactDialog Fragment has a Positive answer and a new Contact has been created.
@@ -334,6 +318,10 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
         super.onResume();
         if (HomeFeedViewModel.publicPlace != null) {
             setPlaceInfo(HomeFeedViewModel.publicPlace);
+        }
+        if (HomeFeedViewModel.needUpdate1) {
+            _viewModel.populatePostsList();
+            HomeFeedViewModel.needUpdate1 = false;
         }
     }
 

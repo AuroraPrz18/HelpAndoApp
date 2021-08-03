@@ -125,6 +125,7 @@
                 tools:src="@tools:sample/avatars" />
 
         </androidx.cardview.widget.CardView>
+
         <TextView
             android:id="@+id/tvTimestamp"
             style="@style/TextAppearance.AppCompat.Small"
@@ -136,6 +137,7 @@
             android:layout_marginTop="@dimen/marginTop"
             android:layout_toEndOf="@+id/ivPhotoUser"
             tools:text="1 hr ago" />
+
         <ImageButton
             android:id="@+id/ibShowContact"
             android:layout_width="30dp"

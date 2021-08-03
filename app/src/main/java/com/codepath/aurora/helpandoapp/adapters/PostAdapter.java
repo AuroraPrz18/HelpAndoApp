@@ -88,7 +88,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             // Add when it was published
             Date date = post.getCreatedAt();
             String time = TimeAgo.using(date.getTime());
-            if((time.charAt(1)!=' ' ||  time.charAt(1)>2) && time.contains("days ago")){
+            if ((time.charAt(1) != ' ' || time.charAt(1) > 2) && time.contains("days ago")) {
                 time = date.toString().substring(4, 10) + ", " + date.toString().substring(24);
             }
             _binding.tvTimestamp.setText(time);

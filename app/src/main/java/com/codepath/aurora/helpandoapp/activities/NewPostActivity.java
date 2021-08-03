@@ -89,13 +89,13 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
      */
     private void setUpProfilePhoto() {
         ParseUser user = ParseUser.getCurrentUser();
-        if(user.getParseFile(User.KEY_PROFILE_PHOTO)!=null){
+        if (user.getParseFile(User.KEY_PROFILE_PHOTO) != null) {
             Glide.with(this).load(user.getParseFile(User.KEY_PROFILE_PHOTO).getUrl())
                     .centerCrop()
                     .error(R.drawable.ic_user_24)
                     .placeholder(R.drawable.ic_user_24)
                     .into(_binding.ivPhotoUser);
-        }else{
+        } else {
             _binding.ivPhotoUser.setImageDrawable(this.getDrawable(R.drawable.ic_user_24));
         }
     }
@@ -104,6 +104,7 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
      * Sets the information that the user wrote before open this Activity
      */
     private void setInfoPost() {
+        // TODO: RETRIEVE THE INFO
     }
 
     /**
@@ -227,6 +228,8 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
                 closePlaceCard();
                 // Clean the Image Card
                 closeImageCard();
+                HomeFeedViewModel.needUpdate1 = true;
+                finish();
             }
         });
     }
