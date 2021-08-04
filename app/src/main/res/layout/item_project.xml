@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:textColor="@color/green_1"
+        android:textStyle="bold"
+        tools:text="Project title" />
+    <ProgressBar
+        android:id="@+id/pbGoal"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvTitle"/>
+    <TextView
+        android:id="@+id/tvSummary"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/pbGoal"
+        android:layout_marginTop="@dimen/marginTop"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        tools:text="Summary of the project" />
+    <TextView
+        android:id="@+id/tvThemes"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvSummary"
+        tools:text="Themes: gdfgd" />
+    <TextView
+        android:id="@+id/tvProjectLink"
+        style="@style/TextAppearance.AppCompat.Body1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvThemes"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/marginTop"
+        android:autoLink="web"
+        android:linksClickable="true"
+        tools:text="www.site.com" />
+
+    <ImageButton
+        android:id="@+id/ibShowContact"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/tvSummary"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/marginTop"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/show_contact_info_project"
+        app:srcCompat="@drawable/ic_contact"
+        app:tint="@color/green_1" />
+
+
+
+</RelativeLayout>

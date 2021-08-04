@@ -171,5 +171,7 @@
     <string name="show_comments">Show comments about this task</string>
     <string name="add_task_btn_description">Add a new task</string>
     <string name="change_profile_photo_description">Change profile photo</string>
+    <string name="projects">Active projects:</string>
+    <string name="show_contact_info_project">Contat information</string>
 
 </resources>
