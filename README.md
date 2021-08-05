@@ -461,3 +461,7 @@ Model: Contact
    * API used to obtain nonprofit organizations data: https://www.globalgiving.org/api/
    * Maps SDK for Android
    * Places API
+   * Lottie animations:
+        - https://lottiefiles.com/52038-click
+        - https://lottiefiles.com/55867-congratulation
+        - https://lottiefiles.com/23332-giving-help

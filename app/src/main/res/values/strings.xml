@@ -176,5 +176,6 @@
     <string name="primary_theme">"Primary theme: "</string>
     <string name="perfect">Perfect</string>
     <string name="choice">choice for you</string>
+    <string name="app_short_name">HelpAndo</string>
 
 </resources>

@@ -67,7 +67,7 @@ public class SignUpActivity extends AppCompatActivity {
      */
     private void populateDropdownMenu() {
         String[] userTypes = getResources().getStringArray(R.array.user_type);
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.dropdown_user_type_item, userTypes);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, userTypes);
         _binding.acUserType.setAdapter(adapter);
     }
 

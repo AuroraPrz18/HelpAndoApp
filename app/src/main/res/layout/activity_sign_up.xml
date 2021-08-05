@@ -13,11 +13,11 @@
         android:id="@+id/containerLogIn"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="120dp"
-        android:background="@color/gray_1"
+        android:layout_marginBottom="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/background">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -52,6 +52,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/etUser_hint"
+                    android:inputType="textCapCharacters"
                     android:textColor="@color/white" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -126,7 +127,7 @@
                     android:id="@+id/acUserType"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/gray_1"
+                    android:background="@android:color/transparent"
                     android:hint="@string/etUserType_hint"
                     android:inputType="none"
                     android:textColor="@color/tv_login" />
@@ -145,6 +146,7 @@
                     android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
                     android:hint="@string/etName_hint"
                     android:textColor="@color/white" />
 
@@ -158,11 +160,14 @@
         android:id="@+id/btnSignIn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_marginTop="15dp"
         android:contentDescription="@string/btnSignUp_description"
         android:onClick="onClickSignUpButton"
+        android:textColor="@color/green_4"
         android:text="@string/btnSignUp_text"
-        android:textColor="@color/white"
+        android:focusable="true"
+        android:drawableEnd="@drawable/ic_next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -3,7 +3,7 @@
     <style name="Theme.HelpAndoApp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/green_1</item>
-        <item name="colorPrimaryVariant">@color/green_2</item>
+        <item name="colorPrimaryVariant">@color/green_4</item>
         <item name="colorOnPrimary">@color/black</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/green_3</item>
@@ -43,7 +43,6 @@
     <!-- Customize TextInputLayout.FilledBox style. -->
     <style name="AppTheme.TextInputLayout.FilledBox" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <item name="boxStrokeColor">@android:color/transparent</item>
-        <item name="boxBackgroundColor">@color/gray_1</item>
         <item name="android:textColorHint">@color/tv_login</item>
         <item name="hintTextColor">@color/tv_login</item>
         <item name="endIconTint">@color/white</item>
