@@ -48,7 +48,7 @@ Encourage people to do things that can help to build a better world. It is possi
 * [X] The app integrates with at least one SDK or API
 * [X] The app uses at least one gesture (e.g. double tap to like, e.g. pinch to scale)
 * [X] The app uses at least one animation (e.g. fade in/out, e.g. animating a view growing and shrinking)
-* [/] The app incorporates at least one external library to add visual polish
+* [X] The app incorporates at least one external library to add visual polish
 
 
 **Optional Nice-to-have Stories**
@@ -453,6 +453,7 @@ Model: Contact
    * TimeAgo Library: https://github.com/marlonlom/timeago
    * RoundedProgressBar Library: https://github.com/MackHartley/RoundedProgressBar
    * Konfetti Library: https://github.com/DanielMartinus/konfetti
+   * TriangleLabelView Library: https://github.com/shts/TriangleLabelView
 
 
  ## 📃 More Resources Used (APIs, SDKs, etc)

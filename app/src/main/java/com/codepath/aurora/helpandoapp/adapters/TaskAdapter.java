@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -219,11 +221,19 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
                 public void done(int count, ParseException e) {
                     if (count > 0) { // If the user completed the task at least once, set the check icon to be visible
                         _binding.ibCheck.setVisibility(View.VISIBLE);
-                        _binding.ibComment.setVisibility(View.VISIBLE); // Show that it has been completed
+                        animation();// Show that it has been completed
                         _completed = true;
                     }
                 }
             });
+        }
+
+        private void animation(){
+            Animation animation = AnimationUtils.loadAnimation(_context, R.anim.animation_scale);
+            _binding.ibCheck.setVisibility(View.VISIBLE);
+            _binding.ibCheck.startAnimation(animation);
+            _binding.ibComment.setVisibility(View.VISIBLE);
+            _binding.ibComment.startAnimation(animation);
         }
     }
 }
