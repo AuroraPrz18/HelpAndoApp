@@ -451,6 +451,7 @@ Model: Contact
    * Material component Library
    * OkHttp Library
    * TimeAgo Library: https://github.com/marlonlom/timeago
+   * RoundedProgressBar Library: https://github.com/MackHartley/RoundedProgressBar
 
 
  ## 📃 More Resources Used (APIs, SDKs, etc)

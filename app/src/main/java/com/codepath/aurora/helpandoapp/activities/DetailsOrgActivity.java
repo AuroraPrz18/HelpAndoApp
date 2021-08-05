@@ -92,7 +92,7 @@ public class DetailsOrgActivity extends AppCompatActivity {
         RequestHeaders headers = new RequestHeaders();
         headers.put("Accept", "application/json"); // To get the response in JSON format - XML is the default value
         String url = getURLProjects(apiKey, _org.getId());
-        // Log.d("Projects", url);
+        Log.d("Projects", url);
         client.get(url, headers, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {

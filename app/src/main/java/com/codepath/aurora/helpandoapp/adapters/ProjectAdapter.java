@@ -72,8 +72,10 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
             _binding.tvPrimaryTheme.setText(_context.getResources().getString(R.string.primary_theme) + project.getPrimaryTheme());
             _binding.tvTitle.setText(project.getTitle());
             _binding.tvProjectLink.setText(project.getProjectLink());
-            _binding.pbGoal.setMax((int)project.getGoal());
-            _binding.pbGoal.setProgress((int)project.getFunding());
+            double percentage = ((double)100.0 * (double)project.getFunding()) / (double)project.getGoal();
+            _binding.pbGoal.setProgressPercentage(percentage, true);
+            _binding.pbGoal.setOnlyShowTrue0(true); // The progress bar will not allow non zero values to round down to "0%"
+            _binding.pbGoal.setOnlyShowTrue100(true); // The progress bar will not allow non '100' values to round up to "100%"
         }
     }
 }

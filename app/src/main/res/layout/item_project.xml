@@ -16,11 +16,20 @@
         android:textColor="@color/green_1"
         android:textStyle="bold"
         tools:text="Project title" />
-    <ProgressBar
+    <com.mackhartley.roundedprogressbar.RoundedProgressBar
         android:id="@+id/pbGoal"
-        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="16dp"
+        app:rpbBackgroundColor="@color/orange_1"
+        app:rpbBackgroundTextColor="#070600"
+        app:rpbCornerRadiusBottomLeft="3dp"
+        app:rpbCornerRadiusBottomRight="10dp"
+        app:rpbCornerRadiusTopLeft="10dp"
+        app:rpbCornerRadiusTopRight="3dp"
+        app:rpbIsRadiusRestricted="false"
+        app:rpbProgressColor="@color/green_1"
+        app:rpbProgressTextColor="@color/orange_1"
+        app:rpbTextPadding="12dp"
         android:layout_below="@id/tvTitle"/>
     <TextView
         android:id="@+id/tvSummary"
