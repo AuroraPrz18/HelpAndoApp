@@ -86,4 +86,6 @@ dependencies {
     implementation 'com.github.marlonlom:timeago:4.0.3'
     //RoundedProgressBar Library
     implementation 'com.github.MackHartley:RoundedProgressBar:2.1.0'
+    // Konfetti Library
+    implementation 'nl.dionsegijn:konfetti:1.3.2'
 }

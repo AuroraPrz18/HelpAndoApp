@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+
     /**
      * Method called when the user click the LogIn button
      *

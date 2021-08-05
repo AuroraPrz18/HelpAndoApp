@@ -452,6 +452,7 @@ Model: Contact
    * OkHttp Library
    * TimeAgo Library: https://github.com/marlonlom/timeago
    * RoundedProgressBar Library: https://github.com/MackHartley/RoundedProgressBar
+   * Konfetti Library: https://github.com/DanielMartinus/konfetti
 
 
  ## 📃 More Resources Used (APIs, SDKs, etc)
