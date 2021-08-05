@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="12dp"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <TextView
@@ -32,18 +33,18 @@
         android:layout_alignParentStart="true"
         tools:text="Summary of the project" />
     <TextView
-        android:id="@+id/tvThemes"
+        android:id="@+id/tvPrimaryTheme"
         style="@style/TextAppearance.AppCompat.Subhead"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvSummary"
-        tools:text="Themes: gdfgd" />
+        tools:text="Primary Theme: gdfgd" />
     <TextView
         android:id="@+id/tvProjectLink"
         style="@style/TextAppearance.AppCompat.Body1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvThemes"
+        android:layout_below="@+id/tvPrimaryTheme"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="@dimen/marginTop"
         android:autoLink="web"
@@ -52,6 +53,7 @@
 
     <ImageButton
         android:id="@+id/ibShowContact"
+        android:visibility="gone"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_below="@id/tvSummary"
@@ -61,7 +63,4 @@
         android:contentDescription="@string/show_contact_info_project"
         app:srcCompat="@drawable/ic_contact"
         app:tint="@color/green_1" />
-
-
-
 </RelativeLayout>

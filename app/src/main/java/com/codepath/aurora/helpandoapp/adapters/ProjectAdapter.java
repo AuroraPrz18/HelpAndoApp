@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.codepath.aurora.helpandoapp.R;
+import com.codepath.aurora.helpandoapp.databinding.ItemProjectBinding;
 import com.codepath.aurora.helpandoapp.models.Project;
 
 import org.jetbrains.annotations.NotNull;
@@ -55,8 +56,10 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        private ItemProjectBinding _binding;
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
+            _binding = ItemProjectBinding.bind(itemView);
         }
 
         /**
@@ -64,6 +67,13 @@ public class ProjectAdapter extends RecyclerView.Adapter<ProjectAdapter.ViewHold
          * @param project
          */
         public void bind(Project project) {
+            _binding.tvTitle.setText(project.getTitle());
+            _binding.tvSummary.setText(project.getSummary());
+            _binding.tvPrimaryTheme.setText(_context.getResources().getString(R.string.primary_theme) + project.getPrimaryTheme());
+            _binding.tvTitle.setText(project.getTitle());
+            _binding.tvProjectLink.setText(project.getProjectLink());
+            _binding.pbGoal.setMax((int)project.getGoal());
+            _binding.pbGoal.setProgress((int)project.getFunding());
         }
     }
 }

@@ -225,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
         // Check permission
         int permission = ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
-        Log.d("Location", ""+permission);
+        Log.d("Location", "" + permission);
         if (permission == PackageManager.PERMISSION_GRANTED) {
             // Get the last known location
             fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
@@ -233,9 +233,9 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull @NotNull Task<Location> task) {
                     // If we have information from the last location known
-                    if (task != null && task.getResult()!=null) {
+                    if (task != null && task.getResult() != null) {
                         updateUserInfoLocation(task.getResult());
-                    }else{ // Location result is null
+                    } else { // Location result is null
                         // TODO: TEST IT MORE
                         Log.d("Location", "There is not information about its last location");
                         // Request location update (to try to know the location) once
@@ -246,10 +246,10 @@ public class MainActivity extends AppCompatActivity {
                                 .setFastestInterval(1000)
                                 .setNumUpdates(1);
                         // Object that receives the notifications from our fusedLocationProviderClient
-                        locationCallback = new LocationCallback(){
+                        locationCallback = new LocationCallback() {
                             @Override
                             public void onLocationResult(LocationResult locationResult) {
-                                if(locationResult !=null){ // If it found some locations
+                                if (locationResult != null) { // If it found some locations
                                     // Ask for the last location
                                     updateUserInfoLocation(locationResult.getLastLocation());
                                 }
@@ -268,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Updates the data of the last location of the user
+     *
      * @param location
      */
     private void updateUserInfoLocation(Location location) {

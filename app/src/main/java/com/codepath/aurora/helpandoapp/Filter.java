@@ -35,7 +35,7 @@ public class Filter {
         _orgs = orgs;
         _city = User.userCity;
         _country = User.userCountry;
-        Log.d("Location", _city+ " "+_country);
+        Log.d("Location", _city + " " + _country);
         _priorityQueue = new PriorityQueue<>(2, new MatchComparator());
         _topThreeThemes = User.getTop3();
         _mpPopularityOrg = new HashMap<>();

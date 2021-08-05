@@ -173,5 +173,6 @@
     <string name="change_profile_photo_description">Change profile photo</string>
     <string name="projects">Active projects:</string>
     <string name="show_contact_info_project">Contat information</string>
+    <string name="primary_theme">"Primary theme: "</string>
 
 </resources>
