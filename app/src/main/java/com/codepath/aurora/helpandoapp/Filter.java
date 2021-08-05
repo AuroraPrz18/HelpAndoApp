@@ -20,7 +20,7 @@ public class Filter {
     private final int POINTS_PROJECTS_1 = 3000;
     private final int POINTS_PROJECTS_2 = 2000;
     private final int POINTS_PROJECTS_3 = 1000;
-    private final int POINTS_USER_ALL_CLICKS = 10000;
+    private final int POINTS_USER_ALL_CLICKS = 7000;
 
     private List<Organization> _orgs;
     private String _city;
@@ -35,6 +35,7 @@ public class Filter {
         _orgs = orgs;
         _city = User.userCity;
         _country = User.userCountry;
+        Log.d("Location", _city+ " "+_country);
         _priorityQueue = new PriorityQueue<>(2, new MatchComparator());
         _topThreeThemes = User.getTop3();
         _mpPopularityOrg = new HashMap<>();

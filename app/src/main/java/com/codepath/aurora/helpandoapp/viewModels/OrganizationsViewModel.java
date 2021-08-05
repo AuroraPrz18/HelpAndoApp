@@ -64,6 +64,10 @@ public class OrganizationsViewModel extends ViewModel {
     }
 
     public static void setUserUpdate(boolean value) {
+        if (_userUpdate == null) {
+            _userUpdate = new MutableLiveData<>();
+            _userUpdate.setValue(false);
+        }
         _userUpdate.setValue(value);
     }
 
@@ -183,6 +187,7 @@ public class OrganizationsViewModel extends ViewModel {
             createDateDownloaded(ParseUser.getCurrentUser());
         }
         new setUpFileDownloadedAsync().execute();
+        setAreOrgsFilter(false);
     }
 
     private void createDateDownloaded(ParseUser currentUser) {
@@ -296,7 +301,6 @@ public class OrganizationsViewModel extends ViewModel {
     }
 
 
-
     private class setUpFileDownloadedAsync extends AsyncTask {
         @Override
         protected void onPostExecute(Object o) {
@@ -331,6 +335,4 @@ public class OrganizationsViewModel extends ViewModel {
             return null;
         }
     }
-
-
 }

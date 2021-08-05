@@ -64,36 +64,33 @@ public class PlaceP extends ParseObject {
         return new LatLng(latitude, longitude);
     }
 
-    public static String getCountry(Context context, LatLng latLng){
+    public static String getCountry(Context context, LatLng latLng) {
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-        String country ="";
-        List<Address> addresses  = null;
+        String country = "";
+        List<Address> addresses = null;
         try {
             addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
             Address userAddress = addresses.get(0);
             country = userAddress.getCountryName();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             return country;
         }
     }
 
-
-    public static String getCity(Context context, LatLng latLng){
+    public static String getCity(Context context, LatLng latLng) {
         Geocoder geocoder = new Geocoder(context, Locale.getDefault());
-        String city ="";
-        List<Address> addresses  = null;
+        String city = "";
+        List<Address> addresses = null;
         try {
             addresses = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
             Address userAddress = addresses.get(0);
             city = userAddress.getLocality();
         } catch (IOException e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             return city;
         }
     }
-
-
 }

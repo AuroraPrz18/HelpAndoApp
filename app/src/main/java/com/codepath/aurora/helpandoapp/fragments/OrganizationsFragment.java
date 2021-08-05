@@ -1,8 +1,6 @@
 package com.codepath.aurora.helpandoapp.fragments;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,7 +10,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,7 +21,6 @@ import com.codepath.aurora.helpandoapp.activities.MapsActivity;
 import com.codepath.aurora.helpandoapp.adapters.OrganizationAdapter;
 import com.codepath.aurora.helpandoapp.databinding.OrganizationsFragmentBinding;
 import com.codepath.aurora.helpandoapp.models.Organization;
-import com.codepath.aurora.helpandoapp.models.User;
 import com.codepath.aurora.helpandoapp.viewModels.OrganizationsViewModel;
 
 import java.util.ArrayList;
@@ -36,7 +32,6 @@ public class OrganizationsFragment extends Fragment {
     private OrganizationAdapter _adapter;
     private List<Organization> _orgs;
     private boolean _cancel;
-
 
 
     public static OrganizationsFragment newInstance() {
@@ -66,24 +61,20 @@ public class OrganizationsFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (User.userLocation == null && !_cancel) {
+        /*if (User.userLocation == null && !_cancel) {
             getLocation();
-        }
+        }*/
         _cancel = true;
     }
 
     /**
-     * Get the locationof the user to find the perfect match for him/her
+     * Get the location of the user to find the perfect match for him/her
      */
     private void getLocation() {
-        if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Request permission
-        }
         Intent intent = new Intent(getActivity(), MapsActivity.class);
         intent.putExtra("Title", getResources().getString(R.string.where_are_you));
         getActivity().startActivityForResult(intent, 100);
     }
-
 
 
     /**
@@ -106,10 +97,8 @@ public class OrganizationsFragment extends Fragment {
         _viewModel.getUserUpdate().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean locationUserHasBeenUpdated) {
-                Log.d("filter", "estoy");
                 // If there is new info about the location of the user, or there is not info about the Location of the user but it also want to be filter
-                if(locationUserHasBeenUpdated || !_viewModel.getAreOrgsFilter()){
-                    Log.d("filter", "estoy2");
+                if (locationUserHasBeenUpdated || !_viewModel.getAreOrgsFilter()) {
                     // Filter it to match the user
                     new AsyncFilter().execute();
                     _viewModel.setUserUpdate(false);

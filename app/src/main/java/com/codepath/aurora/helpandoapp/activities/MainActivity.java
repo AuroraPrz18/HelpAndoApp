@@ -1,11 +1,17 @@
 package com.codepath.aurora.helpandoapp.activities;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
+import android.os.Looper;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -27,6 +34,14 @@ import com.codepath.aurora.helpandoapp.models.PlaceP;
 import com.codepath.aurora.helpandoapp.models.User;
 import com.codepath.aurora.helpandoapp.viewModels.HomeFeedViewModel;
 import com.codepath.aurora.helpandoapp.viewModels.OrganizationsViewModel;
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationBarView;
 import com.parse.ParseUser;
 
@@ -44,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
     private OrganizationsViewModel _viewModel;
     DownloadManager downloadManager;
     ViewPager2.OnPageChangeCallback onPageChangeCallback;
+    FusedLocationProviderClient fusedLocationProviderClient;
+    LocationCallback locationCallback;
 
 
     @Override
@@ -56,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         _vPager = binding.pager;
         _pAdapter = new FragmentAdapter(getSupportFragmentManager(), getLifecycle());
         _vPager.setAdapter(_pAdapter);
+        getLastLocation();
 
         binding.bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
@@ -109,7 +127,6 @@ public class MainActivity extends AppCompatActivity {
             setUpAllTheObservers();
             _viewModel.needUpdate(); // It will change the value of doesItNeedUpdate to true or false
         }
-
     }
 
     @Override
@@ -150,10 +167,10 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == 100 && data != null) {
             PlaceP place = (PlaceP) Parcels.unwrap(data.getParcelableExtra("Place"));
             if (data.getBooleanExtra("IsUserLocation", false)) {
-                User.userLocation = PlaceP.getLatLng(place);
-                User.getCity(this);
-                User.getCountry(this);
-                OrganizationsViewModel.setUserUpdate(true);
+                //User.userLocation = PlaceP.getLatLng(place);
+                //User.getCity(this);
+                //User.getCountry(this);
+                //OrganizationsViewModel.setUserUpdate(true);
             } else {
                 HomeFeedViewModel.publicPlace = place;
             }
@@ -200,27 +217,69 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Method to start receiving location updates
+     * To get the last location of the user
      */
-    /*    public void  getLastLocation(){
-        int permission = ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION);
-        if(permission != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }else{
-            // Create location services client
-            FusedLocationProviderClient locationUser = LocationServices.getFusedLocationProviderClient(this);
+    @SuppressLint("MissingPermission")
+    public void getLastLocation() {
+        // Initialize the location server client
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
+        // Check permission
+        int permission = ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION);
+        Log.d("Location", ""+permission);
+        if (permission == PackageManager.PERMISSION_GRANTED) {
             // Get the last known location
-            Task location = locationUser.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<Location>() {
+                // Listener that is called when the Task completes.
                 @Override
-                public void onSuccess(Location location) {
-                    if(location == null){
-
+                public void onComplete(@NonNull @NotNull Task<Location> task) {
+                    // If we have information from the last location known
+                    if (task != null && task.getResult()!=null) {
+                        updateUserInfoLocation(task.getResult());
+                    }else{ // Location result is null
+                        // TODO: TEST IT MORE
+                        Log.d("Location", "There is not information about its last location");
+                        // Request location update (to try to know the location) once
+                        // with a High priority to show the most accurate location available
+                        LocationRequest locationRequest = new LocationRequest()
+                                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                                .setInterval(10000)
+                                .setFastestInterval(1000)
+                                .setNumUpdates(1);
+                        // Object that receives the notifications from our fusedLocationProviderClient
+                        locationCallback = new LocationCallback(){
+                            @Override
+                            public void onLocationResult(LocationResult locationResult) {
+                                if(locationResult !=null){ // If it found some locations
+                                    // Ask for the last location
+                                    updateUserInfoLocation(locationResult.getLastLocation());
+                                }
+                                Log.d("Location", "There is not information");
+                            }
+                        };
+                        // Request location updates for this client
+                        fusedLocationProviderClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
                     }
                 }
             });
+        } else {
+            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
         }
+    }
 
-    }*/
+    /**
+     * Updates the data of the last location of the user
+     * @param location
+     */
+    private void updateUserInfoLocation(Location location) {
+        LatLng latLngUser = new LatLng(location.getLatitude(), location.getLongitude());
+        User.userLocation = latLngUser;
+        User.getCity(MainActivity.this);
+        User.getCountry(MainActivity.this);
+        OrganizationsViewModel.setUserUpdate(true);
+        Log.d("Location", location.getLatitude() + " " + location.getLongitude());
+    }
+
+
     @Override
     public void onBackPressed() {
         if (_vPager.getCurrentItem() == 0)
