@@ -8,7 +8,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:paddingLeft="@dimen/padding"
         tools:context=".fragments.UserProfileFragment">
 
         <com.google.android.material.card.MaterialCardView
@@ -21,7 +22,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@drawable/background2"
+                android:padding="@dimen/padding">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -47,9 +50,9 @@
                         android:layout_alignParentBottom="true"
                         android:background="@android:color/transparent"
                         android:contentDescription="@string/change_profile_photo_description"
-                        android:elevation="4dp"
+                        android:elevation="10dp"
                         app:srcCompat="@drawable/ic_photo_camera_black_48dp"
-                        app:tint="@color/green_1" />
+                        app:tint="@color/white" />
                 </RelativeLayout>
 
                 <TextView
@@ -58,15 +61,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textColor="@color/orange_1"
+                    android:textStyle="bold"
                     tools:text="Aurora Perez Calderon" />
-
-                <TextView
-                    android:id="@+id/tvUsername"
-                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    tools:text="auroraprzV" />
 
                 <TextView
                     android:id="@+id/tvType"
@@ -74,22 +71,126 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/green_1"
+                    android:textSize="16dp"
+                    android:textColor="@color/white"
                     tools:text="Volunteer" />
-
                 <TextView
+                    android:id="@+id/tvUsername"
+                    style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginBottom="10dp"
+                    tools:text="auroraprzV"
+                    android:textColor="@color/green_2"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:elevation="5dp"
+                    android:background="@color/gray_3"/>
+
+                <LinearLayout
+                    android:id="@+id/lytTitles"
+                    android:layout_marginTop="@dimen/marginTop"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/points_title"
-                    android:textAlignment="center"
-                    android:textColor="@color/black" />
+                    android:layout_below="@id/tvType"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tvPoints"
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/tasksC_title"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        android:textColor="@color/orange_1"
+                        android:textStyle="bold" />
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:elevation="5dp"
+                        android:background="@color/gray_3"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/points_title"
+                        android:textAlignment="center"
+                        android:textColor="@color/orange_1"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:elevation="5dp"
+                        android:background="@color/gray_3"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/tasksS_title"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        android:textColor="@color/orange_1"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lytDetails"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAlignment="center"
-                    tools:text="10000" />
+                    android:layout_below="@id/lytTitles"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvTaskC"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/tasksC_title"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        tools:text="10000" />
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:elevation="5dp"
+                        android:background="@color/gray_3"/>
+
+                    <TextView
+                        android:id="@+id/tvPoints"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/tasksC_title"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        tools:text="10000" />
+                    <View
+                        android:layout_width="0.5dp"
+                        android:layout_height="match_parent"
+                        android:elevation="5dp"
+                        android:background="@color/gray_3"/>
+
+                    <TextView
+                        android:id="@+id/tvTaskS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="@string/tasksC_title"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        tools:text="10000" />
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -103,9 +204,16 @@
             android:layout_below="@id/cvProfileInfo"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/marginTop"
+            android:padding="@dimen/padding"
             android:gravity="center"
+            android:background="@color/gray_3"
             android:text="@string/title_chart_user" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:elevation="5dp"
+            android:background="@color/gray_2"
+            android:layout_below="@id/tvTitleChart"/>
 
         <LinearLayout
             android:id="@+id/titlesRecords"
@@ -120,14 +228,23 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:paddingTop="4dp"
+                android:background="@color/gray_3"
                 android:text="@string/title_worked_days"
                 android:textSize="14sp" />
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:elevation="5dp"
+                android:background="@color/gray_2"/>
 
             <TextView
                 style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingTop="4dp"
                 android:layout_weight="1"
+                android:background="@color/gray_3"
                 android:gravity="center"
                 android:text="@string/title_maximum_day_points"
                 android:textSize="14sp" />
@@ -146,18 +263,33 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="@color/gray_3"
+                android:padding="4dp"
                 android:textSize="14sp"
                 tools:text="1000" />
+            <View
+                android:layout_width="0.5dp"
+                android:layout_height="match_parent"
+                android:elevation="5dp"
+                android:background="@color/gray_2"/>
 
             <TextView
                 android:id="@+id/tvMaxPointsPerDay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="4dp"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:background="@color/gray_3"
                 android:textSize="14sp"
                 tools:text="100" />
         </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:elevation="5dp"
+            android:layout_below="@id/records"
+            android:background="@color/gray_2"/>
 
         <HorizontalScrollView
             android:id="@+id/lytChart"
@@ -193,6 +325,13 @@
                 app:hdProgressColor="@color/green_1"
                 app:hdProgressDisableColor="@color/progress_disable" />
         </HorizontalScrollView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:elevation="5dp"
+            android:layout_marginBottom="-16dp"
+            android:layout_above="@id/tvTitlePosts"
+            android:background="@color/gray_2"/>
 
         <TextView
             android:id="@+id/tvTitlePosts"
@@ -202,10 +341,18 @@
             android:layout_below="@id/lytChart"
             android:layout_alignParentLeft="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/marginTop"
+            android:layout_marginTop="16dp"
+            android:padding="@dimen/padding"
+            android:background="@color/gray_3"
             android:layout_weight="1"
             android:gravity="center"
             android:text="@string/your_posts" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:elevation="5dp"
+            android:layout_below="@id/tvTitlePosts"
+            android:background="@color/gray_2"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvPosts"

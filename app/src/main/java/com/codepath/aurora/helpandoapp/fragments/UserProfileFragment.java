@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -95,6 +94,10 @@ public class UserProfileFragment extends Fragment {
         } else {
             _binding.ivPhotoUser.setImageDrawable(getActivity().getDrawable(R.drawable.ic_user_24));
         }
+        ParseUser user = ParseUser.getCurrentUser();
+        _binding.tvPoints.setText(user.getNumber(User.KEY_POINTS) + "");
+        _binding.tvTaskC.setText(user.getNumber(User.KEY_TASKS_C) + "");
+        _binding.tvTaskS.setText(user.getNumber(User.KEY_TASKS_S) + "");
     }
 
     @Override

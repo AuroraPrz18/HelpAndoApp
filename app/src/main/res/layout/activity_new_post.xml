@@ -14,10 +14,16 @@
         <TextView
             android:id="@+id/tvTask"
             style="@style/TextAppearance.AppCompat.Title"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textColor="@color/orange_1"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textSize="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            tools:text="Name of the task" />
+            tools:text="Name of the task"
+            android:visibility="gone"/>
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/lytMakeAPost"

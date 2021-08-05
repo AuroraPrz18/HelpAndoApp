@@ -11,19 +11,48 @@
         android:layout_height="match_parent"
         android:padding="@dimen/padding">
 
+        <TextView
+            android:id="@+id/tvTask"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:fontFamily="sans-serif-condensed-light"
+            android:textColor="@color/orange_1"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textSize="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/new_task" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/ivAnimation"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTask"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/task" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tfName"
             style="@style/AppTheme.Dark.TextInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginTop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/ivAnimation">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 android:hint="@string/etNameTask_hint" />
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -57,7 +86,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/etCategory_hint"
-                android:inputType="none" />
+                android:inputType="none"
+                android:textColor="@color/black"/>
         </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -80,11 +110,13 @@
 
         <Button
             android:id="@+id/btnSend"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="70dp"
             android:contentDescription="@string/btnSend_text"
             android:onClick="onClickAddTask"
+            android:drawableEnd="@drawable/ic_next"
             android:text="@string/btnSend_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

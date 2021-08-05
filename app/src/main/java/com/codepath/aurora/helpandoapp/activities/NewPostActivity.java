@@ -113,8 +113,6 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
     private void setTaskInfoVisible() {
         // The information about the task is going to be visible only when the Activity has received
         // a task sent by the previous Activity with all the information about it.
-        _binding.tvTask.setVisibility(View.GONE);
-        // If it receives a Task object
         _task = (Task) Parcels.unwrap(getIntent().getParcelableExtra("Task"));
         _binding.tvTask.setText(getResources().getString(R.string.postAboutTask, _task.getName())); // Sets the text of the TextView
         _binding.tvTask.setVisibility(View.VISIBLE); // Makes the TextView visible

@@ -177,5 +177,6 @@
     <string name="perfect">Perfect</string>
     <string name="choice">choice for you</string>
     <string name="app_short_name">HelpAndo</string>
+    <string name="new_task">New task:</string>
 
 </resources>

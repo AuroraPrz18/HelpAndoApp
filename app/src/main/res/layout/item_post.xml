@@ -42,13 +42,13 @@
         <TextView
             android:id="@+id/tvTask"
             style="@style/TextAppearance.AppCompat.Subhead"
+            android:textColor="@color/orange_1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvUser"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="4dp"
             android:layout_toEndOf="@+id/ivPhotoUser"
-            android:textStyle="bold"
             tools:text="About 'Community help' task" />
 
         <TextView
@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tvText"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="34dp"
             android:layout_marginRight="16dp"
             android:clickable="true"
             android:contentDescription="@string/place_card_hint"
@@ -108,7 +108,7 @@
             android:layout_below="@id/cvPlace"
             android:layout_centerHorizontal="true"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="24dp"
             android:layout_marginRight="16dp"
             android:elevation="10dp">
 
@@ -125,29 +125,27 @@
 
         </androidx.cardview.widget.CardView>
 
+        <ImageButton
+            android:id="@+id/ibShowContact"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/cvImage"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="12dp"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/show_contact_hint"
+            app:srcCompat="@drawable/ic_contact"
+            app:tint="@color/green_1" />
         <TextView
             android:id="@+id/tvTimestamp"
             style="@style/TextAppearance.AppCompat.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/cvImage"
-            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
             android:layout_marginLeft="4dp"
-            android:layout_marginTop="@dimen/marginTop"
-            android:layout_toEndOf="@+id/ivPhotoUser"
+            android:layout_marginTop="20dp"
             tools:text="1 hr ago" />
-
-        <ImageButton
-            android:id="@+id/ibShowContact"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_below="@id/tvTimestamp"
-            android:layout_alignParentRight="true"
-            android:layout_marginTop="@dimen/marginTop"
-            android:background="@android:color/transparent"
-            android:contentDescription="@string/show_contact_hint"
-            app:srcCompat="@drawable/ic_contact"
-            app:tint="@color/green_1" />
 
     </RelativeLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -304,8 +304,10 @@ public class OrganizationsViewModel extends ViewModel {
     private class setUpFileDownloadedAsync extends AsyncTask {
         @Override
         protected void onPostExecute(Object o) {
-            Log.d("orgs", _orgs.getValue().size() + " nonprofits downloaded");
-            Log.d("orgs", _orgs.getValue().toString());
+            if(_orgs!=null && _orgs.getValue()!=null){
+                Log.d("orgs", _orgs.getValue().size() + " nonprofits downloaded");
+                Log.d("orgs", _orgs.getValue().toString());
+            }
         }
 
         @Override

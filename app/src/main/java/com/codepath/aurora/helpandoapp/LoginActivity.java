@@ -25,8 +25,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         _binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(_binding.getRoot());
-        // Hide action bar in android
-        getSupportActionBar().hide();
         // Getting an instance of the viewModel
         _viewModel = new ViewModelProvider(this).get(LogInViewModel.class);
         // If there is an active session - allow user persistence

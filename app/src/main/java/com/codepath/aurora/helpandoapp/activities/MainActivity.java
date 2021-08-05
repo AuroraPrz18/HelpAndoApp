@@ -127,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
             setUpAllTheObservers();
             _viewModel.needUpdate(); // It will change the value of doesItNeedUpdate to true or false
         }
+
+        // MainActivity.java
+        setSupportActionBar(binding.toolbar);
     }
 
     @Override

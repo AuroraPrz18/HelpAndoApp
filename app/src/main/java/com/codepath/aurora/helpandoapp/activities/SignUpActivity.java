@@ -26,8 +26,6 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         _binding = ActivitySignUpBinding.inflate(getLayoutInflater());
         setContentView(_binding.getRoot());
-        // Hide action bar in android
-        getSupportActionBar().hide();
         // Creates a ViewModel the first time the system calls an activity's onCreate() method
         // On the other hand, if the activity is re-created it receives the same viewModel than the first Activity
         _viewModel = new ViewModelProvider(this).get(SignUpViewModel.class);
