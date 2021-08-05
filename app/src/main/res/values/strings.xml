@@ -174,5 +174,7 @@
     <string name="projects">Active projects:</string>
     <string name="show_contact_info_project">Contat information</string>
     <string name="primary_theme">"Primary theme: "</string>
+    <string name="perfect">Perfect</string>
+    <string name="choice">choice for you</string>
 
 </resources>

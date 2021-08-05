@@ -124,6 +124,10 @@ public class OrganizationAdapter extends RecyclerView.Adapter<OrganizationAdapte
                     .fitCenter()
                     .error(_context.getDrawable(R.drawable.ic_business))
                     .into(_binding.ivLogo);
+            _binding.tlvChoice.setVisibility(View.GONE);
+            if(getAdapterPosition()==0){
+                _binding.tlvChoice.setVisibility(View.VISIBLE);
+            }
         }
 
         /**

@@ -8,6 +8,24 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     android:focusable="true">
+    <jp.shts.android.library.TriangleLabelView
+        android:id="@+id/tlvChoice"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:elevation="10dp"
+        app:backgroundColor="@color/orange_1"
+        app:corner="leftTop"
+        app:labelBottomPadding="8dp"
+        app:labelCenterPadding="0dp"
+        app:labelTopPadding="18dp"
+        app:primaryText="@string/choice"
+        app:primaryTextColor="@color/white"
+        app:primaryTextSize="10sp"
+        app:secondaryText="@string/perfect"
+        app:secondaryTextColor="@color/white"
+        app:secondaryTextSize="10sp" />
 
     <RelativeLayout
         android:layout_width="match_parent"
