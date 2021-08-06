@@ -146,33 +146,31 @@
         <item>Nov.</item>
         <item>Dec.</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="where_are_you">Where are you now?</string>
     <string name="success_profile_photo">New profile photo has been successfully updated</string>
     <string name="your_posts">Your posts:</string>
     <string name="mission">Mission:</string>
     <string name="where_org">Where can you find it?</string>
     <string name="title_themes">Themes:</string>
-    <string name="title_countries">Countries where the organization operates in:</string>
+    <string name="title_countries">Countries the organization operates in:</string>
     <string name="created">"Published: "</string>
     <string name="where_are_you_now">Where are you now?</string>
     <string name="profile_photo_description">Your profile photo</string>
     <string name="place_description">Click here to select a place that need help</string>
-    <string name="close_place_description">Cancel place</string>
-    <string name="contact_description">Add info contact</string>
-    <string name="place_description_selected">The place selected</string>
+    <string name="close_place_description">Close place</string>
+    <string name="contact_description">Add contact info</string>
+    <string name="place_description_selected">The selected place</string>
     <string name="image_description">Select a picture</string>
     <string name="logo_org_description">Organization logo</string>
     <string name="place_description_post">Get info about the place</string>
     <string name="image_description_post">Image</string>
-    <string name="complete">This task has been completed before</string>
-    <string name="comment_btn_description">Comment this task</string>
-    <string name="show_comments">Show comments about this task</string>
+    <string name="complete">You have done this task before</string>
+    <string name="comment_btn_description">Comment on this task</string>
+    <string name="show_comments">Show comments on this task</string>
     <string name="add_task_btn_description">Add a new task</string>
     <string name="change_profile_photo_description">Change profile photo</string>
     <string name="projects">Active projects:</string>
-    <string name="show_contact_info_project">Contat information</string>
+    <string name="show_contact_info_project">Contact information</string>
     <string name="primary_theme">"Primary theme: "</string>
     <string name="perfect">Perfect</string>
     <string name="choice">choice for you</string>
