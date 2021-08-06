@@ -1,75 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="12dp"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <TextView
-        android:id="@+id/tvTitle"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:layout_width="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:focusable="true"
+    android:elevation="10dp">
+    <RelativeLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        android:textColor="@color/green_1"
-        android:textStyle="bold"
-        tools:text="Project title" />
-    <com.mackhartley.roundedprogressbar.RoundedProgressBar
-        android:id="@+id/pbGoal"
-        android:layout_width="match_parent"
-        android:layout_height="16dp"
-        app:rpbBackgroundColor="@color/orange_1"
-        app:rpbBackgroundTextColor="#070600"
-        app:rpbCornerRadiusBottomLeft="3dp"
-        app:rpbCornerRadiusBottomRight="10dp"
-        app:rpbCornerRadiusTopLeft="10dp"
-        app:rpbCornerRadiusTopRight="3dp"
-        app:rpbIsRadiusRestricted="false"
-        app:rpbProgressColor="@color/green_1"
-        app:rpbProgressTextColor="@color/orange_1"
-        app:rpbTextPadding="12dp"
-        android:layout_below="@id/tvTitle"/>
-    <TextView
-        android:id="@+id/tvSummary"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/pbGoal"
-        android:layout_marginTop="@dimen/marginTop"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentStart="true"
-        tools:text="Summary of the project" />
-    <TextView
-        android:id="@+id/tvPrimaryTheme"
-        style="@style/TextAppearance.AppCompat.Subhead"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvSummary"
-        tools:text="Primary Theme: gdfgd" />
-    <TextView
-        android:id="@+id/tvProjectLink"
-        style="@style/TextAppearance.AppCompat.Body1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvPrimaryTheme"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="@dimen/marginTop"
-        android:autoLink="web"
-        android:linksClickable="true"
-        tools:text="www.site.com" />
+        android:layout_marginBottom="12dp"
+        android:padding="@dimen/padding">
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            android:textColor="@color/green_1"
+            android:textStyle="bold"
+            tools:text="Project title" />
+        <com.mackhartley.roundedprogressbar.RoundedProgressBar
+            android:id="@+id/pbGoal"
+            android:layout_width="match_parent"
+            android:layout_height="12dp"
+            android:layout_marginTop="@dimen/marginTop"
+            app:rpbBackgroundColor="@color/gray_3"
+            app:rpbBackgroundTextColor="@color/black"
+            app:rpbCornerRadiusBottomLeft="3dp"
+            app:rpbCornerRadiusBottomRight="10dp"
+            app:rpbCornerRadiusTopLeft="10dp"
+            app:rpbCornerRadiusTopRight="3dp"
+            app:rpbIsRadiusRestricted="false"
+            app:rpbProgressColor="@color/green_3"
+            app:rpbProgressTextColor="@color/white"
+            app:rpbTextPadding="12dp"
+            android:layout_below="@id/tvTitle"/>
+        <TextView
+            android:id="@+id/tvSummary"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_below="@+id/pbGoal"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentStart="true"
+            tools:text="Summary of the project" />
+        <TextView
+            android:id="@+id/tvPrimaryTheme"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_below="@+id/tvSummary"
+            android:textColor="@color/orange_1"
+            tools:text="Primary Theme: gdfgd" />
+        <TextView
+            android:id="@+id/tvProjectLink"
+            style="@style/TextAppearance.AppCompat.Body1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/marginTop"
+            android:layout_below="@+id/tvPrimaryTheme"
+            android:layout_alignParentEnd="true"
+            android:autoLink="web"
+            android:linksClickable="true"
+            tools:text="www.site.com" />
 
-    <ImageButton
-        android:id="@+id/ibShowContact"
-        android:visibility="gone"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_below="@id/tvSummary"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="@dimen/marginTop"
-        android:background="@android:color/transparent"
-        android:contentDescription="@string/show_contact_info_project"
-        app:srcCompat="@drawable/ic_contact"
-        app:tint="@color/green_1" />
-</RelativeLayout>
+        <ImageButton
+            android:id="@+id/ibShowContact"
+            android:visibility="gone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/tvSummary"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/marginTop"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/show_contact_info_project"
+            app:srcCompat="@drawable/ic_contact"
+            app:tint="@color/green_1" />
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

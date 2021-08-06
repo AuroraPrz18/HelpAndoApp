@@ -178,5 +178,6 @@
     <string name="choice">choice for you</string>
     <string name="app_short_name">HelpAndo</string>
     <string name="new_task">New task:</string>
+    <string name="basic_info">Basic info:</string>
 
 </resources>

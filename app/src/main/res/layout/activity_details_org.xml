@@ -12,7 +12,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding">
+        android:paddingTop="@dimen/padding"
+        android:paddingRight="@dimen/padding"
+        android:paddingLeft="@dimen/padding">
 
         <TextView
             android:id="@+id/tvName"
@@ -35,13 +37,42 @@
             android:layout_marginTop="@dimen/marginTop"
             tools:srcCompat="@drawable/ic_business"
             android:contentDescription="@string/ivLogo_description" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:elevation="5dp"
+            android:layout_marginBottom="-16dp"
+            android:layout_above="@id/tvTitleBasicInfo"
+            android:background="@color/gray_2"/>
+
+        <TextView
+            android:id="@+id/tvTitleBasicInfo"
+            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/ivLogo"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="16dp"
+            android:padding="4dp"
+            android:textColor="@color/gray_3"
+            android:background="@color/green_3"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/basic_info" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:elevation="5dp"
+            android:layout_below="@id/tvTitleBasicInfo"
+            android:background="@color/gray_2"/>
 
         <TextView
             android:id="@+id/tvTitleWhere"
             style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ivLogo"
+            android:layout_below="@+id/tvTitleBasicInfo"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/marginTop"
             android:text="@string/where_org"
@@ -151,26 +182,56 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             tools:text="Mission of the company" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:elevation="5dp"
+            android:layout_marginBottom="-16dp"
+            android:layout_above="@id/tvTitleProjects"
+            android:background="@color/gray_2"/>
+
         <TextView
             android:id="@+id/tvTitleProjects"
-            style="@style/TextAppearance.AppCompat.Subhead"
+            style="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvMission"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/marginTop"
-            android:text="@string/projects"
-            android:textColor="@color/green_3"
-            android:textStyle="bold" />
+            android:layout_below="@id/tvMission"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="16dp"
+            android:padding="4dp"
+            android:textColor="@color/gray_3"
+            android:background="@color/green_3"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="@string/projects" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:elevation="5dp"
+            android:layout_below="@id/tvTitleProjects"
+            android:background="@color/gray_2"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvProjects"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/marginTop"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_below="@id/tvTitleProjects"/>
+        <TextView
+            android:id="@+id/tvGlobal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/padding"
+            android:autoLink="web"
+            android:elevation="10dp"
+            android:linksClickable="true"
+            android:layout_below="@id/rvProjects"
+            android:text="@string/credits"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"/>
 
     </RelativeLayout>
 </ScrollView>

@@ -183,7 +183,8 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
                 public boolean onDoubleTap(MotionEvent e) {
                     // Open the New Post section in its own Activity
                     Intent intent = new Intent(getActivity(), NewPostActivity.class);
-                    intent.putExtra("Post", Parcels.wrap(createNewPost()));
+                    //intent.putExtra("Post", Parcels.wrap(createNewPost()));
+                    // todo: send the information already written
                     startActivity(intent);
                     return super.onDoubleTap(e);
                 }

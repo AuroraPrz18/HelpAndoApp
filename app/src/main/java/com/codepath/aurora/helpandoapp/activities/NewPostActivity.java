@@ -55,7 +55,7 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
         _binding = ActivityNewPostBinding.inflate(getLayoutInflater());
         _viewModel = new ViewModelProvider(this).get(HomeFeedViewModel.class);
         setContentView(_binding.getRoot());
-        if (getIntent() != null) {
+        if (getIntent() != null && getIntent().getExtras()!=null) {
             if (getIntent().getExtras().containsKey("Post")) { // If it was sent from HomeFeedFragment
                 _post = (Post) Parcels.unwrap(getIntent().getParcelableExtra("Post"));
                 setInfoPost();
