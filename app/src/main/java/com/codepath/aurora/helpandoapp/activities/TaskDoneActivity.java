@@ -21,7 +21,7 @@ public class TaskDoneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_done);
         // Hide action bar in android
-        getSupportActionBar().hide();
+        //getSupportActionBar().hide();
         LottieAnimationView animationView = findViewById(R.id.ivAnimation);
         animationView.addAnimatorListener(new Animator.AnimatorListener() {
             @Override

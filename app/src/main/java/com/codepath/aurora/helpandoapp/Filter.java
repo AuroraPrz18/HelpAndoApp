@@ -114,7 +114,7 @@ public class Filter {
     }
 
     /**
-     * Evaluate the topics that the Organization support, looking if they match with the favorite topics of the user.
+     * Evaluate the topics that the Organization support, looking if they match with the favorite topics/categories of the user.
      *
      * @param position
      * @return
