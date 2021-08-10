@@ -82,7 +82,7 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0'
     // OkHttp Library
     implementation 'com.squareup.okhttp3:okhttp:4.1.0'
-    // TimeAGo Library
+    // TimeAgo Library
     implementation 'com.github.marlonlom:timeago:4.0.3'
     //RoundedProgressBar Library
     implementation 'com.github.MackHartley:RoundedProgressBar:2.1.0'
