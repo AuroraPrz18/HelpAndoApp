@@ -218,8 +218,8 @@ Work made so far:
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
-<img src='https://github.com/AuroraPrz18/HelpAndoApp/blob/master/walkthroughVolunteer.gif' title='Video Walkthrough' width='' alt='Video Walkthrough (As Volunteer)' />
-<img src='https://github.com/AuroraPrz18/HelpAndoApp/blob/master/walkthroughSponsor.gif' title='Video Walkthrough' width='' alt='Video Walkthrough (As Sponsor)' />
+
+<img src='https://github.com/AuroraPrz18/HelpAndoApp/blob/master/walkthroughVolunteer.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough (As Volunteer)' /> <img src='https://github.com/AuroraPrz18/HelpAndoApp/blob/master/walkthroughSponsor.gif' title='Video Walkthrough' width='300' alt='Video Walkthrough (As Sponsor)' />
 
 GIF created with [LICEcap](https://www.cockos.com/licecap/).
 
