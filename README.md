@@ -78,228 +78,232 @@ Basically, its goal is to build an environment of comfort and empathy to help th
 
 ### 2. Screen Archetypes
 Planned work:
-    * Login Screen (Activity)
-       * User can login
-       * The app should allow user persistence.
-    * Sign Up Screen (Activity)
-       * User can create a new account
-    * Main Activity (Activity)
-            * User can logout.
-        * HomeFeed Fragment
-            * User can post text information about the tasks that it had completed.
-            * User can take a picture and post it inside the app.
-            * User can post information about people that need help, this post will have a button to display information to contact the user to help her or him.
-            * User can post information about places that need help, including the place's Location.
-            * User can watch posts of other users.
-        * Todo Activity
-            * Todo Fragment
-                * User should find tasks to do (next task at the top and highlighted).
-            * AddTask Fragment
-                * User can suggest tasks to the admin. V1 all of them will be automatically accepted.
-            * SuggestedTasks Activity (Optional Story)
-                    * Suggested tasks are received by the admin.
-                * Evaluate Task Fragment (Optional story)
-                    * Admin can add tasks in the same mobile app.
-                    * Admin can edit tasks in the same mobile app.
-                    * Admin can accept and reject tasks in the same mobile app.
-        * Nonprofit Organizations Fragment
-            * User should be able to find information about non-profit organizations
-        * Notifications Fragment (optional)
-            * User should receive notifications about new ranking or improvement.
-        * Profile Fragment
-            * User can have and see its dashboard and points, based on its performance.
+ * Login Screen (Activity)
+    * User can login
+    * The app should allow user persistence.
+ * Sign Up Screen (Activity)
+    * User can create a new account
+ * Main Activity (Activity)
+         * User can logout.
+     * HomeFeed Fragment
+         * User can post text information about the tasks that it had completed.
+         * User can take a picture and post it inside the app.
+         * User can post information about people that need help, this post will have a button to display information to contact the user to help her or him.
+         * User can post information about places that need help, including the place's Location.
+         * User can watch posts of other users.
+     * Todo Activity
+         * Todo Fragment
+             * User should find tasks to do (next task at the top and highlighted).
+         * AddTask Fragment
+             * User can suggest tasks to the admin. V1 all of them will be automatically accepted.
+         * SuggestedTasks Activity (Optional Story)
+                 * Suggested tasks are received by the admin.
+             * Evaluate Task Fragment (Optional story)
+                 * Admin can add tasks in the same mobile app.
+                 * Admin can edit tasks in the same mobile app.
+                 * Admin can accept and reject tasks in the same mobile app.
+     * Nonprofit Organizations Fragment
+         * User should be able to find information about non-profit organizations
+     * Notifications Fragment (optional)
+         * User should receive notifications about new ranking or improvement.
+     * Profile Fragment
+         * User can have and see its dashboard and points, based on its performance.
+         
 Work made so far:
-    * Login Activity
-        * SignUp Activity
-        * Main Activity
-    * SignUp Activity
-        * Login Activity
-    * Main Activity
-        * HomeFeed Fragment
-            * Maps Activity
-            * MapsInPost Activity
-            * NewPost Activity
-            * ContactDialog (DialogFragment)
-            * ContactDialogInPost (DialogFragment)
-        * ToDo Fragment
-            * AddTask Activity
-            * NewPost Activity
-            * TaskDone Activity
-        * Search Fragment
-        * Organizations Fragment (non-profit organizations)
-            * DetailsOrg Activity
-        * UserProfile Fragment
-            * MapsInPost Activity
-            * ContactDialogInPost (DialogFragment)
-        * Login Activity
+ * Login Activity
+     * SignUp Activity
+     * Main Activity
+ * SignUp Activity
+     * Login Activity
+ * Main Activity
+     * HomeFeed Fragment
+         * Maps Activity
+         * MapsInPost Activity
+         * NewPost Activity
+         * ContactDialog (DialogFragment)
+         * ContactDialogInPost (DialogFragment)
+     * ToDo Fragment
+         * AddTask Activity
+         * NewPost Activity
+         * TaskDone Activity
+     * Search Fragment
+     * Organizations Fragment (non-profit organizations)
+         * DetailsOrg Activity
+     * UserProfile Fragment
+         * MapsInPost Activity
+         * ContactDialogInPost (DialogFragment)
+     * Login Activity
 
 ### 3. Navigation
 Planned work:
-    **Tab Navigation** (Tab to Screen)
-        * HomeFeed
-        * Todo
-        * Find Organizations
-        * Notifications
-        * User Profile
+#### Tab Navigation (Tab to Screen)
+  * HomeFeed
+  * Todo
+  * Find Organizations
+  * Notifications
+  * User Profile
 
-        * Todo
-        * Add a Task
-        * Notifications2 (just for admins, optional)
+  * Todo
+  * Add a Task
+  * Notifications2 (just for admins, optional)
 
-    **Flow Navigation** (Screen to Screen)
-        * Login Screen
-           * Registration
-           * MainActivity
-        * Registration Screen
-           * Login
-        * Main Activity
-           * HomeFeed
-           * Todo
-           * Organizations
-           * Notifications
-           * Profile
-        * HomeFeed Screen
-        * Todo Screen
-           * Todo
-           * SuggestTasks
-           * Notifications2 (just for admins, optional)
-        * Organizations Screen
-        * Profile Screen
-        * Add Task
-           * Todo
-        * SuggestedTasks Screen (optional)
-           * Todo
-           * EvaluateTask
-        * EvaluateTask Screen (optional)
-           * SuggestedTasks
+#### Flow Navigation  (Screen to Screen)
+  * Login Screen
+     * Registration
+     * MainActivity
+  * Registration Screen
+     * Login
+  * Main Activity
+     * HomeFeed
+     * Todo
+     * Organizations
+     * Notifications
+     * Profile
+  * HomeFeed Screen
+  * Todo Screen
+     * Todo
+     * SuggestTasks
+     * Notifications2 (just for admins, optional)
+  * Organizations Screen
+  * Profile Screen
+  * Add Task
+     * Todo
+  * SuggestedTasks Screen (optional)
+     * Todo
+     * EvaluateTask
+  * EvaluateTask Screen (optional)
+     * SuggestedTasks
 
 Work made so far:
-    **Tab Navigation** (Tab to Screen)
-        * HomeFeed Fragment
-        * ToDo Fragment
-        * Search Fragment
-        * Organizations Fragment
-        * UserProfile Fragment
+#### Tab Navigation (Tab to Screen)
+  * HomeFeed Fragment
+  * ToDo Fragment
+  * Search Fragment
+  * Organizations Fragment
+  * UserProfile Fragment
 
-    **Flow Navigation** (Screen to Screen)
-        * Login Activity
-            * SignUp Activity
-            * Main Activity
-        * SignUp Activity
-            * Login Activity
-        * Main Activity
-            * Maps Activity
-            * MapsInPost Activity
-            * NewPost Activity
-            * AddTask Activity
-            * TaskDone Activity
-            * DetailsOrg Activity
-            * Login Activity
-        * Maps Activity
-            * Main Activity
-        * MapsInPost Activity
-            * Main Activity
-        * NewPost Activity
-            * Main Activity
-        * AddTask Activity
-            * Main Activity
-        * TaskDone Activity
-            * Main Activity
-        * DetailsOrg Activity
-            * Main Activity
+#### Flow Navigation (Screen to Screen)
+  * Login Activity
+      * SignUp Activity
+      * Main Activity
+  * SignUp Activity
+      * Login Activity
+  * Main Activity
+      * Maps Activity
+      * MapsInPost Activity
+      * NewPost Activity
+      * AddTask Activity
+      * TaskDone Activity
+      * DetailsOrg Activity
+      * Login Activity
+  * Maps Activity
+      * Main Activity
+  * MapsInPost Activity
+      * Main Activity
+  * NewPost Activity
+      * Main Activity
+  * AddTask Activity
+      * Main Activity
+  * TaskDone Activity
+      * Main Activity
+  * DetailsOrg Activity
+      * Main Activity
 
 ## Wireframes
-Planned work:
-<img src="https://github.com/AuroraPrz18/HelpAndoApp/blob/master/Wireframe.jpg" width=600>
+#### Planned work:
+
+<img src="https://github.com/AuroraPrz18/HelpAndoApp/blob/master/Wireframe.jpg" width=1000>
 
 ## Schema
 
 ### Models
 
-    Model: User
-       | Property      | Type     | Description |
-       | ------------- | -------- | ------------|
-       | objectId      | String   | unique id for the user (default field) |
-       | userName      | String   | unique username for the user |
-       | name          | String   | user's name |
-       | profilePicture| File     | picture that will be display as the profile picture |
-       | password      | String   | string to login |
-       | type          | String   | define if the user is a volunteer or a sponsor |
-       | isAdmin       | Boolean  | define if the user has admin privileges |
-       | points        | Number   | points earned by the user |
-       | tasksCompleted| Number   | tasks completed by the user |
-       | tasksSuggested| Number   | tasks suggested by the user |
-       | telephone     | String   | telephone to contact the user - optional |
-       | contactEmail  | String   | email to contact the user - optional|
+#### Model: User
+| Property      | Type     | Description |
+| ------------- | -------- | ------------|
+| objectId      | String   | unique id for the user (default field) |
+| userName      | String   | unique username for the user |
+| name          | String   | user's name |
+| profilePicture| File     | picture that will be display as the profile picture |
+| password      | String   | string to login |
+| type          | String   | define if the user is a volunteer or a sponsor |
+| isAdmin       | Boolean  | define if the user has admin privileges |
+| points        | Number   | points earned by the user |
+| tasksCompleted| Number   | tasks completed by the user |
+| tasksSuggested| Number   | tasks suggested by the user |
+| telephone     | String   | telephone to contact the user - optional |
+| contactEmail  | String   | email to contact the user - optional|
 
-    Model: Task
-       | Property      | Type     | Description |
-       | ------------- | -------- | ------------|
-       | objectId      | String   | unique id for the task (default field) |
-       | name          | String   | unique name for the task |
-       | description   | String   | description for the task |
-       | points        | Number   | points that the user will get when he/she complete this task |
-       | category      | String   | define the category of the task |
-       | isApproved    | Boolean  | define if this task has been approved by an admin |
-       | user          | Pointer to User | pointer to a User who creates this task |
+#### Model: Task
+| Property      | Type     | Description |
+| ------------- | -------- | ------------|
+| objectId      | String   | unique id for the task (default field) |
+| createdAt     | Date     | default date when this task was created by the user|
+| name          | String   | name for the task |
+| description   | String   | description for the task |
+| points        | Number   | points that the user will get when he/she complete this task |
+| category      | String   | define the category of the task |
+| isApproved    | Boolean  | define if this task has been approved by an admin |
+| user          | Pointer to User | pointer to a User who creates this task |
 
 
-    Model: TaskCompleted
-       | Property      | Type     | Description |
-       | ------------- | -------- | ------------|
-       | objectId      | String   | unique id for the taskCompleted (default field) |
-       | createdAt     | Date     | default date when a user completed a task |
-       | user          | Pointer to User | user that completed this post |
-       | task          | Pointer to Task | task completed by the user |
+#### Model: TaskCompleted
+| Property      | Type     | Description |
+| ------------- | -------- | ------------|
+| objectId      | String   | unique id for the taskCompleted (default field) |
+| createdAt     | Date     | default date when a user completed a task |
+| user          | Pointer to User | user that completed this post |
+| task          | Pointer to Task | task completed by the user |
 
-    Model: Post
-       | Property      | Type     | Description |
-       | ------------- | -------- | ------------|
-       | objectId      | String   | unique id for the post (default field) |
-       | author        | Pointer to User | user that wrote this post |
-       | image         | File     | image posted |
-       | place         | Pointer to Place   | place posted |
-       | contactInfo   | Pointer to Contact | info to contact and help |
-       | text          | String   | text posted |
-       | createdAt     | DateTime | date when post is created (default field) |
+#### Model: Post
+| Property      | Type     | Description |
+| ------------- | -------- | ------------|
+| objectId      | String   | unique id for the post (default field) |
+| author        | Pointer to User | user that wrote this post |
+| image         | File     | image posted |
+| place         | Pointer to Place   | place posted |
+| task          | Pointer to Task   | specify that it was a comment on this task|
+| contactInfo   | Pointer to Contact | info to contact and help |
+| text          | String   | text posted |
+| createdAt     | DateTime | date when post is created (default field) |
 
-    Model: Contact
-       | Property      | Type     | Description |
-       | ------------- | -------- | ------------|
-       | objectId      | String   | unique id for the contact in an specific post(default field) |
-       | name          | String   | name of the contact person to help |
-       | telephone     | String   | telephone number where you can send message/call to help |
-       | text          | String   | extra info about how to contact |
+#### Model: Contact
+| Property      | Type     | Description |
+| ------------- | -------- | ------------|
+| objectId      | String   | unique id for the contact in an specific post(default field) |
+| name          | String   | name of the contact person in need |
+| telephone     | String   | telephone number where you can send message/call to help |
+| text          | String   | extra info about how to contact |
 
-    Model: Place
-       | Property      | Type     | Description |
-       | ------------- | -------- | ------------|
-       | objectId      | String   | unique id for the place in an specific post (default field) |
-       | latLng        | String   | latitude and longitude of the place |
-       | address       | String   | address for this latLng |
+#### Model: Place
+| Property      | Type     | Description |
+| ------------- | -------- | ------------|
+| objectId      | String   | unique id for the place in an specific post (default field) |
+| latLng        | String   | latitude and longitude of the place. Format: "lat/lng: (X,Y)"|
+| address       | String   | address for this latLng |
 
-    Model: OrganizationsLastUpdate
-       | Property      | Type     | Description |
-       | ------------- | -------- | ------------|
-       | objectId      | String   | unique id (default field) |
-       | updatedAt     | Date     | last update of the file that contains all the non-profits organizations |
-       | user          | Pointer to User   | user who received this update |
-       | times         | Number   | times the file has been updated |
+#### Model: OrganizationsLastUpdate
+| Property      | Type     | Description |
+| ------------- | -------- | ------------|
+| objectId      | String   | unique id (default field) |
+| updatedAt     | Date     | last update of the file that contains all the non-profits organizations |
+| user          | Pointer to User   | user who received this update |
+| times         | Number   | times the file has been updated |
 
-    Model: IndividualClicksOrgs
-       | Property      | Type     | Description |
-       | ------------- | -------- | ------------|
-       | objectId      | String   | unique id (default field) |
-       | user          | Pointer to User   | user who like an specific organization |
-       | idOrg         | String   | unique id for the organization (it is given by the API) |
-       | clicks        | Number   | clicks made by the user in the specific organization |
+#### Model: IndividualClicksOrgs
+| Property      | Type     | Description |
+| ------------- | -------- | ------------|
+| objectId      | String   | unique id (default field) |
+| user          | Pointer to User   | user who like an specific organization |
+| idOrg         | String   | unique id for the organization (it is given by the API) |
+| clicks        | Number   | clicks made by the user in the specific organization |
 
-    Model: GeneralClicksOrgs
-       | Property      | Type     | Description |
-       | ------------- | -------- | ------------|
-       | objectId      | String   | unique id (default field) |
-       | idOrg         | String   | unique id for the organization (it is given by the API) |
-       | clicks        | Number   | clicks made by all the users in the specific organization |
+#### Model: GeneralClicksOrgs
+| Property      | Type     | Description |
+| ------------- | -------- | ------------|
+| objectId      | String   | unique id (default field) |
+| idOrg         | String   | unique id for the organization (it is given by the API) |
+| clicks        | Number   | clicks made by all the users in the specific organization |
 
 
 ### Networking
@@ -555,11 +559,11 @@ Planned work:
 
 
  ## 📃 More Resources Used (APIs, SDKs, etc)
-   * Parse XML data (using the guide code in OrganizationsXmlParser.java): https://developer.android.com/training/basics/network-ops/xml
    * API used to obtain nonprofit organizations data: https://www.globalgiving.org/api/
    * Parse SDK for Android: https://github.com/parse-community/Parse-SDK-Android
    * Maps SDK for Android
    * Places API
+   * Parse XML data (using the guide code in OrganizationsXmlParser.java): https://developer.android.com/training/basics/network-ops/xml
    * Lottie animations:
         - https://lottiefiles.com/52038-click
         - https://lottiefiles.com/55867-congratulation
