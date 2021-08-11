@@ -214,6 +214,15 @@ Work made so far:
 
 <img src="https://github.com/AuroraPrz18/HelpAndoApp/blob/master/Wireframe.jpg" width=1000>
 
+
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+<img src='https://github.com/AuroraPrz18/HelpAndoApp/blob/master/walkthroughVolunteer.gif' title='Video Walkthrough' width='' alt='Video Walkthrough (As Volunteer)' />
+<img src='https://github.com/AuroraPrz18/HelpAndoApp/blob/master/walkthroughSponsor.gif' title='Video Walkthrough' width='' alt='Video Walkthrough (As Sponsor)' />
+
+GIF created with [LICEcap](https://www.cockos.com/licecap/).
+
 ## Schema
 
 ### Models
@@ -540,6 +549,9 @@ Work made so far:
               });
             ```
     To find more code: https://parse-dashboard.back4app.com/
+    
+    
+ # Credits
 
  ## 📃 Libraries Used
    * Android Codepath AsyncHttpClient: https://github.com/codepath/CPAsyncHttpClient
