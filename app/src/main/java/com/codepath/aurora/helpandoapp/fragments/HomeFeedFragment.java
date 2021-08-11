@@ -153,8 +153,9 @@ public class HomeFeedFragment extends Fragment implements ContactDialog.ContactD
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Request permission
+                    // TODO: Request permission if needed
                 }
+                // It always enters because at this point we don't want the location of the user
                 Intent intent = new Intent(getActivity(), MapsActivity.class);
                 getActivity().startActivityForResult(intent, 100);
             }

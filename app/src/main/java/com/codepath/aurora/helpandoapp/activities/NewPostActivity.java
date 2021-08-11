@@ -64,6 +64,12 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
                 setTaskInfoVisible();
             }
         }
+        setOnClickListeners();
+        setUpProfilePhoto();
+    }
+
+
+    private void setOnClickListeners() {
         _binding.btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -74,13 +80,25 @@ public class NewPostActivity extends AppCompatActivity implements ContactDialog.
             @Override
             public void onClick(View v) {
                 if (ContextCompat.checkSelfPermission(NewPostActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Request permission
+                    // TODO: Request permission if needed
                 }
+                // It always enters because at this point we don't want the location of the user
                 Intent intent = new Intent(NewPostActivity.this, MapsActivity.class);
                 startActivityForResult(intent, 100);
             }
         });
-        setUpProfilePhoto();
+        _binding.ibDeleteContactCard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closeContactCard();
+            }
+        });
+        _binding.ibClosePlace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                closePlaceCard();
+            }
+        });
     }
 
 
