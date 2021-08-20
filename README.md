@@ -9,6 +9,7 @@ Original App Design Project
 3. [Wireframes](#Wireframes)
 4. [Video Walkthrough](#Video-Walkthrough)
 5. [Schema](#Schema)
+6. [Credits](#Credits)
 
 ## Overview
 ### Description
